@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../bower_components/jquery/jquery.js"></script>
+        <script src="../hammer.js/index.js"></script>
+        <style>
+        table {
+            width:100%;
+            height:100%;
+        }
+        td, th {
+            width: 14.285714%;
+            text-align: center;
+            vertical-align: middle;
+            height:2.5em;
+        }
+        th {
+            font-size:2em;
+            background-color: #CCC;
+        }
+        td {
+            font-size:2em;
+            background-color: #eee;
+        }
+        td.notvalid {
+            background-color: #f8f8f8;
+        }
+        td.iscurrent {
+            outline: 2px solid blue;
+        }
+        table:focus {
+            outline: 2px solid green;
+        }
+        caption {
+            width:100%;
+            font-size:2em;
+            text-align: center;
+        }
+        .datepicker-wide {
+            width: 100%;
+            height: 1.5em;
+            font-size:1.5em;
+        }
+        @media (max-width: 980px) {
+            td {
+                font-size:4em;
+            }
+            td.iscurrent {
+                outline: 4px solid blue;
+            }
+            table:focus {
+                outline: 4px solid green;
+            }
+            caption {
+                font-size:4em;
+            }
+        }
+        .offscreen {
+            border: 0;
+            clip: rect(0 0 0 0);
+            clip: rect(0, 0, 0, 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            width: 1px;
+        }
+        </style>            
+    </head>
+    <body>
+        <h1>Accessible Gesture Widget Example</h1>
+        <div>
+        <p>To use this on an iOS device with Voiceover, double-tap-hold to enable gesture passthrough. Then drag up, left, right and down to move within the current month. Swipe up and down to go to the previous and following month. Swipe left and right to go to the first and last day of the current month. Double-tap (tap) to select a date and Triple-tap (double-tap) to simulate the dismiss event.</p>
+        <p>
+        To use with the keyboard use up, down, left and right arrow keys to move within the current month. Use page up and page down to move to previous and following months. Use home and end to go to first and last day of the current month. Use enter to select a date and esc to simulate the dismiss.
+        </p>
+        <p>
+            Mouse and touch can be used as you would expect them to be used.
+        </p>
+        </div>
+        <div id="myDatePicker">
+            <button id="previousMonth" class="datepicker-wide">Previous Month</button>
+            <table id="mygrid" tabindex="0" role="application">
+                <caption></caption>
+                <thead aria-hidden="true">
+                    <tr>
+                        <th>
+                            Sunday
+                        </th>
+                        <th>
+                            Monday
+                        </th>
+                        <th>
+                            Tuesday
+                        </th>
+                        <th>
+                            Wednesday
+                        </th>
+                        <th>
+                            Thursday
+                        </th>
+                        <th>
+                            Friday
+                        </th>
+                        <th>
+                            Saturday
+                        </th>
+                    </tr>
+                </thead>
+                <tbody aria-hidden="true">
+                </tbody>
+            </table>
+            <button id="nextMonth" class="datepicker-wide">Following Month</button>
+        </div>
+        <div id="assertiveAnnouncer" class="offscreen" role="log" aria-live="assertive" aria-relevant="additions"></div>
+<script>
+/*
+ * Copyright (C) 2013 Dylan Barrell - All Rights Reserved. See Licence file.
+ * This copyright message must remain in any derivative works
+ */
+(function() {
+    function ariaAnnounce(msg) {
+        jQuery('#assertiveAnnouncer').find('p').hide();
+        jQuery('#assertiveAnnouncer').append(
+            jQuery('<p>').text(msg)
+        );
+    }
+    function getWeeksArray(month, year) {
+        var d = new Date(),
+            date = 1,
+            currentDay,
+            weeksArray = [],
+            dayArray = [],
+            time,
+            i;
+        d.setDate(date);
+        d.setMonth(month);
+        d.setYear(year);
+        currentDay = d.getDay();
+        for (i = 0; i < currentDay; i++) {
+            dayArray[i] = null;
+        }
+        do {
+            time = d.getTime();
+            dayArray[currentDay] = date;
+            currentDay += 1;
+            if (currentDay === 7) {
+                currentDay = 0;
+                weeksArray.push(dayArray);
+                dayArray = [];
+            }
+            d.setTime(time + (1000 * 60 * 60 * 24));
+            date = d.getDate();
+        } while(date > 1)
+        if (dayArray.length) {
+            for (i = currentDay; i < 7; i++) {
+                dayArray[i] = null;
+            }
+            weeksArray.push(dayArray);
+        }
+        return weeksArray;
+    }
+    function getMonthTable(weeksArray) {
+        var i, j, dayArray, $tr, $td,
+            rowArray = [];
+        for ( i = 0; i < weeksArray.length; i++) {
+            dayArray = weeksArray[i];
+            $tr = jQuery('<tr>');
+            for ( j = 0; j < dayArray.length; j++) {
+                $td = jQuery('<td>');
+                if (!dayArray[j]) {
+                    $td.addClass('notvalid');
+                } else {
+                    $td.text(dayArray[j]);
+                }
+                $tr.append($td);
+            }
+            rowArray.push($tr);
+        }
+        return rowArray;
+    }
+    var monthNames = {
+        en : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    };
+    jQuery(document).ready(function () {
+        var timeout, $dpDiv, rowArray, maxRows, month, year, dragSwipeTimer,
+            doubleTapped = false,
+            dragging = false,
+            active = false,
+            DRAG_EVENTS = 'tap touch release hold doubletap drag swipe dragstart dragend dragup dragdown dragleft dragright swipeup swipedown swipeleft swiperight';
+
+        function drawTable(callback) {
+            var rowArray = getMonthTable(getWeeksArray(month, year));
+            $dpDiv.find('caption').empty().text(monthNames['en'][month] + ' ' + year);
+            $dpDiv.find('tbody').empty().append(rowArray);
+            callback();
+            $rows = $dpDiv.find('tr');
+            maxRows = $rows.length;
+            ariaAnnounce(monthNames['en'][month] + ' ' + $dpDiv.find('.iscurrent').text() + ' ' + year);
+        }
+        function handleTap() {
+            jQuery('<p>').text(
+                'You Selected: ' + 
+                monthNames['en'][month] + ' ' + $dpDiv.find('.iscurrent').text() + ' ' + year
+            ).appendTo(document.body);
+            timeout = undefined;
+            jQuery('#myDatePicker').remove();
+        }
+        function handleDoubleTap() {
+            doubleTapped = true;
+            clearTimeout(timeout);
+            timeout = undefined;
+            jQuery('<p>').text('You dismissed the date picker').appendTo(document.body);
+            jQuery('#myDatePicker').remove();
+        }
+        function repositionCursor(row, cell, $currentCell) {
+            var $row = jQuery($rows[row]),
+                $cells = $row.find('td'),
+                $nextCell, skipped = false;
+
+            console.log('repositionCursor: ' + row + ', ' + cell);
+            if (jQuery($cells[cell]).hasClass('notvalid')) {
+                if (jQuery($cells[0]).hasClass('notvalid')) {
+                    // move up
+                    while(jQuery($cells[cell]).hasClass('notvalid')) {
+                        cell += 1;
+                        skipped = true;
+                    }
+                } else {
+                    // move down
+                    while(jQuery($cells[cell]).hasClass('notvalid')) {
+                        cell -= 1;
+                        skipped = true;
+                    }
+                }
+            }
+            $nextCell = jQuery($cells[cell]);
+            if (skipped && $nextCell[0] === $currentCell[0]) {
+                // need to wrap
+                if (row === 1) {
+                    repositionCursor(maxRows - 1, 6, $currentCell);
+                } else {
+                    repositionCursor(1, 0, $currentCell);
+                }
+                return;
+            }
+            console.log('Setting next cell to: ' + cell);
+            if ($nextCell.length) {
+                $currentCell.removeClass('iscurrent');
+                $nextCell.addClass('iscurrent');
+                ariaAnnounce(monthNames['en'][month] + ' ' + $nextCell.text() + ' ' + year);
+
+            } else {
+                console.log('HUH');
+            }
+        }
+        function triggerDrag(keyCode, delay) {
+            var $currentCell = $dpDiv.find('td.iscurrent'),
+                currentCellIndex = $currentCell[0].cellIndex,
+                currentRowIndex = $currentCell.closest('tr')[0].rowIndex,
+                nextCellIndex, nextRowIndex, $nextCell;
+
+            function doDrag() {
+                dragSwipeTimer = undefined;
+                if (!dragging) {
+                    dragging = true;
+                    setTimeout(function () {
+                        console.log('reset');
+                        dragging = false;
+                    }, delay === 0 ? 0 : 1000);
+                    switch(keyCode) {
+                    case 37: // LEFT
+                        console.log('LEFT');
+                        if (currentCellIndex === 0) {
+                            nextCellIndex = 6;
+                            if (currentRowIndex > 1) {
+                                nextRowIndex = currentRowIndex - 1;
+                            } else {
+                                nextRowIndex = maxRows - 1;
+                            }
+                        } else {
+                            nextCellIndex = currentCellIndex - 1;
+                            nextRowIndex = currentRowIndex;
+                        }
+                        break;
+                    case 39: // RIGHT
+                        console.log('RIGHT: ');
+                        if (currentCellIndex === 6) {
+                            nextCellIndex = 0;
+                            if (currentRowIndex < maxRows - 1) {
+                                nextRowIndex = currentRowIndex + 1;
+                            } else {
+                                nextRowIndex = 1;
+                            }
+                        } else {
+                            nextCellIndex = currentCellIndex + 1;
+                            nextRowIndex = currentRowIndex;
+                        }
+                        break;
+                    case 38: // UP
+                        console.log('UP: ');
+                        if (currentRowIndex > 1) {
+                            nextRowIndex = currentRowIndex - 1;
+                        } else {
+                            nextRowIndex = maxRows - 1;
+                        }
+                        nextCellIndex = currentCellIndex;
+                        break;
+                    case 40: // DOWN
+                        console.log('DOWN: ');
+                        if (currentRowIndex < maxRows - 1) {
+                            nextRowIndex = currentRowIndex + 1;
+                        } else {
+                            nextRowIndex = 1;
+                        }
+                        nextCellIndex = currentCellIndex;
+                        break;
+                    }
+                    repositionCursor(nextRowIndex, nextCellIndex, $currentCell);
+                }
+            }
+            if (!dragSwipeTimer) {
+                dragSwipeTimer = setTimeout(doDrag, delay);
+            }
+        }
+        function triggerSelect() {
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+            if (doubleTapped) {
+                // a tap occurs after every doubleTap
+                doubleTapped = false;
+                return;
+            }
+            timeout = setTimeout(handleTap, 500);
+        }
+        function triggerDismiss() {
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+            handleDoubleTap();
+        }
+        $dpDiv = jQuery('#mygrid');
+        month = new Date().getMonth();
+        year = new Date().getFullYear();
+        drawTable(function() {
+            $dpDiv.find('td').not('.notvalid').first().addClass('iscurrent');
+        });
+        Hammer($dpDiv[0], {
+            swipe_min_touches: 0,
+            swipe_velocity: 0.7
+        }).on(DRAG_EVENTS, dragHandler);
+        $dpDiv.delegate('td', 'click', function(e) {
+            repositionCursor(this.parentNode.rowIndex, this.cellIndex, $dpDiv.find('td.iscurrent'));
+        }).on('keydown', function (e) {
+            var keyCode = e.which || e.keyCode;
+            if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) {
+                return;
+            }
+            console.log(keyCode);
+            switch(keyCode) {
+            case 37: // left
+            case 38: // up
+            case 39: // right
+            case 40: // down
+                triggerDrag(keyCode, 0);
+                e.preventDefault();
+                break;
+            case 33:
+            case 34:
+            case 35:
+            case 36:
+                triggerSwipe(keyCode);
+                e.preventDefault();
+                break;
+            case 13:
+                triggerSelect();
+                e.preventDefault();
+                break;
+            case 27:
+                triggerDismiss();
+                e.preventDefault();
+                break;
+            }
+        });
+        jQuery('.datepicker-wide').on('click', function (e) {
+            if (this.id === 'previousMonth') {
+                triggerSwipe(33);
+            } else {
+                triggerSwipe(34);
+            }
+            e.preventDefault();
+        });
+        function triggerSwipe(keyCode) {
+            if (dragSwipeTimer) {
+                clearTimeout(dragSwipeTimer);
+                dragSwipeTimer = undefined;
+            }
+            dragging = false;
+            switch(keyCode) {
+            case 36:
+                repositionCursor(1, 0, $dpDiv.find('td.iscurrent'));
+                break;
+            case 35:
+                repositionCursor(maxRows - 1, 6, $dpDiv.find('td.iscurrent'));                    
+                break;
+            case 33:
+                month -= 1;
+                if (month < 0) {
+                    month = 11;
+                    year -= 1;
+                }
+                drawTable(function () {
+                    $dpDiv.find('td').not('.notvalid').last().addClass('iscurrent');
+                });
+                break;
+            case 34:
+                month += 1;
+                if (month == 12) {
+                    month = 0;
+                    year += 1;
+                }
+                drawTable(function () {
+                    $dpDiv.find('td').not('.notvalid').first().addClass('iscurrent');
+                });
+                break;
+            }
+        }
+        function dragHandler(e) {
+            if (e.type === 'tap') {
+                triggerSelect();
+            } else if (e.type === 'doubletap') {
+                triggerDismiss();
+            } else if (e.type === 'dragleft') {
+                triggerDrag(37, 100);
+            } else if (e.type === 'dragright') {
+                triggerDrag(39, 100);
+            } else if (e.type === 'dragup') {
+                triggerDrag(38, 100);
+            } else if (e.type === 'dragdown') {
+                triggerDrag(40, 100);
+            } else if (e.type === 'dragend' || e.type === 'dragstart') {
+                dragging = false;
+            } else if (e.type === 'swipeleft') {
+                triggerSwipe(36);
+            } else if (e.type === 'swiperight') {
+                triggerSwipe(35);
+            } else if (e.type === 'swipeup') {
+                triggerSwipe(33);
+            } else if (e.type === 'swipedown') {
+                triggerSwipe(34);
+            }
+            e.preventDefault();
+        }
+    });
+}());
+</script>
+    </body>
+</html>

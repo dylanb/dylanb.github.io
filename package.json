@@ -1,0 +1,31 @@
+{
+  "name": "dylanb.github.io",
+  "title": "dylanb.github.io",
+  "description": "Accessibility stuff",
+  "author": {
+    "name": "Unobfuscated, @unobfuscator",
+    "url": "http://unobfuscated.blogspot.com/"
+  },
+  "maintainers": [
+    {
+      "name": "Dylan Barrell",
+      "email": "dylan@barrell.com",
+      "twitter": "@dylanbarrell"
+    }
+  ],
+  "version": "0.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-git-authors": "~1.2.0",
+    "bower": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dylanb/dylanb.github.io"
+  },
+  "scripts": {
+    "install": "bower install"
+  }
+}
