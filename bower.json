@@ -13,6 +13,9 @@
   ],
   "devDependencies": {
     "jquery": "~1.10.2",
+    "a11yfycore": "https://raw.github.com/dylanb/a11yfy/master/a11yfy/jquery.a11yfy.core.js",
+    "a11yfytables": "https://raw.github.com/dylanb/a11yfy/master/tables/jquery.a11yfy.tables.js",
+    "a11yfyde": "https://raw.github.com/dylanb/a11yfy/master/i18n/jquery.a11yfy.i18n-de.js",
     "blanket" : "*"
   }
 }
