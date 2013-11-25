@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../bower_components/jquery/jquery.js"></script>
+<script src="../bower_components/a11yfycore/index.js"></script>
+<script src="../bower_components/a11yfytables/index.js"></script>
+<script src="../bower_components/a11yfyde/index.js"></script>
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker = _gat._getTracker("UA-44989756-2");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+</head>
+<body>
+<h1>Row-based responsive table</h1>
+<table id="row-based-responsive">
+    <tr>
+        <th scope="row">
+            Nelson Mandela
+        </th>
+        <td>
+            1
+        </td>
+        <td>
+            95
+        </td>
+        <td>
+            Former political prisoner who upon his release was elected president of South Africa in 1994.
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">
+            Steve Nash
+        </th>
+        <td>
+            2
+        </td>
+        <td>
+            39
+        </td>
+        <td>
+            NBA legend who won the MVP in 2005 and 2006 with the Phoenix Suns, and played in eight NBA All-Star games.
+        </td>
+    </tr>
+</table>
+
+<script>
+jQuery(document).ready(function (e) {
+    jQuery('#row-based-responsive').tables({
+        sortFilter: "none",
+        responsive: {
+            breakPoint: 980,
+            rowBased: true,
+            css: true
+        }
+    });
+});
+</script>
+</body>
+</html>
