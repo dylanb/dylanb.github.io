@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../bower_components/jquery/jquery.js"></script>
+</head>
+<body>
+<p>
+    Visit this page on your iOS 6.x or 7.x device. Turn on VoiceOver, enter a value in the input field below and press the button.
+</p>
+<p>
+    What is supposed to happen is that some content will be inserted into the document (simulating a dialog) and then the code will try to set focus onto the "No Thanks" button within this content. This is what a well programmed accessible dialog implementation will try to do. With the default values, this will always happen on all devices but that is because I am employing some techniques that work around limitations of the iOS operating system.
+</p>
+<p>
+    If the value is significantly less than 1000 (the value is in milliseconds and 1000 milliseconds represents 1 second) and you are visiting on an iOS device with VoiceOver turned on, then strange behavior will start to occur. If the value is 0, then the focus will not end up anywhere near where it is supposed to go. If the value is between 0 and 500, then the focus will go randomly to some focussable element somewhere nearer to the "No Thanks" button. If the value is between 500 and 1000, then random behavior will occur with focus sometimes going to the "No Thanks" button and sometimes not.
+</p>
+<form>
+    <label>Enter timeout Value<input id="timeoutVal" value="1000" type="text" /></label>
+    <button id="doIt">Run</button>
+</form>
+<div id="content">
+</div>
+<style>
+input:focus, button:focus {
+    outline: 2px dotted red;
+}
+</style>
+<script>
+function addContent(id) {
+    var pUp = jQuery('<div id="dialog' + id + '" tabindex="-1">' +
+    '<form>' +
+    '       <div id="dialog' + id + '_content">' +
+    '               <div>' +
+    '                       <h1>We Value Your Opinion</h1>' +
+    '                       <div>Would you be willing to answer a few brief questions?</div>' +
+    '               </div>' +
+    '       </div>' +
+    '       <div id="dialog' + id + '_buttons">' +
+    '               <button id="dialog' + id + '_buttonCfrm">Yes, I would</button>' +
+    '               <input type="button" value="No thanks" id="pupinput' + id + '">' +
+    '       </div>' +
+    '</form>' +
+    '</div>');
+    jQuery('#content').append(pUp);
+}
+function addContentAndFocusIt(id) {
+    addContent(id);
+    focusIt(id);
+}
+function focusButton(id) {
+    jQuery('#pupinput' + id + '').focus();
+}
+function focusDialog(id) {
+    jQuery('#dialog' + id + '').focus();
+}
+jQuery(document).ready(function() {
+    jQuery('#doIt').click(function(e) {
+        e.preventDefault();
+        jQuery('#content').empty();
+        var tOut = parseInt(jQuery('#timeoutVal').val(), 10);
+        if (tOut) {
+            setTimeout(function() {
+                addContent(3);
+                focusDialog(3);
+                setTimeout(function() {
+                    focusButton(3);
+                }, tOut);
+            }, 1000);
+        } else {
+            addContent(3);
+            focusButton(3);
+        }
+    });
+});
+</script>
+</body>
+</html>
