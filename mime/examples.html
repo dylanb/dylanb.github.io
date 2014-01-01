@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mime - Examples</title>
+
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Mime - Examples</h1>
+        <h2 style="font-size:1em;">Mime</h2>
+        <p class="view"><a href="overview.html">Mime Home</a></p>
+        <p class="view"><a href="index.html">Mime API Documentation</a></p>
+        <h2 style="font-size:1em;">Other</h2>
+          <p class="view"><a href="https://github.com/dylanb">View My GitHub Profile</a></p>
+      </header>
+      <section>
+        <h2><span class="octicon octicon-link"></span>Mocking Global Objects</h2>
+          <p>
+            This example below shows how Mime can be used to mock and capture the Express global application object that is common in many Express-bases applications. Assume that you have broken each of your Express application route handlers into its own Node.js module that all access the global "app" symbol, then one line of code in your test file prior to requiring your test target module, will allow you to test all the routes that the module sets up as well as the callback(s) themselves.
+          </p>
+          <pre><code>
+// Create a Mime instance that will be used for capturing
+global.app = new Mime();
+
+// Require our test target
+require('../../src/myExpressHandlers.js');
+
+// Fetch the callback that was registered by the required module
+handlerCallback = app._getCallArguments('all', 0)[1];
+          </code></pre>
+          <h3><span class="octicon octicon-link"></span>Adding methods and attributes that return values</h3>
+          <p>
+            Mime instances do not need you to do any work for methods that take arguments but do not return any values. However, this will not work for all situations, sometimes you need one or more method that returns a value and/or you need attributes. Fortunately this is simple.
+          </p>
+          <h4><span class="octicon octicon-link"></span>Adding an attribute</h4>
+          <p>
+            This example adds an attribute that has a value. In this instance, we are testing an Express callback that handles a POST request. The handler expects the http Request object to have a "query" attribute with the posted values as child attributes.
+          </p>
+          <pre><code>
+/* test.js */
+// Creat our Mime instance
+request = new Mime();
+// Add the attributes
+request.query = {
+    name: 'Dylan Barrell',
+    twitter: '@dylanbarrell'
+  };
+          </code></pre>
+          <h4><span class="octicon octicon-link"></span>Adding a method</h4>
+          <p>
+            This example shows how to add a method to an instance
+          </p>
+          <pre><code>
+/* test.js */
+// Creat our Mime instance
+newspaper = new Mime();
+// Add the read method
+newspaper.getContents = function() {
+  return 'somevalue';
+};
+          </code></pre>
+        <h2><span class="octicon octicon-link"></span>Mocking Required Modules</h2>
+          <p>
+            There are two ways to use Mime to mock and capture dependencies of your test targets. The first mechanism, called Dependency Separation is to move all of your dependency requires into a separate file that you then combine with your code in a build step. You can then create Mime instances for each of the dependecies in your test files. The second mechanism, called Dependency Interception is where you replace calls to the standard Node.js require with calls to Mime's static method Mime.require. This allows Mime to generate and manange the dependencies for you.
+          </p>
+          <p>
+            The advantage of the Dependency Interception is that it requires only a small change to the require call for each dependency you want to mock and one change to your application's main file. The disadvantage of Dependency Interception is that your runtime is now dependent on Mime. The advantage of Dependency Separation is that you are not required make the change to your application's main file and therefore not required to include Mime in your runtime. The disadvantage of Dependency Separation is that it requires a build in order to run your application and it requires quite significant refactoring to retrofit an existing project.
+          </p>
+          <h3><span class="octicon octicon-link"></span>Dependency Interception Example</h3>
+          <pre><code>
+/* dependency.js */
+// In your module, use Mime.require for any dependency
+http = Mime.require('http', require);
+
+// Then you use that dependency
+  ...
+  http.setHeader('cache-control', 'no-cache');
+  ...
+          </code></pre>
+          <pre><code>
+/* test.js */
+// In your test file, you use Mime.getMockedModuleMime to obtain a Mime object for the http module
+// This is required so that Node.js's module caching will not get in the way of multiple
+// modules requiring the same dependency
+httpMime = Mime.getMockedModuleMime('http');
+
+// Then tell the mime instance which symbols to export
+httpMime._mockModule('http', ['setHeader', 'write', 'end']);
+
+// Then require the module with the dependency
+dependency = require('../src/dependency.js');
+
+// Now run the tests
+...
+          </code></pre>
+          <h3><span class="octicon octicon-link"></span>Dependency Separation Example</h3>
+          <pre><code>
+/* dependencyIntro.js */
+// In your module's intro file, you set up the variable that will be used by the module
+http = require('http');
+          </code></pre>
+          <pre><code>
+/* dependency.js */
+// In your module, you simply use that variable
+  ...
+  http.setHeader('cache-control', 'no-cache');
+  ...
+          </code></pre>
+          <pre><code>
+/* test.js */
+// In your test file, you create a Mime instance with the same symbol name
+http = new Mime();
+
+// Then require the module with the dependency
+dependency = require('../src/dependency.js');
+
+// Now run the tests
+...
+          </code></pre>
+          <h2><span class="octicon octicon-link"></span>Mocking factories and constructors</h2>
+          <p>
+            If you are familiar with the mongoose.js example on the Mongoose.js home page, listed below, you will see a couple of problems that fall into the category of constructors and factories. the mongoose.model function is a class factory that returns a constructor that can be used to instantiate instances of a new class created by the factory.
+          </p>
+          <pre><code>
+/* mongooseExample.js */
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+
+var Cat = mongoose.model('Cat', { name: String });
+
+var kitty = new Cat({ name: 'Zildjian' });
+kitty.save(function (err) {
+  if (err) // ...
+  console.log('meow');
+});
+          </code></pre>
+          <p>
+            To test such a file with Mime, we must first solve the dependency mocking problem. We will use Dependency Separation for this example.
+          </p>
+          <pre><code>
+/* mongooseExampleIntro.js */
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+          </code></pre>
+          <pre><code>
+/* mongooseExample.js */
+var Cat = mongoose.model('Cat', { name: String });
+
+var kitty = new Cat({ name: 'Zildjian' });
+kitty.save(function (err) {
+  if (err) // ...
+  console.log('meow');
+});
+          </code></pre>
+          <p>
+            Now we use a combination of the Mime._captor function and the Mime._createClass function called within the captor. Creating a captor function like this allows us to define some specific behavior (in this case the class factory), assign it to the Mime instance and also capture the arguments in calls to that function.
+          </p>
+          <pre><code>
+var assert = require('assert');
+
+require('../../mime/mime');
+
+global.mongoose = new Mime();
+mongoose._captor('model', function(name, defn) {
+    return this._createClass(function() {
+    });
+  });
+          </code></pre>
+          <p>
+            Now when we require our refactored test target file, then we can create tests that test the call to the factory, the call to the constructor(s) for the factory-created classes and the calls to the instance methods of those classes. We can also, having captured all arguments, test any callbacks in those arguments synchronously. In the example, if the callback passed into the "save" method did anything usefully testable, we could test that it works correctly too.
+          </p>
+          <pre><code>
+require('../../examplesrc/mongooseExample.js');
+
+describe('mongooseExample.js', function () {
+    it('Should have created the model', function () {
+        assert.ok(mongoose._wasCalledWithArguments('model', 'Cat', { name : String }),
+          'Should have called model');
+    });
+
+    it('Should have called the "Cat" constructor', function () {
+        assert.equal(mongoose._getCallArguments('Class', 0)[0].name, 'Zildjian',
+          'Should have created a Zildjian cat');
+    });
+
+    it('Should have called the "save" method', function () {
+        assert.equal(typeof mongoose._getCallArguments('save', 0)[0], 'function',
+          'Should have called with a callback');
+    });
+});
+          </code></pre>
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker = _gat._getTracker("UA-44989756-2");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+  </body>
+</html>

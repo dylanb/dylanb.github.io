@@ -1,0 +1,422 @@
+{
+    "project": {
+        "name": "The Mime API",
+        "description": "The Mime API: a Node.js library for doing Capturing Mocking for Test Driven Development",
+        "version": "0.0.1",
+        "url": "http://dylanb.github.io/"
+    },
+    "files": {
+        "mime/mime.js": {
+            "name": "mime/mime.js",
+            "modules": {
+                "Mime": 1
+            },
+            "classes": {
+                "safeObject": 1,
+                "Mime": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "Mime": {
+            "name": "Mime",
+            "submodules": {},
+            "classes": {
+                "safeObject": 1,
+                "Mime": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "mime/mime.js",
+            "line": 97,
+            "description": "Mime module"
+        }
+    },
+    "classes": {
+        "safeObject": {
+            "name": "safeObject",
+            "shortname": "safeObject",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mime",
+            "namespace": "",
+            "file": "mime/mime.js",
+            "line": 16,
+            "description": "Given a constructor function as an argument, safeObject will create a new\nJavaScript Class that will not throw an exception when a call is made to a\nnon-existent function member. A call will be made instead to the\n'__undefinedMethod__' function which can be overridden to implement\nfunctionality you find useful.\nIt will also look for symbols that have been registered with the target object's\n__constructor array and will treat those functions in the way that constructor\nfunctions need to be treated.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "f",
+                    "description": "- the constructor function that you want to use for your safe class",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Class"
+            }
+        },
+        "Mime": {
+            "name": "Mime",
+            "shortname": "Mime",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mime",
+            "namespace": "",
+            "file": "mime/mime.js",
+            "line": 97,
+            "description": "Mime constructor. Takes an optional argument that implements a deepEqual\ncomparison to be able to determine whether the arguments passed into the\nfunction call are equal. By default it uses the Node.js assert.deepEqual.\nYou will want to override this if you have objects that do not serialize\nnaturally",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "f",
+                    "description": "a deepEqual function that can be used to compare whether two object structures are equal",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            }
+        }
+    },
+    "classitems": [
+        {
+            "file": "mime/mime.js",
+            "line": 116,
+            "description": "Given a module name and the default require function, Mime.require will\nreturn a mocked module for the name if one was registered with _mockModule\nor it will defer the call to the require function passed in",
+            "itemtype": "method",
+            "name": "require",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- the module name",
+                    "type": "String"
+                },
+                {
+                    "name": "require",
+                    "description": "- the default require function",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "- of exported module's symbols",
+                "type": "Object"
+            },
+            "example": [
+                "\n       // In your module, use Mime.require for any dependency\n       http = Mime.require('http', require);"
+            ],
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 136,
+            "description": "Internal method that captures calls to undefined functions into the log\nstructure",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "__undefinedMethod__",
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 153,
+            "description": "Log a call to a function",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "__logCall",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- the name of the function",
+                    "type": "String"
+                },
+                {
+                    "name": "restOfArguments",
+                    "description": "- the argument array",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 169,
+            "description": "This will reset the call log, so that old undefined calls are no longer present",
+            "methdo": "_reset",
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 179,
+            "description": "Create a function with a specific name that is bound to the Mime and\nreturn this function. This function can then be passed into a test target\nand will act as an argument Mime. You can test the arguments passed to\nthese calls in the same way as calls to a mocked object function",
+            "itemtype": "method",
+            "name": "_captor",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- the name you will use to test the arguments passed into the function when it was called",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "- optional parameter with a function to call when this method is called",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function"
+            },
+            "example": [
+                "\n       // This will add a \"model\" function to the mime instance that mimics\n       // Mongoose's model function\n       mime._captor('model', function(name, schema) {\n           return this._createClass(function() {\n               // constructor function logic\n               ...\n           });\n       });"
+            ],
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 214,
+            "description": "Returns true if the function with the name passed in as the first argument\nwas called with the arguments passed in as the rest of the arguments.\nReturns false under all other conditions",
+            "itemtype": "method",
+            "name": "_wasCalledWithArguments",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- the name of the function to test",
+                    "type": "String"
+                },
+                {
+                    "name": "arguments",
+                    "description": "- the other arguments to test",
+                    "type": "Anything",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "example": [
+                "\n       // The mime instance here was supplied as a mock for a mongoose module\n       it('Should have created the model', function () {\n           assert.ok(mime._wasCalledWithArguments('model', 'Cat', { name : String }),\n             'Should have called model');\n       });"
+            ],
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 256,
+            "description": "Given a function name and an index, returns the arguments of the call at\nthat index. It returns undefined if there was no call at that index.\nIt returns an empty array if there was a call with no arguments at that\nindex. If no index is supplied, the first call (0-index) will be assumed",
+            "itemtype": "method",
+            "name": "_getCallArguments",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- the name of the function",
+                    "type": "String"
+                },
+                {
+                    "name": "index",
+                    "description": "- which call's arguments to return",
+                    "type": "Integer",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "example": [
+                "\n       // The mime object was turned into a class factory using _createClass\n       it('Should have called the child class\\'s constructor', function () {\n           assert.equal(mime._getCallArguments('Class', 0)[0].name, 'Zildjian',\n             'Should have created a Zildjian cat');\n       });"
+            ],
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 290,
+            "description": "Given a function name return the array of all the calls to that function.",
+            "itemtype": "method",
+            "name": "_getAllCallArguments",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- the name of the function",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "example": [
+                "\n       var mime = new Mime();\n       mime.newFunction();\n       mime.newFunction(1, 2, 3);\n       assert.deepEqual(mime._getAllCallArguments('newFunction'), [[], [1, 2, 3]],\n           'Should return array of argument arrays');"
+            ],
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 314,
+            "description": "Given the name of a module, return the Mime instance that is the cached instance for this\nmodule and if one does not exist create it",
+            "static": "getMockedModuleMime",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- the name of the module as it will be required",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "- the Mime instance for the mocked module",
+                "type": "Mime"
+            },
+            "example": [
+                "\n       // In your test file, you use Mime.getMockedModuleMime to obtain a Mime object for the http module\n       // This is required so that Node.js's module caching will not get in the way of multiple\n       // modules requiring the same dependency\n       httpMime = Mime.getMockedModuleMime('http');\n\n       // Then tell the mime instance which symbols to export\n       httpMime._mockModule('http', ['setHeader', 'write', 'end']);\n\n       // Then require the module with the dependency\n       dependency = require('../src/dependency.js');\n\n       // Now run the tests\n       ..."
+            ],
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 346,
+            "description": "Given a module name and a set of methods, create an exports structure for a module with\nthose methods and bind it to the this object. Put that structure into the global mocked\nmodules registry",
+            "itemtype": "method",
+            "name": "_mockModule",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- the name of the module as it will be required",
+                    "type": "String"
+                },
+                {
+                    "name": "methods",
+                    "description": "- if a String, the name of the method to export and bind, if an Object, its attributes' name will be exported, bound to the Mime instance and the function will also be called when the method is called",
+                    "type": "Array[String|Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "example": [
+                "\n       // In your test file, you use Mime.getMockedModuleMime to obtain a Mime object for the http module\n       // This is required so that Node.js's module caching will not get in the way of multiple\n       // modules requiring the same dependency\n       httpMime = Mime.getMockedModuleMime('http');\n\n       // Then tell the mime instance which symbols to export\n       httpMime._mockModule('http', ['setHeader', 'write', 'end']);\n\n       // Then require the module with the dependency\n       dependency = require('../src/dependency.js');\n\n       // Now run the tests\n       ..."
+            ],
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 404,
+            "description": "Unregister the mocked exports for a module",
+            "itemtype": "method",
+            "name": "_unmockModule",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- the name of the module to unmock",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 431,
+            "description": "Register a symbol as a constructor function so that the proxy will return the\nfunction in such a way that it can be used with new",
+            "_registerconstructor": "",
+            "params": [
+                {
+                    "name": "symbol",
+                    "description": "- the symbol name to register",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "class": "Mime",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 443,
+            "description": "Given a constructor function as an argument, create a new Class that inherits from\nthe Mime class but whose instances' cal logs are shared with this instance's call log.\nThis is useful when mocking a global or require class so that access can be gained to\nwhat happens to the instances of that class.\nThe call log will also log the creation of instances under the symbol 'Class', so that\nthe arguments to those calls can also be captured",
+            "itemtype": "method",
+            "name": "_createClass",
+            "params": [
+                {
+                    "name": "constructor",
+                    "description": "- the constructor function",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "- the inherited and bound constructor",
+                "type": "Function"
+            },
+            "example": [
+                "\n       var assert = require('assert'),\n           Cat, kitty, mongoose;\n\n       require('../../mime/mime');\n\n       mongoose = new Mime();\n       // When mongoose.model is called, it returns a new class\n       mongoose._captor('model', function(name, defn) {\n           return this._createClass(function() {\n           });\n         });\n       Cat = mongoose.model('Cat', { name: String });\n\n       // Calling the class's constructor, will register a call against the \"Class\"\n       // \"method\" in the mongoose Mime instance\n       kitty = new Cat({ name: 'Zildjian' });\n\n       // Calling the child instance's functions will also register calls against\n       // the mongoose Mime instance\n       kitty.save(function (err) {\n           if (err) {\n               console.log('meow');\n           }\n       });\n\n       // test that with these asserts\n       describe('mongooseExample.js', function () {\n           it('Should have created the model', function () {\n               assert.ok(mongoose._wasCalledWithArguments('model', 'Cat', { name : String }),\n                 'Should have called model');\n           });\n\n           it('Should have called the \"Cat\" constructor', function () {\n               assert.equal(mongoose._getCallArguments('Class', 0)[0].name, 'Zildjian',\n                 'Should have created a Zildjian cat');\n           });\n\n           it('Should have called the \"save\" method', function () {\n               assert.equal(typeof mongoose._getCallArguments('save', 0)[0], 'function',\n                 'Should have called with a callback');\n           });\n       });"
+            ],
+            "class": "Mime",
+            "module": "Mime"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: methdo",
+            "line": " mime/mime.js:169"
+        },
+        {
+            "message": "unknown tag: _registerconstructor",
+            "line": " mime/mime.js:431"
+        },
+        {
+            "message": "Missing item type\nThis will reset the call log, so that old undefined calls are no longer present",
+            "line": " mime/mime.js:169"
+        },
+        {
+            "message": "Missing item type\nGiven the name of a module, return the Mime instance that is the cached instance for this\nmodule and if one does not exist create it",
+            "line": " mime/mime.js:314"
+        },
+        {
+            "message": "Missing item type\nRegister a symbol as a constructor function so that the proxy will return the\nfunction in such a way that it can be used with new",
+            "line": " mime/mime.js:431"
+        }
+    ]
+}

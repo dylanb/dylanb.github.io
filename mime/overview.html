@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mime - Capturing Mock Library for Node.js</title>
+
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Mime - Capturing Mock Library for Node.js</h1>
+        <h2 style="font-size:1em;">Mime</h2>
+        <p class="view"><a href="index.html">Mime API Documentation</a></p>
+        <p class="view"><a href="examples.html">Mime Examples</a></p>
+        <h2 style="font-size:1em;">Other</h2>
+          <p class="view"><a href="https://github.com/dylanb">View My GitHub Profile</a></p>
+      </header>
+      <section>
+        <h2><span class="octicon octicon-link"></span>Mime - Mock and Capture for Node.js</h2>
+          <p>
+            Mime is a capturing mock library for Node.js. It uses harmony-reflect Proxy objects (part of the ES 6 JavaScript standard) to allow for very simple capturing mock objects and capturing callbacks to be created and used within an automated test framework such as Mocha. 
+          </p>
+          <p>
+            Mime builds on some work I did a while back on a "Safe Object", using harmony-reflect proxies. The idea behind a safe object is that instead of throwing an exception if you call a function that does not exist, you have a catchall function that does something. It is useful for writing domain-specific languages, or in this case for creating mocks of objects that are called by the code you are testing with unit tests.
+          </p>
+          <p>
+            One of the difficulties when doing TDD with Node.js is its asynchronous nature. Test frameworks like Mocha have support for asynchronous testing, but you have to have timeouts to handle the potential condition where the final callback that calls "done" is not called AND you have to use an "expect" function that can handle the case where an interim callback as not called.
+          </p>
+          <p>
+            The answer to this difficulty is to use capturing functions and synchronous mock objects to turn asynchronous code into synchronous code so that tests execute and faile quickly. However, writing this can make your tests large and difficult to read, write and maintain. You end up with more "setup" code than actual asserts. Mime capturing mock objects used with a couple of simple best practices make this easy.
+          </p>
+        <h3><span class="octicon octicon-link"></span>A Simple Example</h3>
+        <p>
+          Take the simple Express application example below. It makes four calls to the respose object with a text that was generated, based on what sort of request is made. In order to get complete test coverage of this handler, we need to create tests that cover each of the three different paths through the code and then ensure that the appropriate functions were called with the appropriate arguments.
+        </p>
+        <pre><code>
+app.all('/status', function(request, response) {
+  var statusText;
+  if (request.query.statusType === 'network') {
+    statusText = getNetworkStatus();
+  } else if (request.query.statusType === 'sensors') {
+    statusText = getSensorsStatus();
+  } else if (request.query.statusType === 'all') {
+    statusText = getAllStatii();
+  }
+  response.setHeader('content-type', 'application/json');
+  response.setHeader('cache-control', 'no-cache');
+  response.write(statusText);
+  response.end();
+});
+        </code></pre>
+        <p>
+          Lets write the three test cases using Mocha and Mime. Assume that the above code lives in the file called "status.js" that lives in ../examplesrc. First we set up a capturing mock object that represents the Express application global "app"
+        </p>
+        <pre><code>
+var assert = require('assert'),
+    Mime = require('../mime').Mime,
+    statusCallback;
+
+global.app = new Mime();
+        </code></pre>
+        <p>
+          Then we require our target file, which will capture the route setup call, so we can fetch the callback and cache it in a variable that can then be used by all of the tests that are going to be testing this callback.
+        </p>
+        <pre><code>
+require('../../examplesrc/status.js');
+
+// Fetch the callback
+statusCallback = app._getCallArguments('all', 0)[1];
+        </code></pre>
+        <p>
+          First we will set up a beforeEach() call to initialize some Mime objects for each of our unit tests. The request and the response object are obviously going to be used to capture all the calls to those objects from within our target code? thisObject is used to create "capturing callbacks" to be attached to the global namespace to capture calls to global functions.
+        </p>
+        <pre><code>
+describe('status.js', function() {
+    describe('Callback functionality', function() {
+        var request, response;
+        beforeEach(function() {
+            request = new Mime(),
+            response = new Mime(),
+            thisObject = new Mime();
+        });
+        </code></pre>
+        <p>
+          Now lets initialize some data in the request object and set up the global callback for a first test that will test the "network" request. This test will also test all the calls to the response object, which are the same for all routes through the callback.
+        </p>
+        <pre><code>
+it('Network status request will call the getNetworkStatus global, set the correct headers and call write and end', function () {
+    // Setup the input data by addign it to our mock object
+    request.query = { statusType : 'network' };
+    
+    global.getNetworkStatus = thisObject._captor('getNetworkStatus');
+        </code></pre>
+        <p>
+          Now we call the callback and assert all the conditions that should have been met.
+        </p>
+        <pre><code>
+    statusCallback(request, response);
+
+    // Test that getNetworkStatus was called
+    assert.ok(thisObject._wasCalledWithArguments('getNetworkStatus'), 'Should have called getNetworkStatus');
+    assert.ok(response._wasCalledWithArguments('setHeader', 'content-type', 'application/json'), 'Should have set the content-type header');
+    assert.ok(response._wasCalledWithArguments('setHeader', 'cache-control', 'no-cache'), 'Should have set the cache-control header');
+    assert.ok(response._wasCalledWithArguments('write', undefined), 'Should have called write');
+    assert.ok(response._wasCalledWithArguments('end'), 'Should have called end');
+});
+        </code></pre>
+        <p>
+          The result is some very clean test code that has no asynchronous calls. The rest of the routes through the callback can now be tested with some additional simple tests.
+        </p>
+        <pre><code>
+it('Sensors status request will call the getSensorsStatus global', function () {
+    request.query = { statusType : 'sensors' };
+    global.getSensorsStatus = thisObject._captor('getSensorsStatus');
+    statusCallback(request, response);
+    assert.ok(thisObject._wasCalledWithArguments('getSensorsStatus'), 'Should have called getSensorsStatus');
+});
+it('All status request will call the getAllStatii global', function () {
+    request.query = { statusType : 'all' };
+    global.getAllStatii = thisObject._captor('getAllStatii');
+    statusCallback(request, response);
+    assert.ok(thisObject._wasCalledWithArguments('getAllStatii'), 'Should have called getAllStatii');
+});
+        </code></pre>
+        <p>
+          But wait, there is more: because the capturing mock object was used to initialize the Express route, we can also test the route setup to ensure that future changes to this are caught properly.
+        </p>
+        <pre><code>
+describe('Route registration', function() {
+    it('Will register a callback function against the "/status" route', function () {
+        assert.equal(app._getCallArguments('all', 0)[0], '/status',
+            'Route must be registered');
+    });
+    it('Will not register any other routes', function () {
+        assert.equal(app._getAllCallArguments('all').length, 1, 'No other "all" routes registered');
+        assert.equal(app._getAllCallArguments('get'), undefined, 'No "get" routes registered');
+        assert.equal(app._getAllCallArguments('post'), undefined, 'No "post" routes registered');
+    });
+});
+        </code></pre>
+        <p>
+          You can take this simple example a bit further and imagine how using the Mime capturing mock objects can make testing complex asynchronous Node.js functions easy and fast - even when they fail.
+        </p>
+        <p>
+          For more detailed information, take a look at the <a href="mime/index.html">Mime API documentation</a> or the <a href="mime/examples.html">Mime examples</a>.
+        </p>
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker = _gat._getTracker("UA-44989756-2");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+  </body>
+</html>

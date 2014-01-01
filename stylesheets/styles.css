@@ -45,7 +45,7 @@ a small {
 }
 
 .wrapper {
-  width:860px;
+  width:98%;
   margin:0 auto;
 }
 
@@ -67,7 +67,7 @@ pre {
   background: #f8f8f8;  
   border-radius:5px;
   border:1px solid #e5e5e5;
-  overflow-x: auto;
+  overflow-x: scroll;
 }
 
 table {
@@ -95,9 +95,10 @@ img {
 }
 
 header {
-  width:270px;
+  width:20%;
   float:left;
   position:fixed;
+  background-color:#FFF;
 }
 
 header ul {
@@ -159,7 +160,7 @@ header ul a strong {
 }
 
 section {
-  width:500px;
+  width:77%;
   float:right;
   padding-bottom:50px;
 }
@@ -176,10 +177,11 @@ hr {
 }
 
 footer {
-  width:270px;
+  width:20%;
   float:left;
   position:fixed;
   bottom:50px;
+  z-index: -1;
 }
 
 @media print, screen and (max-width: 960px) {

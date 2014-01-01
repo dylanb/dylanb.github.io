@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mime - API Documentation</title>
+
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Mime - API Documentation</h1>
+        <h2 style="font-size:1em;">Mime</h2>
+        <p class="view"><a href="overview.html">Mime Home</a></p>
+        <p class="view"><a href="examples.html">Mime Examples</a></p>
+        <h2 style="font-size:1em;">Other</h2>
+          <p class="view"><a href="https://github.com/dylanb">View My GitHub Profile</a></p>
+      </header>
+      <section>
+        <h2><span class="octicon octicon-link"></span>Mime Class</h2>
+          <p>
+            Mime consists of a single class with public methods that control the instances of that class as well as some static methods that can be used without an instance. Mime is a mock object which means that it is intended to mock the public methods of other classes as well as callback functions. In order to minimize the namespace collisions with other classes, all the public instance methods of Mime begin with _ (underscore) and all the internal attributes and methods begin with __ (double-underscore). The static class methods do not have underscores because they will not clash with other namespaces.
+          </p>
+        <h3><span class="octicon octicon-link"></span>Public Instance Interface</h3>
+        <pre><code>
+mimeInstanceInterface = {
+  _reset: function (),
+  _captor: function(name),
+  _wasCalledWithArguments: function(/* variable arguments */),
+  _getCallArguments: function(name, index),
+  _getAllCallArguments: function(name),
+  _mockModule: function(name, methods),
+  _unmockModule: function(name)
+};
+        </code></pre>
+        <h4><span class="octicon octicon-link"></span>Public Instance Methods</h4>
+          <h5><span class="octicon octicon-link"></span>Constructor</h5>
+          <pre><code>
+Mime(deepEqual /* optional */)
+          </code></pre>
+          <p>
+             Instantiates the Mime class. If passed a function as the first argument, will use that function when comparing arguments for equality. If no function is given, will use Node.js's assert.deepEqual.
+          </p>
+          <h5><span class="octicon octicon-link"></span>_wasCalledWithArguments</h5>
+          <pre><code>
+_wasCalledWithArguments(/* variable arguments */)
+          </code></pre>
+          <p>
+             Although this method takes a variable argument list, the first argument must always be the name of the function and the rest of the arguments, the arguments to be used in the deeqEqual comparison. _wasCalledWithArguments returns true if the given method was called with the supplied arguments (using the deepEqual comparison on the arguments arrays) and false otherwise.
+          </p>
+          <h5><span class="octicon octicon-link"></span>_getCallArguments</h5>
+          <pre><code>
+_getCallArguments(name, index)
+          </code></pre>
+          <p>
+             Given a String (name) representing the name of the mocked method and a zero-based index, _getCallArguments will return the arguments that were passed into that call to the method and undefined if no call was made. If a call was made with no arguments, _getCallArguments will return the empty array ([]).
+          </p>
+          <h5><span class="octicon octicon-link"></span>_getAllCallArguments</h5>
+          <pre><code>
+_getAllCallArguments(name)
+          </code></pre>
+          <p>
+             Given a String (name) representing the name of the mocked method, _getAllCallArguments will return an array of the arguments provided to all the calls to the method, in the order in which those calls were made. Each set of arguments is an array. If no calls were made to the method, _getAllCallArguments will return undefined. For each call which was made without arguments, the arguments at that index will be the empty array ([]).
+          </p>
+          <h5><span class="octicon octicon-link"></span>_captor</h5>
+          <pre><code>
+_captor(name)
+          </code></pre>
+          <p>
+             Given a String (name) representing the name of a method, _captor will add a method of that name to the Mime object  and return that method, bound to the Mime object so that calls to that method will be logged as if the method was called on the object itself. This is useful for capturing arguments to a callback that is passed into another function. Calls to that callback can then be tested by calling _wasCalledWithArguments, _getCallArguments or _getAllCallArguments with the name provided. Note that the name you provide here can be anything as long as it does not clash with anything else in the mocked object's namespace or the Mime internal methods and attributes (i.e. avoid anything starting with one or more underscore).
+          </p>
+          <h5><span class="octicon octicon-link"></span>_mockModule</h5>
+          <pre><code>
+_mockModule(name, methods)
+          </code></pre>
+          <p>
+            Given the name of a module that will be "required" by the test target and a list of the symbols that are to be exported by the module, _mockModule will register a mocked module against that name and bind it to the current Mime instance, so that Mime.require(name) will return that set of symbols instead of the actual module. NOTE: The Mime instance must be obtained from a call to Mime.getMockedModuleMime(name) in order to ensure that Node.js's module caching mechanism works in conjunction with the module mocking.
+          </p>
+          <h5><span class="octicon octicon-link"></span>_unmockModule</h5>
+          <pre><code>
+_unmockModule(name)
+          </code></pre>
+          <p>
+            Given the name of a module that has been mocked, _unmockModule will empty out the exported symbols object and remove all the corresponding bound functions from the Mime instance.
+          </p>
+          <h5><span class="octicon octicon-link"></span>_reset</h5>
+          <pre><code>
+_reset()
+          </code></pre>
+          <p>
+            When called, _reset will clear the log of calls to the mocked object.
+          </p>
+        <h3><span class="octicon octicon-link"></span>Public Static Interface</h3>
+        <pre><code>
+mimeStaticInterface = {
+  getMockedModuleMime: function (name),
+  require: function(name, require)
+};
+        </code></pre>
+        <h4><span class="octicon octicon-link"></span>Public Static Methods</h4>
+          <h5><span class="octicon octicon-link"></span>Mime.getMockedModuleMime</h5>
+          <pre><code>
+Mime.getMockedModuleMime(name)
+          </code></pre>
+          <p>
+            When called with the name of the module that will be required, Mime.getMockedModuleMime will return a Mime instance against which calls to the required mocked module will be registered. This instance can then be passed into _mockModule or _unmockModule and will guarantee that the Node.js module caching will work no matter how many times Mime.require is called or how the mocked methods change
+          </p>
+          <h5><span class="octicon octicon-link"></span>Mime.require</h5>
+          <pre><code>
+Mime.require(name, require)
+          </code></pre>
+          <p>
+            In order for dependencies to be able to be mocked by Mime, it is necessary to obtain those dependencies by making a call to Mime.require instead of to the standard require. Mime.require will only return a mocked module, if one has been registered prior to the first call to  Mime.require for that module. If no mocked module has been registered, Mime.require will defer to the standard require which is also passed in as the second argument.
+          </p>
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker = _gat._getTracker("UA-44989756-2");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+  </body>
+</html>
