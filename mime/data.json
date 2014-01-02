@@ -179,7 +179,7 @@
             "line": 178,
             "description": "Create a function with a specific name that is bound to the Mime and\nreturn this function. This function can then be passed into a test target\nand will act as an argument Mime. You can test the arguments passed to\nthese calls in the same way as calls to a mocked object function",
             "itemtype": "method",
-            "name": "_captor",
+            "name": "_spy",
             "params": [
                 {
                     "name": "name",
@@ -198,7 +198,7 @@
                 "type": "Function"
             },
             "example": [
-                "\n       // This will add a \"model\" function to the mime instance that mimics\n       // Mongoose's model function\n       mime._captor('model', function(name, schema) {\n           return this._createClass(function() {\n               // constructor function logic\n               ...\n           });\n       });"
+                "\n       // This will add a \"model\" function to the mime instance that mimics\n       // Mongoose's model function\n       mime._spy('model', function(name, schema) {\n           return this._createClass(function() {\n               // constructor function logic\n               ...\n           });\n       });"
             ],
             "class": "Mime",
             "module": "Mime"
@@ -391,7 +391,7 @@
                 "type": "Function"
             },
             "example": [
-                "\n       var assert = require('assert'),\n           Cat, kitty, mongoose;\n\n       require('node-mimejs');\n\n       mongoose = new Mime();\n       // When mongoose.model is called, it returns a new class\n       mongoose._captor('model', function(name, defn) {\n           return this._createClass(function() {\n           });\n         });\n       Cat = mongoose.model('Cat', { name: String });\n\n       // Calling the class's constructor, will register a call against the \"Class\"\n       // \"method\" in the mongoose Mime instance\n       kitty = new Cat({ name: 'Zildjian' });\n\n       // Calling the child instance's functions will also register calls against\n       // the mongoose Mime instance\n       kitty.save(function (err) {\n           if (err) {\n               console.log('meow');\n           }\n       });\n\n       // test that with these asserts\n       describe('mongooseExample.js', function () {\n           it('Should have created the model', function () {\n               assert.ok(mongoose._wasCalledWithArguments('model', 'Cat', { name : String }),\n                 'Should have called model');\n           });\n\n           it('Should have called the \"Cat\" constructor', function () {\n               assert.equal(mongoose._getCallArguments('Class', 0)[0].name, 'Zildjian',\n                 'Should have created a Zildjian cat');\n           });\n\n           it('Should have called the \"save\" method', function () {\n               assert.equal(typeof mongoose._getCallArguments('save', 0)[0], 'function',\n                 'Should have called with a callback');\n           });\n       });"
+                "\n       var assert = require('assert'),\n           Cat, kitty, mongoose;\n\n       require('node-mimejs');\n\n       mongoose = new Mime();\n       // When mongoose.model is called, it returns a new class\n       mongoose._spy('model', function(name, defn) {\n           return this._createClass(function() {\n           });\n         });\n       Cat = mongoose.model('Cat', { name: String });\n\n       // Calling the class's constructor, will register a call against the \"Class\"\n       // \"method\" in the mongoose Mime instance\n       kitty = new Cat({ name: 'Zildjian' });\n\n       // Calling the child instance's functions will also register calls against\n       // the mongoose Mime instance\n       kitty.save(function (err) {\n           if (err) {\n               console.log('meow');\n           }\n       });\n\n       // test that with these asserts\n       describe('mongooseExample.js', function () {\n           it('Should have created the model', function () {\n               assert.ok(mongoose._wasCalledWithArguments('model', 'Cat', { name : String }),\n                 'Should have called model');\n           });\n\n           it('Should have called the \"Cat\" constructor', function () {\n               assert.equal(mongoose._getCallArguments('Class', 0)[0].name, 'Zildjian',\n                 'Should have created a Zildjian cat');\n           });\n\n           it('Should have called the \"save\" method', function () {\n               assert.equal(typeof mongoose._getCallArguments('save', 0)[0], 'function',\n                 'Should have called with a callback');\n           });\n       });"
             ],
             "class": "Mime",
             "module": "Mime"

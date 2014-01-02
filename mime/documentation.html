@@ -31,7 +31,7 @@
         <pre><code>
 mimeInstanceInterface = {
   _reset: function (),
-  _captor: function(name),
+  _spy: function(name),
   _wasCalledWithArguments: function(/* variable arguments */),
   _getCallArguments: function(name, index),
   _getAllCallArguments: function(name),
@@ -68,12 +68,12 @@ _getAllCallArguments(name)
           <p>
              Given a String (name) representing the name of the mocked method, _getAllCallArguments will return an array of the arguments provided to all the calls to the method, in the order in which those calls were made. Each set of arguments is an array. If no calls were made to the method, _getAllCallArguments will return undefined. For each call which was made without arguments, the arguments at that index will be the empty array ([]).
           </p>
-          <h5><span class="octicon octicon-link"></span>_captor</h5>
+          <h5><span class="octicon octicon-link"></span>_spy</h5>
           <pre><code>
-_captor(name)
+_spy(name)
           </code></pre>
           <p>
-             Given a String (name) representing the name of a method, _captor will add a method of that name to the Mime object  and return that method, bound to the Mime object so that calls to that method will be logged as if the method was called on the object itself. This is useful for capturing arguments to a callback that is passed into another function. Calls to that callback can then be tested by calling _wasCalledWithArguments, _getCallArguments or _getAllCallArguments with the name provided. Note that the name you provide here can be anything as long as it does not clash with anything else in the mocked object's namespace or the Mime internal methods and attributes (i.e. avoid anything starting with one or more underscore).
+             Given a String (name) representing the name of a method, _spy will add a method of that name to the Mime object  and return that method, bound to the Mime object so that calls to that method will be logged as if the method was called on the object itself. This is useful for capturing arguments to a callback that is passed into another function. Calls to that callback can then be tested by calling _wasCalledWithArguments, _getCallArguments or _getAllCallArguments with the name provided. Note that the name you provide here can be anything as long as it does not clash with anything else in the mocked object's namespace or the Mime internal methods and attributes (i.e. avoid anything starting with one or more underscore).
           </p>
           <h5><span class="octicon octicon-link"></span>_mockModule</h5>
           <pre><code>

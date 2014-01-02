@@ -162,7 +162,7 @@ kitty.save(function (err) {
 });
           </code></pre>
           <p>
-            Now we use a combination of the Mime._captor function and the Mime._createClass function called within the captor. Creating a captor function like this allows us to define some specific behavior (in this case the class factory), assign it to the Mime instance and also capture the arguments in calls to that function.
+            Now we use a combination of the Mime._spy function and the Mime._createClass function called within the captor. Creating a captor function like this allows us to define some specific behavior (in this case the class factory), assign it to the Mime instance and also capture the arguments in calls to that function.
           </p>
           <pre><code>
 var assert = require('assert');
@@ -170,7 +170,7 @@ var assert = require('assert');
 require('node-mimejs');
 
 global.mongoose = new Mime();
-mongoose._captor('model', function(name, defn) {
+mongoose._spy('model', function(name, defn) {
     return this._createClass(function() {
     });
   });

@@ -64,8 +64,6 @@
             
                 <li><a href="#methods___undefinedMethod__">__undefinedMethod__</a></li>
             
-                <li><a href="#methods__captor">_captor</a></li>
-            
                 <li><a href="#methods__createClass">_createClass</a></li>
             
                 <li><a href="#methods__getAllCallArguments">_getAllCallArguments</a></li>
@@ -73,6 +71,8 @@
                 <li><a href="#methods__getCallArguments">_getCallArguments</a></li>
             
                 <li><a href="#methods__mockModule">_mockModule</a></li>
+            
+                <li><a href="#methods__spy">_spy</a></li>
             
                 <li><a href="#methods__unmockModule">_unmockModule</a></li>
             
@@ -246,71 +246,6 @@ structure</p>
 </div>
 
             
-                <a name="methods__captor"></a>
-<div class="method item">
-    <span class="foundat">
-    
-        
-    
-        <a href="../files/mime_mime.js.html#l178"><code>mime&#x2F;mime.js:178</code></a>
-    </span>
-    <h4 class="name"><span><code>_captor</code></span>( <code>name, [callback] </code> ) </h4>
-    <br>
-    <p>Create a function with a specific name that is bound to the Mime and
-return this function. This function can then be passed into a test target
-and will act as an argument Mime. You can test the arguments passed to
-these calls in the same way as calls to a mocked object function</p>
-
-    
-    <h5>Parameters:</h5>
-    <ul class="params">
-    
-        <li>
-        
-            <code>name</code> <strong>&lt;String&gt;</strong>
-        
-        
-        <ul>
-<li>the name you will use to test the arguments passed into the function when it was called</li>
-</ul>
-
-            
-        </li>
-    
-        <li>
-        
-            <code>[callback]</code> <strong>&lt;Function&gt;</strong>
-        
-        
-        <ul>
-<li>optional parameter with a function to call when this method is called</li>
-</ul>
-
-            
-        </li>
-    
-    </ul>
-    
-    
-    
-    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; </div>
-    
-    
-    
-        <h5>Example</h5>
-        <pre class="code prettyprint"><code>   // This will add a &quot;model&quot; function to the mime instance that mimics
-   // Mongoose&#39;s model function
-   mime._captor(&#39;model&#39;, function(name, schema) {
-       return this._createClass(function() {
-           // constructor function logic
-           ...
-       });
-   });</code></pre>
-
-    
-</div>
-
-            
                 <a name="methods__createClass"></a>
 <div class="method item">
     <span class="foundat">
@@ -363,7 +298,7 @@ the arguments to those calls can also be captured</p>
 
    mongoose = new Mime();
    // When mongoose.model is called, it returns a new class
-   mongoose._captor(&#39;model&#39;, function(name, defn) {
+   mongoose._spy(&#39;model&#39;, function(name, defn) {
        return this._createClass(function() {
        });
      });
@@ -576,6 +511,71 @@ modules registry</p>
 
    // Now run the tests
    ...</code></pre>
+
+    
+</div>
+
+            
+                <a name="methods__spy"></a>
+<div class="method item">
+    <span class="foundat">
+    
+        
+    
+        <a href="../files/mime_mime.js.html#l178"><code>mime&#x2F;mime.js:178</code></a>
+    </span>
+    <h4 class="name"><span><code>_spy</code></span>( <code>name, [callback] </code> ) </h4>
+    <br>
+    <p>Create a function with a specific name that is bound to the Mime and
+return this function. This function can then be passed into a test target
+and will act as an argument Mime. You can test the arguments passed to
+these calls in the same way as calls to a mocked object function</p>
+
+    
+    <h5>Parameters:</h5>
+    <ul class="params">
+    
+        <li>
+        
+            <code>name</code> <strong>&lt;String&gt;</strong>
+        
+        
+        <ul>
+<li>the name you will use to test the arguments passed into the function when it was called</li>
+</ul>
+
+            
+        </li>
+    
+        <li>
+        
+            <code>[callback]</code> <strong>&lt;Function&gt;</strong>
+        
+        
+        <ul>
+<li>optional parameter with a function to call when this method is called</li>
+</ul>
+
+            
+        </li>
+    
+    </ul>
+    
+    
+    
+    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; </div>
+    
+    
+    
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code>   // This will add a &quot;model&quot; function to the mime instance that mimics
+   // Mongoose&#39;s model function
+   mime._spy(&#39;model&#39;, function(name, schema) {
+       return this._createClass(function() {
+           // constructor function logic
+           ...
+       });
+   });</code></pre>
 
     
 </div>

@@ -96,7 +96,7 @@ it('Network status request will call the getNetworkStatus global, set the correc
     // Setup the input data by addign it to our mock object
     request.query = { statusType : 'network' };
     
-    global.getNetworkStatus = thisObject._captor('getNetworkStatus');
+    global.getNetworkStatus = thisObject._spy('getNetworkStatus');
         </code></pre>
         <p>
           Now we call the callback and assert all the conditions that should have been met.
@@ -118,13 +118,13 @@ it('Network status request will call the getNetworkStatus global, set the correc
         <pre><code>
 it('Sensors status request will call the getSensorsStatus global', function () {
     request.query = { statusType : 'sensors' };
-    global.getSensorsStatus = thisObject._captor('getSensorsStatus');
+    global.getSensorsStatus = thisObject._spy('getSensorsStatus');
     statusCallback(request, response);
     assert.ok(thisObject._wasCalledWithArguments('getSensorsStatus'), 'Should have called getSensorsStatus');
 });
 it('All status request will call the getAllStatii global', function () {
     request.query = { statusType : 'all' };
-    global.getAllStatii = thisObject._captor('getAllStatii');
+    global.getAllStatii = thisObject._spy('getAllStatii');
     statusCallback(request, response);
     assert.ok(thisObject._wasCalledWithArguments('getAllStatii'), 'Should have called getAllStatii');
 });
