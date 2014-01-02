@@ -38,7 +38,7 @@
           </p>
         <h3><span class="octicon octicon-link"></span>A Simple Example</h3>
         <p>
-          Take the simple Express application example below. It makes four calls to the respose object with a text that was generated, based on what sort of request is made. In order to get complete test coverage of this handler, we need to create tests that cover each of the three different paths through the code and then ensure that the appropriate functions were called with the appropriate arguments.
+          Take the simple Express application example below. It makes four calls to the response object with a text that was generated, based on what sort of request is made. In order to get complete test coverage of this handler, we need to create tests that cover each of the three different paths through the code and then ensure that the appropriate functions were called with the appropriate arguments.
         </p>
         <pre><code>
 app.all('/status', function(request, response) {
@@ -61,7 +61,7 @@ app.all('/status', function(request, response) {
         </p>
         <pre><code>
 var assert = require('assert'),
-    Mime = require('../mime').Mime,
+    Mime = require('node-mimejs').Mime,
     statusCallback;
 
 global.app = new Mime();
