@@ -68,7 +68,7 @@ newspaper.getContents = function() {
   return 'somevalue';
 };
           </code></pre>
-        <h2><span class="octicon octicon-link"></span>Mocking Required Modules</h2>
+        <h2><span class="octicon octicon-link"></span>Mocking Dependencies</h2>
           <p>
             There are two ways to use Mime to mock and capture dependencies of your test targets. The first mechanism, called Dependency Separation is to move all of your dependency requires into a separate file that you then combine with your code in a build step. You can then create Mime instances for each of the dependecies in your test files. The second mechanism, called Dependency Interception is where you replace calls to the standard Node.js require with calls to Mime's static method Mime.require. This allows Mime to generate and manange the dependencies for you.
           </p>
