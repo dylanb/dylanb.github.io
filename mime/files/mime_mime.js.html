@@ -163,7 +163,6 @@ global.safeObject = function(f) {
     require(&#x27;harmony-reflect&#x27;);
     util = require(&#x27;util&#x27;);
 
-
     /*
      * Implement the require mocking &#x27;globals&#x27;
      */
@@ -535,7 +534,7 @@ global.safeObject = function(f) {
         var assert = require(&#x27;assert&#x27;),
             Cat, kitty, mongoose;
 
-        require(&#x27;../../mime/mime&#x27;);
+        require(&#x27;node-mimejs&#x27;);
 
         mongoose = new Mime();
         // When mongoose.model is called, it returns a new class
