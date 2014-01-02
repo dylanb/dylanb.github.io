@@ -81,7 +81,7 @@ statusCallback = app._getCallArguments('all', 0)[1];
         <pre><code>
 describe('status.js', function() {
     describe('Callback functionality', function() {
-        var request, response;
+        var request, response, thisObject;
         beforeEach(function() {
             request = new Mime(),
             response = new Mime(),
