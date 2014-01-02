@@ -25,10 +25,10 @@
       <section>
         <h2><span class="octicon octicon-link"></span>Mime - Mock and Capture for Node.js</h2>
           <p>
-            Mime is a capturing mock library for Node.js. It uses harmony-reflect Proxy objects (part of the ES 6 JavaScript standard) to allow for very simple capturing mock objects and capturing callbacks to be created and used within an automated test framework such as Mocha. 
+            Mime (npm node-mimejs) is a capturing mock library for Node.js. It uses harmony-reflect Proxy objects (part of the ES 6 JavaScript standard) to allow for very simple capturing mock objects and capturing callbacks to be created and used within an automated test framework such as Mocha. 
           </p>
           <p>
-            Mime builds on some work I did a while back on a "Safe Object", using harmony-reflect proxies. The idea behind a safe object is that instead of throwing an exception if you call a function that does not exist, you have a catchall function that does something. It is useful for writing domain-specific languages, or in this case for creating mocks of objects that are called by the code you are testing with unit tests.
+            Mime builds on some work I did a while back on a <a href="http://unobfuscated.blogspot.com/2012/06/creating-catchall-method-for-javascript.html">Safe Object</a>, using harmony-reflect proxies. The idea behind a safe object is that instead of throwing an exception if you call a function that does not exist, you have a catchall function that does something. It is useful for writing domain-specific languages, or in this case for creating mocks of objects that are called by the code you are testing with unit tests.
           </p>
           <p>
             One of the difficulties when doing TDD with Node.js is its asynchronous nature. Test frameworks like Mocha have support for asynchronous testing, but you have to have timeouts to handle the potential condition where the final callback that calls "done" is not called AND you have to use an "expect" function that can handle the case where an interim callback as not called.
