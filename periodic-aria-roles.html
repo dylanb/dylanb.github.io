@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=macintosh">
+<style>
+<!--table {}
+body {
+  padding-top: 20px;
+  padding-left: 20px;
+  background-color: darkgrey;
+  color: #000;
+  font-family:Tahoma, Verdana, Arial, sans-serif;
+}
+h1, section {
+  text-align:center;
+}
+h1 {
+  font-family: "Temporarium", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size:2.5em;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+
+}
+
+.style0
+	{text-align:general;
+	vertical-align:bottom;
+	white-space:nowrap;
+	color:windowtext;
+	font-size:10.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Verdana;
+	border:none;}
+#elements td {
+  	font-size:11px;
+  	font-weight:normal;
+  	font-style:normal;
+  	text-decoration:none;
+    color: #000;
+  	text-align:general;
+  	vertical-align:bottom;
+  	white-space:normal;
+    border-radius: 10px;
+    width:5em;
+    height: 5em;
+    overflow:wrap;
+    text-align:center;
+    vertical-align:middle;
+    border:2px solid black;
+  }
+  #elements td.invisible {
+    border:2px solid transparent;
+  }
+  table#elements {
+    text-align:center;
+    min-width:800px;
+  }
+-->
+/* Legend */
+
+ul#legend .icon {
+  cursor: pointer;
+  font-size: 0.9em;
+  margin: 0;
+  opacity: 0.8;
+  padding: 0;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  border-radius: 0.5em;
+  -o-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+}
+
+ul#legend {
+  width:96%;
+  color: black;
+  margin: 0;
+  padding-left: 2%;
+  list-style: none;
+}
+
+ul#legend li {
+  float: left;
+  font-size:12px;
+  width: 24%;
+  padding: 0.125em 0;
+}
+
+ul#legend .icon {
+  height: 1.5em;
+  width: 1.5em;
+  display: inline-block;
+  margin: 0 0.5em;
+  vertical-align: middle;
+}
+
+/* Colours */
+
+ul#legend .document .icon,
+table#elements .document .icon,
+table#elements .document .info {
+  background-color: rgb(120, 140, 255);
+}
+
+ul#legend .text .icon,
+table#elements .text {
+  background-color: rgb(255, 255, 100);
+}
+
+ul#legend .grouping .icon,
+table#elements .grouping {
+  background-color: rgb(255, 150, 80);
+}
+
+ul#legend .form .icon,
+table#elements .form {
+  background-color: rgb(100, 255, 100);
+}
+
+ul#legend .sections .icon,
+table#elements .sections {
+  background-color: rgb(160, 175, 255);
+}
+
+ul#legend .interactive .icon,
+table#elements .interactive {
+  background-color: silver;
+}
+
+ul#legend .table .icon,
+table#elements .table {
+  background-color: rgb(255, 150, 100);
+}
+
+ul#legend .embedding .icon,
+table#elements .embedding {
+  background-color: rgb(255, 150, 255);
+}
+
+
+</style>
+</head>
+
+<body link="#0000d4" vlink="#993366">
+<h1>Periodic Table of ARIA roles</h1>
+<section>
+  <center>
+    <table id="elements">
+     <col span=6>
+     <col>
+     <col span=5>
+     <tr>
+      <td class=text>link</td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class=sections>main</td>
+      <td class=embedding>img</td>
+     </tr>
+     <tr>
+      <td class=grouping>marquee</td>
+      <td class=interactive>alertdialog</td>
+      <td class=interactive>menuitem-radio</td>
+      <td class=interactive>tab</td>
+      <td class=interactive>treeitem</td>
+      <td class=form>form</td>
+      <td class=form>textbox</td>
+      <td class=sections>article</td>
+      <td class=sections>group</td>
+      <td class=sections>presen-tation</td>
+      <td class=sections>banner</td>
+      <td class=table>grid</td>
+     </tr>
+     <tr>
+      <td class=grouping>log</td>
+      <td class=interactive>dialog</td>
+      <td class=interactive>progress-bar</td>
+      <td class=interactive>tabpanel</td>
+      <td class=interactive>menu</td>
+      <td class=form>button</td>
+      <td class=form>spinbutton</td>
+      <td class=sections>column-header</td>
+      <td class=sections>heading</td>
+      <td class=sections>region</td>
+      <td class=sections>comple-mentary</td>
+      <td class=table>gridcell</td>
+     </tr>
+     <tr>
+      <td class=grouping>status</td>
+      <td class=interactive>menuitem</td>
+      <td class=interactive>scrollbar</td>
+      <td class=interactive>timer</td>
+      <td class=interactive>menubar</td>
+      <td class=form>checkbox</td>
+      <td class=form>combobox</td>
+      <td class=sections>definition</td>
+      <td class=sections>list</td>
+      <td class=sections>separator</td>
+      <td class=sections>content-info</td>
+      <td class=table>row</td>
+     </tr>
+     <tr>
+      <td class=grouping>alert</td>
+      <td class=interactive>menuitem-checkbox</td>
+      <td class=interactive>slider</td>
+      <td class=interactive>tooltip</td>
+      <td class=interactive>tablist</td>
+      <td class=form>option</td>
+      <td class=form>radio-group</td>
+      <td class=sections>directory</td>
+      <td class=sections>listitem</td>
+      <td class=sections>toolbar</td>
+      <td class=sections>navigation</td>
+      <td class=table>row-header</td>
+     </tr>
+     <tr>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class=interactive>application</td>
+      <td class=interactive>treegrid</td>
+      <td class=interactive>tree</td>
+      <td class=form>radio</td>
+      <td class=form>listbox</td>
+      <td class=sections>document</td>
+      <td class=sections>math</td>
+      <td class=sections>note</td>
+      <td class=sections>search</td>
+      <td class="invisible"></td>
+     </tr>
+     <tr>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+      <td class="invisible"></td>
+     </tr>
+    </table>
+  </center>
+</section>
+  <ul id="legend">
+    <li class="text"><div class="icon"></div>Text-level semantics</li>
+    <li class="form"><div class="icon"></div>Forms</li>
+    <li class="table"><div class="icon"></div>Tabular data</li> 
+    <li class="document"><div class="icon"></div>Metadata and scripting</li>
+    <li class="grouping"><div class="icon"></div>Grouping content</li>
+    <li class="sections"><div class="icon"></div>Document sections</li>
+    <li class="interactive"><div class="icon"></div>Interactive elements</li>
+    <li class="embedding"><div class="icon"></div>Embedding content</li>
+  </ul>
+</body>
+</html>
