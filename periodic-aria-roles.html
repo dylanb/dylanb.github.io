@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv=Content-Type content="text/html; charset=macintosh">
 <title>Periodic Title of ARIA roles</title>
+<script src="./bower_components/jquery/jquery.js"></script>
 <style>
 <!--table {}
 body {
@@ -264,5 +265,25 @@ table#elements .embedding {
     <li class="interactive"><div class="icon"></div>Interactive elements</li>
     <li class="embedding"><div class="icon"></div>Embedding content</li>
   </ul>
+<script>
+jQuery(document).ready(function () {
+  jQuery('td').each(function(index, value) {
+    var descText = jQuery('li.' + value.className).text();
+    if(descText.length) {
+      jQuery(value).attr('aria-label', descText);
+    }
+  });
+});
+</script>
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker = _gat._getTracker("UA-44989756-2");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
 </body>
 </html>
