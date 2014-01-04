@@ -9,7 +9,7 @@
 body {
   padding-top: 20px;
   padding-left: 20px;
-  background-color: darkgrey;
+  background-color: #fff;
   color: #000;
   font-family:Tahoma, Verdana, Arial, sans-serif;
 }
@@ -97,6 +97,7 @@ ul#legend .icon {
   display: inline-block;
   margin: 0 0.5em;
   vertical-align: middle;
+  border:1px solid black;
 }
 
 /* Colours */
@@ -137,6 +138,32 @@ table#elements .embedding {
   background-color: rgb(255, 150, 255);
 }
 
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+ 
+.clearfix {
+    display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+    display: block;
+}
+ 
+* html .clearfix {
+    height: 1%;
+}
+
+footer {
+  padding-top:5em;
+  font-size:8pt;
+  text-align:center;
+}
 
 </style>
 </head>
@@ -250,7 +277,7 @@ table#elements .embedding {
     </table>
   </center>
 </section>
-  <ul id="legend">
+  <ul id="legend" class="clearfix">
     <li class="form"><div class="icon"></div>Forms</li>
     <li class="table"><div class="icon"></div>Tabular data</li> 
     <li class="sections"><div class="icon"></div>Document sections</li>
@@ -258,6 +285,9 @@ table#elements .embedding {
     <li class="embedding"><div class="icon"></div>Embedding content</li>
     <li class="text"><div class="icon"></div>Text-level semantics</li>
   </ul>
+  <footer role="contentinfo">
+    The roles have been wrapped using additional - (dash) characters. This is so that the table looks good and the content is not hidden. all ARIA roles have zero dashes in them. Please refer to the <a href="http://www.w3.org/TR/wai-aria/roles">ARIA roles spec</a>
+  </footer>
 <script>
 jQuery(document).ready(function () {
   jQuery('td').each(function(index, value) {
