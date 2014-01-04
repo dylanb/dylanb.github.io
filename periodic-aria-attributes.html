@@ -85,6 +85,7 @@ ul#legend {
   margin: 0;
   padding-left: 2%;
   list-style: none;
+
 }
 
 ul#legend li {
@@ -139,13 +140,38 @@ table#elements .value {
   background-color: rgb(255, 150, 255);
 }
 
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+ 
+.clearfix {
+    display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+    display: block;
+}
+ 
+* html .clearfix {
+    height: 1%;
+}
 
+footer {
+  padding-top:5em;
+  font-size:8pt;
+  text-align:center;
+}
 </style>
 </head>
 
 <body link="#0000d4" vlink="#993366">
-<h1>Periodic Table of ARIA attributes</h1>
-<section>
+<section role="main">
+  <h1>Periodic Table of ARIA attributes</h1>
   <center>
     <table id="elements">
      <col span=6>
@@ -166,7 +192,7 @@ table#elements .value {
       <td class="role">aria-multiline</td>
       <td class="interactive">aria-live</td>
       <td class="interactive">aria-atomic</td>
-      <td class="interactive">aria-haspopup</td>
+      <td class="interactive">aria-has-popup</td>
       <td class="state">aria-invalid</td>
       <td class="state">aria-disabled</td>
       <td class="value">aria-valuemin</td>
@@ -176,7 +202,7 @@ table#elements .value {
       <td class="role">aria-multi-selectable</td>
       <td class="interactive">aria-relevant</td>
       <td class="interactive">aria-controls</td>
-      <td class="interactive">aria-autocomplete</td>
+      <td class="interactive">aria-auto-complete</td>
       <td class="state">aria-expanded</td>
       <td class="state">aria-checked</td>
       <td class="value">aria-valuemax</td>
@@ -214,14 +240,17 @@ table#elements .value {
     </table>
   </center>
 </section>
-  <ul id="legend">
+  <ul id="legend" class="clearfix">
     <li class="name"><div class="icon"></div>Name</li>
     <li class="role"><div class="icon"></div>Role</li>
     <li class="state"><div class="icon"></div>State</li>
     <li class="interactive"><div class="icon"></div>Interactive elements</li>
     <li class="value"><div class="icon"></div>Value</li>
   </ul>
-  <script>
+  <footer role="contentinfo">
+    The attribute names have been wrapped using additional - (dash) characters. This is so that the table looks good and the content is not hidden. all ARIA attributes ONLY have one - (dash) in them immediately after the word aria. Please refer to the <a href="http://www.w3.org/TR/wai-aria/states_and_properties">ARIA states and properties spec</a>
+  </footer>
+<script>
 jQuery(document).ready(function () {
   jQuery('td').each(function(index, value) {
     var descText = jQuery('li.' + value.className).text();
@@ -230,7 +259,7 @@ jQuery(document).ready(function () {
     }
   });
 });
-  </script>
+</script>
 <script type="text/javascript">
   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
