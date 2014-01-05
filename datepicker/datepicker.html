@@ -66,17 +66,7 @@
             padding: 0;
             width: 1px;
         }
-        </style>
-<script type="text/javascript">
-  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-  var pageTracker = _gat._getTracker("UA-44989756-2");
-  pageTracker._trackPageview();
-} catch(err) {}
-</script>
+        </style>            
     </head>
     <body>
         <h1>Accessible Gesture Widget Example</h1>
@@ -229,7 +219,6 @@ try {
                 $cells = $row.find('td'),
                 $nextCell, skipped = false;
 
-            console.log('repositionCursor: ' + row + ', ' + cell);
             if (jQuery($cells[cell]).hasClass('notvalid')) {
                 if (jQuery($cells[0]).hasClass('notvalid')) {
                     // move up
@@ -255,14 +244,10 @@ try {
                 }
                 return;
             }
-            console.log('Setting next cell to: ' + cell);
             if ($nextCell.length) {
                 $currentCell.removeClass('iscurrent');
                 $nextCell.addClass('iscurrent');
                 ariaAnnounce(monthNames['en'][month] + ' ' + $nextCell.text() + ' ' + year);
-
-            } else {
-                console.log('HUH');
             }
         }
         function triggerDrag(keyCode, delay) {
@@ -276,12 +261,10 @@ try {
                 if (!dragging) {
                     dragging = true;
                     setTimeout(function () {
-                        console.log('reset');
                         dragging = false;
                     }, delay === 0 ? 0 : 1000);
                     switch(keyCode) {
                     case 37: // LEFT
-                        console.log('LEFT');
                         if (currentCellIndex === 0) {
                             nextCellIndex = 6;
                             if (currentRowIndex > 1) {
@@ -295,7 +278,6 @@ try {
                         }
                         break;
                     case 39: // RIGHT
-                        console.log('RIGHT: ');
                         if (currentCellIndex === 6) {
                             nextCellIndex = 0;
                             if (currentRowIndex < maxRows - 1) {
@@ -309,7 +291,6 @@ try {
                         }
                         break;
                     case 38: // UP
-                        console.log('UP: ');
                         if (currentRowIndex > 1) {
                             nextRowIndex = currentRowIndex - 1;
                         } else {
@@ -318,7 +299,6 @@ try {
                         nextCellIndex = currentCellIndex;
                         break;
                     case 40: // DOWN
-                        console.log('DOWN: ');
                         if (currentRowIndex < maxRows - 1) {
                             nextRowIndex = currentRowIndex + 1;
                         } else {
@@ -368,7 +348,6 @@ try {
             if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) {
                 return;
             }
-            console.log(keyCode);
             switch(keyCode) {
             case 37: // left
             case 38: // up
@@ -465,6 +444,16 @@ try {
         }
     });
 }());
+</script>
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker = _gat._getTracker("UA-44989756-2");
+  pageTracker._trackPageview();
+} catch(err) {}
 </script>
     </body>
 </html>
