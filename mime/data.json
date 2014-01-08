@@ -2,7 +2,7 @@
     "project": {
         "name": "The Mime API",
         "description": "The Mime API: a Node.js library for doing Capturing Mocking for Test Driven Development",
-        "version": "0.0.4",
+        "version": "0.0.6",
         "url": "http://dylanb.github.io/"
     },
     "files": {
@@ -31,7 +31,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "mime/mime.js",
-            "line": 96,
+            "line": 107,
             "description": "Mime module"
         }
     },
@@ -47,7 +47,7 @@
             "module": "Mime",
             "namespace": "",
             "file": "mime/mime.js",
-            "line": 16,
+            "line": 61,
             "description": "Given a constructor function as an argument, safeObject will create a new\nJavaScript Class that will not throw an exception when a call is made to a\nnon-existent function member. A call will be made instead to the\n'__undefinedMethod__' function which can be overridden to implement\nfunctionality you find useful.\nIt will also look for symbols that have been registered with the target object's\n__constructor array and will treat those functions in the way that constructor\nfunctions need to be treated.",
             "is_constructor": 1,
             "params": [
@@ -73,7 +73,7 @@
             "module": "Mime",
             "namespace": "",
             "file": "mime/mime.js",
-            "line": 96,
+            "line": 107,
             "description": "Mime constructor. Takes an optional argument that implements a deepEqual\ncomparison to be able to determine whether the arguments passed into the\nfunction call are equal. By default it uses the Node.js assert.deepEqual.\nYou will want to override this if you have objects that do not serialize\nnaturally",
             "is_constructor": 1,
             "params": [
@@ -93,7 +93,27 @@
     "classitems": [
         {
             "file": "mime/mime.js",
-            "line": 115,
+            "line": 16,
+            "description": "Wrap any object in the safeobject proxy",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "- the object to be wrapped",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "safeObject",
+            "module": "Mime"
+        },
+        {
+            "file": "mime/mime.js",
+            "line": 126,
             "description": "Given a module name and the default require function, Mime.require will\nreturn a mocked module for the name if one was registered with _mockModule\nor it will defer the call to the require function passed in",
             "itemtype": "method",
             "name": "require",
@@ -121,22 +141,22 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 135,
-            "description": "Internal method that captures calls to undefined functions into the log\nstructure",
+            "line": 146,
+            "description": "Internal method that captures calls to undefined functions into the log\nstructure. It returns self so that calls to it can be chained and it can\nbe used for mocking chained objects",
             "access": "private",
             "tagname": "",
             "itemtype": "method",
             "name": "__undefinedMethod__",
             "return": {
                 "description": "",
-                "type": "Undefined"
+                "type": "Self"
             },
             "class": "Mime",
             "module": "Mime"
         },
         {
             "file": "mime/mime.js",
-            "line": 152,
+            "line": 165,
             "description": "Log a call to a function",
             "access": "private",
             "tagname": "",
@@ -164,7 +184,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 168,
+            "line": 181,
             "description": "This will reset the call log, so that old undefined calls are no longer present",
             "methdo": "_reset",
             "return": {
@@ -176,7 +196,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 178,
+            "line": 191,
             "description": "Create a function with a specific name that is bound to the Mime and\nreturn this function. This function can then be passed into a test target\nand will act as an argument Mime. You can test the arguments passed to\nthese calls in the same way as calls to a mocked object function",
             "itemtype": "method",
             "name": "_spy",
@@ -205,7 +225,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 213,
+            "line": 226,
             "description": "Returns true if the function with the name passed in as the first argument\nwas called with the arguments passed in as the rest of the arguments.\nReturns false under all other conditions",
             "itemtype": "method",
             "name": "_wasCalledWithArguments",
@@ -234,7 +254,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 255,
+            "line": 268,
             "description": "Given a function name and an index, returns the arguments of the call at\nthat index. It returns undefined if there was no call at that index.\nIt returns an empty array if there was a call with no arguments at that\nindex. If no index is supplied, the first call (0-index) will be assumed",
             "itemtype": "method",
             "name": "_getCallArguments",
@@ -263,7 +283,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 289,
+            "line": 302,
             "description": "Given a function name return the array of all the calls to that function.",
             "itemtype": "method",
             "name": "_getAllCallArguments",
@@ -286,7 +306,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 313,
+            "line": 326,
             "description": "Given the name of a module, return the Mime instance that is the cached instance for this\nmodule and if one does not exist create it",
             "static": "getMockedModuleMime",
             "params": [
@@ -308,7 +328,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 345,
+            "line": 358,
             "description": "Given a module name and a set of methods, create an exports structure for a module with\nthose methods and bind it to the this object. Put that structure into the global mocked\nmodules registry",
             "itemtype": "method",
             "name": "_mockModule",
@@ -336,7 +356,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 403,
+            "line": 416,
             "description": "Unregister the mocked exports for a module",
             "itemtype": "method",
             "name": "_unmockModule",
@@ -356,7 +376,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 430,
+            "line": 443,
             "description": "Register a symbol as a constructor function so that the proxy will return the\nfunction in such a way that it can be used with new",
             "_registerconstructor": "",
             "params": [
@@ -375,7 +395,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 442,
+            "line": 455,
             "description": "Given a constructor function as an argument, create a new Class that inherits from\nthe Mime class but whose instances' cal logs are shared with this instance's call log.\nThis is useful when mocking a global or require class so that access can be gained to\nwhat happens to the instances of that class.\nThe call log will also log the creation of instances under the symbol 'Class', so that\nthe arguments to those calls can also be captured",
             "itemtype": "method",
             "name": "_createClass",
@@ -400,23 +420,27 @@
     "warnings": [
         {
             "message": "unknown tag: methdo",
-            "line": " mime/mime.js:168"
+            "line": " mime/mime.js:181"
         },
         {
             "message": "unknown tag: _registerconstructor",
-            "line": " mime/mime.js:430"
+            "line": " mime/mime.js:443"
+        },
+        {
+            "message": "Missing item type\nWrap any object in the safeobject proxy",
+            "line": " mime/mime.js:16"
         },
         {
             "message": "Missing item type\nThis will reset the call log, so that old undefined calls are no longer present",
-            "line": " mime/mime.js:168"
+            "line": " mime/mime.js:181"
         },
         {
             "message": "Missing item type\nGiven the name of a module, return the Mime instance that is the cached instance for this\nmodule and if one does not exist create it",
-            "line": " mime/mime.js:313"
+            "line": " mime/mime.js:326"
         },
         {
             "message": "Missing item type\nRegister a symbol as a constructor function so that the proxy will return the\nfunction in such a way that it can be used with new",
-            "line": " mime/mime.js:430"
+            "line": " mime/mime.js:443"
         }
     ]
 }

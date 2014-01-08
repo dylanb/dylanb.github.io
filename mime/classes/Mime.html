@@ -16,7 +16,7 @@
             <h1><a href="../index.html">The Mime API: Mime</a></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.4</em>
+            <em>API Docs for: 0.0.6</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -106,7 +106,7 @@
         </div>
 
         <div id="main" class="yui3-u">
-            <div class="content"><span class="foundat">Class defined in: <a href="../files/mime_mime.js.html#l96"><code>mime&#x2F;mime.js:96</code></a></span><h2>Mime Class</h2>
+            <div class="content"><span class="foundat">Class defined in: <a href="../files/mime_mime.js.html#l107"><code>mime&#x2F;mime.js:107</code></a></span><h2>Mime Class</h2>
 
 
 
@@ -127,7 +127,7 @@ naturally</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l96"><code>mime&#x2F;mime.js:96</code></a>
+        <a href="../files/mime_mime.js.html#l107"><code>mime&#x2F;mime.js:107</code></a>
     </span>
     <h4 class="name"><span><code>Mime</code></span>( <code>[f] </code> ) </h4>
     <br>
@@ -178,7 +178,7 @@ naturally</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l152"><code>mime&#x2F;mime.js:152</code></a>
+        <a href="../files/mime_mime.js.html#l165"><code>mime&#x2F;mime.js:165</code></a>
     </span>
     <h4 class="name"><span><code>__logCall</code></span>( <code>name, [restOfArguments] </code> ) <em><code>&#x2F;* private method *&#x2F;</code></em></h4>
     <br>
@@ -229,17 +229,18 @@ naturally</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l135"><code>mime&#x2F;mime.js:135</code></a>
+        <a href="../files/mime_mime.js.html#l146"><code>mime&#x2F;mime.js:146</code></a>
     </span>
     <h4 class="name"><span><code>__undefinedMethod__</code></span>( <code>  </code> ) <em><code>&#x2F;* private method *&#x2F;</code></em></h4>
     <br>
     <p>Internal method that captures calls to undefined functions into the log
-structure</p>
+structure. It returns self so that calls to it can be chained and it can
+be used for mocking chained objects</p>
 
     
     
     
-    <br><div class="returns"><strong>Returns:</strong> &lt;Undefined&gt; </div>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Self&gt; </div>
     
     
     
@@ -252,7 +253,7 @@ structure</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l442"><code>mime&#x2F;mime.js:442</code></a>
+        <a href="../files/mime_mime.js.html#l455"><code>mime&#x2F;mime.js:455</code></a>
     </span>
     <h4 class="name"><span><code>_createClass</code></span>( <code>constructor </code> ) </h4>
     <br>
@@ -344,7 +345,7 @@ the arguments to those calls can also be captured</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l289"><code>mime&#x2F;mime.js:289</code></a>
+        <a href="../files/mime_mime.js.html#l302"><code>mime&#x2F;mime.js:302</code></a>
     </span>
     <h4 class="name"><span><code>_getAllCallArguments</code></span>( <code>name </code> ) </h4>
     <br>
@@ -391,7 +392,7 @@ the arguments to those calls can also be captured</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l255"><code>mime&#x2F;mime.js:255</code></a>
+        <a href="../files/mime_mime.js.html#l268"><code>mime&#x2F;mime.js:268</code></a>
     </span>
     <h4 class="name"><span><code>_getCallArguments</code></span>( <code>name, [index] </code> ) </h4>
     <br>
@@ -453,7 +454,7 @@ index. If no index is supplied, the first call (0-index) will be assumed</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l345"><code>mime&#x2F;mime.js:345</code></a>
+        <a href="../files/mime_mime.js.html#l358"><code>mime&#x2F;mime.js:358</code></a>
     </span>
     <h4 class="name"><span><code>_mockModule</code></span>( <code>name, methods </code> ) </h4>
     <br>
@@ -522,7 +523,7 @@ modules registry</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l178"><code>mime&#x2F;mime.js:178</code></a>
+        <a href="../files/mime_mime.js.html#l191"><code>mime&#x2F;mime.js:191</code></a>
     </span>
     <h4 class="name"><span><code>_spy</code></span>( <code>name, [callback] </code> ) </h4>
     <br>
@@ -587,7 +588,7 @@ these calls in the same way as calls to a mocked object function</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l403"><code>mime&#x2F;mime.js:403</code></a>
+        <a href="../files/mime_mime.js.html#l416"><code>mime&#x2F;mime.js:416</code></a>
     </span>
     <h4 class="name"><span><code>_unmockModule</code></span>( <code>name </code> ) </h4>
     <br>
@@ -626,7 +627,7 @@ these calls in the same way as calls to a mocked object function</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l213"><code>mime&#x2F;mime.js:213</code></a>
+        <a href="../files/mime_mime.js.html#l226"><code>mime&#x2F;mime.js:226</code></a>
     </span>
     <h4 class="name"><span><code>_wasCalledWithArguments</code></span>( <code>name, [arguments] </code> ) </h4>
     <br>
@@ -687,7 +688,7 @@ Returns false under all other conditions</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l115"><code>mime&#x2F;mime.js:115</code></a>
+        <a href="../files/mime_mime.js.html#l126"><code>mime&#x2F;mime.js:126</code></a>
     </span>
     <h4 class="name"><span><code>require</code></span>( <code>name, require </code> ) </h4>
     <br>

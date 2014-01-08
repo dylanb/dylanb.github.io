@@ -16,7 +16,7 @@
             <h1><a href="../index.html">The Mime API: mime/mime.js</a></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.4</em>
+            <em>API Docs for: 0.0.6</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -94,6 +94,51 @@
  */
 
 /**
+ * Wrap any object in the safeobject proxy
+ *
+ * @private
+ * @param {Object} target - the object to be wrapped
+ * @return {Object}
+ */
+var proxiedObject = function(target) {
+    return Proxy(target, {
+        get: function(target, name, receiver) {
+            var rVal, newArguments, executionVal, i;
+            if (typeof target[name] === &#x27;function&#x27; &amp;&amp; name !== &#x27;__undefinedMethod__&#x27;) {
+                // Existing function that is not the __undefinedMethod__ function
+                if (target.__constructors &amp;&amp; target.__constructors.indexOf(name) !== -1) {
+                    // Constructor
+                    rVal = Reflect.get(target, name, arguments);
+                } else {
+                    rVal = function () {
+                        var executionVal = target[name].apply(target, arguments);
+                        return executionVal;
+                    };
+                }
+            } else if (typeof target[name] === &#x27;undefined&#x27;) {
+                /*
+                 * Either a non-existent function or a non-existent attribute
+                 * Cannot tell the difference, so we treat them all like functions
+                 */
+                rVal = function () {
+                    newArguments = [name];
+                    for (i = 0; i &lt; arguments.length; i++) {
+                        newArguments.push(arguments[i]);
+                    }
+                    executionVal = target.__undefinedMethod__.apply(target, newArguments);
+                    return executionVal;
+                };
+            } else {
+                // Existing attribute or __undefinedMethod__ function
+                // Defer to the target
+                rVal = Reflect.get(target, name, arguments);
+            }
+            return rVal;
+        }
+    });
+}
+
+/**
  * Given a constructor function as an argument, safeObject will create a new
  * JavaScript Class that will not throw an exception when a call is made to a
  * non-existent function member. A call will be made instead to the
@@ -112,45 +157,11 @@
 global.safeObject = function(f) {
     var retObject = Proxy(f, {
         construct: function(target, argArray) {
-            return Proxy(Reflect.construct(target, argArray), {
-                get: function(target, name, receiver) {
-                    var rVal, newArguments, executionVal, i;
-                    if (typeof target[name] === &#x27;function&#x27; &amp;&amp; name !== &#x27;__undefinedMethod__&#x27;) {
-                        // Existing function that is not the __undefinedMethod__ function
-                        if (target.__constructors &amp;&amp; target.__constructors.indexOf(name) !== -1) {
-                            // Constructor
-                            rVal = Reflect.get(target, name, arguments);
-                        } else {
-                            rVal = function () {
-                                var executionVal = target[name].apply(target, arguments);
-                                return executionVal;
-                            };
-                        }
-                    } else if (typeof target[name] === &#x27;undefined&#x27;) {
-                        /*
-                         * Either a non-existent function or a non-existent attribute
-                         * Cannot tell the difference, so we treat them all like functions
-                         */
-                        rVal = function () {
-                            newArguments = [name];
-                            for (i = 0; i &lt; arguments.length; i++) {
-                                newArguments.push(arguments[i]);
-                            }
-                            executionVal = target.__undefinedMethod__.apply(target, newArguments);
-                            return executionVal;
-                        };
-                    } else {
-                        // Existing attribute or __undefinedMethod__ function
-                        // Defer to the target
-                        rVal = Reflect.get(target, name, arguments);
-                    }
-                    return rVal;
-                }
-            });
+            return proxiedObject(Reflect.construct(target, argArray));
         }
     });
     retObject.prototype.__undefinedMethod__ = function () {
-        return undefined;
+        return proxiedObject(this); // return this so we can chain the calls
     };
     return retObject;
 };
@@ -214,11 +225,12 @@ global.safeObject = function(f) {
 
     /**
      * Internal method that captures calls to undefined functions into the log
-     * structure
+     * structure. It returns self so that calls to it can be chained and it can
+     * be used for mocking chained objects
      *
      * @private
      * @method __undefinedMethod__
-     * @return {undefined}
+     * @return {self}
      */
     Mime.prototype.__undefinedMethod__ = function() {
         var myName = arguments[0],
@@ -227,6 +239,7 @@ global.safeObject = function(f) {
             restOfArguments = Array.prototype.splice.call(arguments, 1, arguments.length-1);
         }
         this.__logCall(myName, restOfArguments);
+        return proxiedObject(this); // return this so we can chain the calls
     };
 
     /**
