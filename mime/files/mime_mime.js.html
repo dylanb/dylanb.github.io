@@ -16,7 +16,7 @@
             <h1><a href="../index.html">The Mime API: mime/mime.js</a></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.6</em>
+            <em>API Docs for: 0.0.7</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -169,10 +169,12 @@ global.safeObject = function(f) {
 (function(){
     var Mime,
         mockedModules = {},
-        util;
+        util, Sandbox, requireLike;
     
     require(&#x27;harmony-reflect&#x27;);
     util = require(&#x27;util&#x27;);
+    Sandbox = require(&#x27;./sandbox&#x27;).Sandbox;
+    requireLike = require(&#x27;require-like&#x27;);
 
     /*
      * Implement the require mocking &#x27;globals&#x27;
@@ -435,6 +437,7 @@ global.safeObject = function(f) {
             return retVal;
         }
     }
+
     /**
      * Given a module name and a set of methods, create an exports structure for a module with
      * those methods and bind it to the this object. Put that structure into the global mocked
@@ -610,6 +613,40 @@ global.safeObject = function(f) {
 
         // Return the new class
         return actualConstructor;
+    };
+
+    function requirePartial(filename) {
+        var require = requireLike(filename, true);
+        return function(module) {
+            return Mime.require(module, require);
+        };
+    }
+    /**
+     * Given a test target path, require that module in a sandbox
+     *
+     * @method _sandboxRequire
+     * @param {String} path The name of the test target whose dependencies are to be intercepted
+     * @param {Funtion} require The test&#x27;s require function (needed so that the test target can be
+     *                  resolved in the context of the test)
+     * @return {Object} The exports of the test target
+     * @example
+        
+        mime = new Mime()
+        mime._mockModule(&#x27;something&#x27;, [&#x27;callSomeFunction&#x27;]);
+        exports = mime._sandboxRequire(&#x27;../../testdata/dep4&#x27;, require);
+        
+        ...
+        run the tests
+        ...
+
+        mime._unmockModule(&#x27;something&#x27;);
+     */
+    Mime.prototype._sandboxRequire = function(path, require) {
+        var filename = require.resolve(path),
+            proxyRequire = requirePartial(filename),
+            sandbox = new Sandbox();
+        sandbox.addGlobal(&#x27;require&#x27;, proxyRequire);
+        return sandbox.require(filename);
     };
 }());
 

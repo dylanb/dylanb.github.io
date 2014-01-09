@@ -70,16 +70,16 @@ newspaper.getContents = function() {
           </code></pre>
         <h2><span class="octicon octicon-link"></span>Mocking Dependencies</h2>
           <p>
-            There are two ways to use Mime to mock and capture dependencies of your test targets. The first mechanism, called Dependency Separation is to move all of your dependency requires into a separate file that you then combine with your code in a build step. You can then create Mime instances for each of the dependecies in your test files. The second mechanism, called Dependency Interception is where you replace calls to the standard Node.js require with calls to Mime's static method Mime.require. This allows Mime to generate and manange the dependencies for you.
+            There are two ways to use Mime to mock and capture dependencies of your test targets. The first mechanism, called Dependency Separation is to move all of your dependency requires into a separate file that you then combine with your code in a build step. You can then create Mime instances for each of the dependecies in your test files. The second mechanism, called Dependency Interception is where in your tests, when requiring a test target, you replace calls to the standard Node.js require with calls to a Mime instance's _sandboxRequire function. This allows Mime to generate and manage your test target's dependencies for you.
           </p>
           <p>
-            The advantage of the Dependency Interception is that it requires only a small change to the require call for each dependency you want to mock and one change to your application's main file. The disadvantage of Dependency Interception is that your runtime is now dependent on Mime. The advantage of Dependency Separation is that you are not required make the change to your application's main file and therefore not required to include Mime in your runtime. The disadvantage of Dependency Separation is that it requires a build in order to run your application and it requires quite significant refactoring to retrofit an existing project.
+            The advantage of the Dependency Interception is that it requires only a small change to the require call for each test target in your test files. The disadvantage of Dependency Separation is that it requires a build in order to run your application and it requires quite significant refactoring to retrofit an existing project.
           </p>
           <h3><span class="octicon octicon-link"></span>Dependency Interception Example</h3>
           <pre><code>
 /* dependency.js */
-// In your module, use Mime.require for any dependency
-http = Mime.require('http', require);
+// In your module use Node.js's require
+http = require('http', require);
 
 // Then you use that dependency
   ...
@@ -97,7 +97,7 @@ httpMime = Mime.getMockedModuleMime('http');
 httpMime._mockModule('http', ['setHeader', 'write', 'end']);
 
 // Then require the module with the dependency
-dependency = require('../src/dependency.js');
+dependency = httpMime._sandboxRequire('../src/dependency.js', require);
 
 // Now run the tests
 ...
