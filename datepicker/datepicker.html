@@ -181,8 +181,11 @@
         return rowArray;
     }
     var monthNames = {
-        en : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    };
+            en : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        },
+        dayNames = {
+            en : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        };
     jQuery(document).ready(function () {
         var timeout, $dpDiv, rowArray, maxRows, month, year, dragSwipeTimer,
             doubleTapped = false,
@@ -197,7 +200,8 @@
             callback();
             $rows = $dpDiv.find('tr');
             maxRows = $rows.length;
-            ariaAnnounce(monthNames['en'][month] + ' ' + $dpDiv.find('.iscurrent').text() + ' ' + year);
+            ariaAnnounce(dayNames['en'][$dpDiv.find('.iscurrent')[0].cellIndex] + ', ' +
+                monthNames['en'][month] + ' ' + $dpDiv.find('.iscurrent').text() + ' ' + year);
         }
         function handleTap() {
             jQuery('<p>').text(
@@ -247,7 +251,8 @@
             if ($nextCell.length) {
                 $currentCell.removeClass('iscurrent');
                 $nextCell.addClass('iscurrent');
-                ariaAnnounce(monthNames['en'][month] + ' ' + $nextCell.text() + ' ' + year);
+                ariaAnnounce(dayNames['en'][$nextCell[0].cellIndex] + ', ' +
+                    monthNames['en'][month] + ' ' + $nextCell.text() + ' ' + year);
             }
         }
         function triggerDrag(keyCode, delay) {
