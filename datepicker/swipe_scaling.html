@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../bower_components/jquery/jquery.js"></script>
+        <script src="../hammer.js/index.js"></script>
+        <style>
+        </style>            
+    </head>
+    <body>
+        <div id="main">
+            <h1>Scaling Gestures Example</h1>
+                <ol>
+                    <li>Swipe down with the page in the default zoom state. When you swipe down fast enough, you should see the text "Swiped Down" appear above the form. I have set the threshold such that you will have to swipe from the top of the document to the bottom, quite quickly to trigger it.
+                    </li>
+                    <li>Then once you have this nailed, click on the "Sample text field" input field to get iOS to zoom the page.
+                    </li>
+                    <li>Click the done button to get rid of the on-screen keyboard.
+                    </li>
+                    <li>Now try to generate the swipe event again using the same gesture you were previously able to generate it with. You should notice that it is almost impossible to generate with the page zoomed.
+                    </li>
+                    <li>Finally, if you check the "Scale gestures" checkbox, then you should find it equally easy to generate the gesture in both states.
+                    </li>
+                </ol>
+            <div id="assertiveAnnouncer" role="log" aria-live="assertive" aria-relevant="additions">
+            </div>
+            <form>
+                <label for="myTextField">Sample text field</label>
+                <input id="myTextField" type="text" />
+                <label for="scale">Scale gestures</label>
+                <input type="checkbox" id="scale">
+                <button id="clear">Clear</button>
+            </form>
+        </div>
+<style>
+body {
+    height:100%;
+}
+</style>
+<script>
+/*
+ * Copyright (C) 2013 Dylan Barrell - All Rights Reserved. See Licence file.
+ * This copyright message must remain in any derivative works
+ */
+(function() {
+    jQuery(document).ready(function () {
+        var $announce,
+            DRAG_EVENTS = 'swipedown';
+            // DRAG_EVENTS = 'tap touch release hold doubletap drag swipe dragstart dragend dragup dragdown dragleft dragright swipeup swipedown swipeleft swiperight';
+
+        window.ignoreZoomLevel = true; // turn off Hammer fix
+        function swipeHandler(e) {
+            jQuery('<p>').text('Swiped Down').appendTo($announce);
+            e.preventDefault();
+        }
+
+        $announce = jQuery('#assertiveAnnouncer');
+        Hammer(document.getElementById('main'), {
+            swipe_min_touches: 0,
+            swipe_velocity: 3
+        }).on(DRAG_EVENTS, swipeHandler);
+        jQuery('#clear').on('click', function (e) {
+            $announce.empty();
+            e.preventDefault();
+        });
+        jQuery('#scale').on('change', function (e) {
+            if (jQuery(this).attr('checked')) {
+                window.ignoreZoomLevel = true; // turn off Hammer fix
+            } else {
+                window.ignoreZoomLevel = false; // turn on Hammer fix
+            }
+        });
+    });
+}());
+</script>
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker = _gat._getTracker("UA-44989756-2");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+    </body>
+</html>

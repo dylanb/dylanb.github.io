@@ -1148,10 +1148,10 @@ Hammer.gestures.Swipe = {
     // set 0 for unlimited, but this can conflict with transform
     swipe_min_touches: 0,
     swipe_max_touches: 1,
-    swipe_velocity   : 0.5
+    swipe_velocity   : 1
   },
   handler : function swipeGesture(ev, inst) {
-    var zoomLevel;
+    var zoomLevel = 1;
     if(ev.eventType == Hammer.EVENT_END) {
       // max touches
       if(inst.options.swipe_max_touches > 0 &&
@@ -1162,7 +1162,10 @@ Hammer.gestures.Swipe = {
 
       // when the distance we moved is too small we skip this gesture
       // or we can be already in dragging
-      zoomLevel = ev.target.ownerDocument.defaultView.innerWidth / ev.target.ownerDocument.documentElement.clientWidth;
+      if (!window.ignoreZoomLevel) {
+        zoomLevel = ev.target.ownerDocument.defaultView.innerWidth / ev.target.ownerDocument.documentElement.clientWidth;
+      }
+      console.log('zoomLevel: ', zoomLevel, ', velocityX: ', ev.velocityX, ', velocityY: ', ev.velocityY);
       if(ev.velocityX > inst.options.swipe_velocity*zoomLevel ||
         ev.velocityY > inst.options.swipe_velocity*zoomLevel) {
         // trigger swipe events
