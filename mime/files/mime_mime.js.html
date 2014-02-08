@@ -511,7 +511,6 @@ var safeObject = global.safeObject = function(f) {
         this.__exports = this.__exports || {};
         exports = this.__exports[name] || {this:this};
 
-        console.log(&#x27;before purge: &#x27;, exports);
         for (attr in exports) {
             if (attr !== &#x27;this&#x27;) {
                 // Remove the symbol from the exported symbols
@@ -525,7 +524,6 @@ var safeObject = global.safeObject = function(f) {
                 delete this.__callsMade[attr];
             }
         }
-        console.log(&#x27;after purge: &#x27;, exports);
         __registerModule(name, exports);
     };
 
@@ -610,8 +608,9 @@ var safeObject = global.safeObject = function(f) {
                 // Call the client&#x27;s constructor
                 constructor.apply(this, arguments);
 
-                // Log the call to the constructor aainst the special &quot;Class&quot; method
-                this.__logCall(&#x27;Class&#x27;, arguments ? Array.prototype.splice.call(arguments, 0, arguments.length) : undefined);
+                // Log the call to the constructor against the special &quot;Class&quot; method
+                this.__logCall(&#x27;Class&#x27;, arguments ?
+                    Array.prototype.splice.call(arguments, 0, arguments.length) : undefined);
             });
 
         // Inherit from Mime
@@ -632,8 +631,9 @@ var safeObject = global.safeObject = function(f) {
      *
      * @method _sandboxRequire
      * @param {String} path The name of the test target whose dependencies are to be intercepted
-     * @param {Funtion} require The test&#x27;s require function (needed so that the test target can be
+     * @param {Function} require The test&#x27;s require function (needed so that the test target can be
      *                  resolved in the context of the test)
+     * @param {Object} [globals] optional argument of globals to expose to the sandboxed module
      * @return {Object} The exports of the test target
      * @example
         
@@ -647,10 +647,15 @@ var safeObject = global.safeObject = function(f) {
 
         mime._unmockModule(&#x27;something&#x27;);
      */
-    Mime.prototype._sandboxRequire = function(path, require) {
+    Mime.prototype._sandboxRequire = function(path, require, globals) {
         var filename = require.resolve(path),
             proxyRequire = requirePartial(filename),
-            sandbox = new Sandbox();
+            sandbox = new Sandbox(),
+            att;
+
+        for (att in globals) {
+            sandbox.addGlobal(att, globals[att]);
+        }
         sandbox.addGlobal(&#x27;require&#x27;, proxyRequire);
         return sandbox.require(filename);
     };

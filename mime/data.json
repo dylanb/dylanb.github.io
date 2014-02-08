@@ -376,7 +376,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 452,
+            "line": 450,
             "description": "Register a symbol as a constructor function so that the proxy will return the\nfunction in such a way that it can be used with new",
             "_registerconstructor": "",
             "params": [
@@ -395,7 +395,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 464,
+            "line": 462,
             "description": "Given a constructor function as an argument, create a new Class that inherits from\nthe Mime class but whose instances' cal logs are shared with this instance's call log.\nThis is useful when mocking a global or require class so that access can be gained to\nwhat happens to the instances of that class.\nThe call log will also log the creation of instances under the symbol 'Class', so that\nthe arguments to those calls can also be captured",
             "itemtype": "method",
             "name": "_createClass",
@@ -418,7 +418,7 @@
         },
         {
             "file": "mime/mime.js",
-            "line": 550,
+            "line": 549,
             "description": "Given a test target path, require that module in a sandbox",
             "itemtype": "method",
             "name": "_sandboxRequire",
@@ -431,7 +431,13 @@
                 {
                     "name": "require",
                     "description": "The test's require function (needed so that the test target can be\n                 resolved in the context of the test)",
-                    "type": "Funtion"
+                    "type": "Function"
+                },
+                {
+                    "name": "globals",
+                    "description": "optional argument of globals to expose to the sandboxed module",
+                    "type": "Object",
+                    "optional": true
                 }
             ],
             "return": {
@@ -452,7 +458,7 @@
         },
         {
             "message": "unknown tag: _registerconstructor",
-            "line": " mime/mime.js:452"
+            "line": " mime/mime.js:450"
         },
         {
             "message": "Missing item type\nWrap any object in the safeobject proxy",
@@ -468,7 +474,7 @@
         },
         {
             "message": "Missing item type\nRegister a symbol as a constructor function so that the proxy will return the\nfunction in such a way that it can be used with new",
-            "line": " mime/mime.js:452"
+            "line": " mime/mime.js:450"
         }
     ]
 }

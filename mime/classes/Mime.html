@@ -255,7 +255,7 @@ be used for mocking chained objects</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l464"><code>mime&#x2F;mime.js:464</code></a>
+        <a href="../files/mime_mime.js.html#l462"><code>mime&#x2F;mime.js:462</code></a>
     </span>
     <h4 class="name"><span><code>_createClass</code></span>( <code>constructor </code> ) </h4>
     <br>
@@ -525,9 +525,9 @@ modules registry</p>
     
         
     
-        <a href="../files/mime_mime.js.html#l550"><code>mime&#x2F;mime.js:550</code></a>
+        <a href="../files/mime_mime.js.html#l549"><code>mime&#x2F;mime.js:549</code></a>
     </span>
-    <h4 class="name"><span><code>_sandboxRequire</code></span>( <code>path, require </code> ) </h4>
+    <h4 class="name"><span><code>_sandboxRequire</code></span>( <code>path, require, [globals] </code> ) </h4>
     <br>
     <p>Given a test target path, require that module in a sandbox</p>
 
@@ -547,11 +547,21 @@ modules registry</p>
     
         <li>
         
-            <code>require</code> <strong>&lt;Funtion&gt;</strong>
+            <code>require</code> <strong>&lt;Function&gt;</strong>
         
         
         <p>The test&#39;s require function (needed so that the test target can be
                  resolved in the context of the test)</p>
+
+            
+        </li>
+    
+        <li>
+        
+            <code>[globals]</code> <strong>&lt;Object&gt;</strong>
+        
+        
+        <p>optional argument of globals to expose to the sandboxed module</p>
 
             
         </li>
