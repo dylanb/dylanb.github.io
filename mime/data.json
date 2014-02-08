@@ -2,7 +2,7 @@
     "project": {
         "name": "The Mime API",
         "description": "The Mime API: a Node.js library for doing Capturing Mocking for Test Driven Development",
-        "version": "0.0.8",
+        "version": "0.0.10",
         "url": "http://dylanb.github.io/"
     },
     "files": {
