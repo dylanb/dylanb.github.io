@@ -1,0 +1,44 @@
+{
+  "name": "a11yfy",
+  "version": "0.0.7",
+  "main": [
+    "./dist/jquery.a11yfy.all.js",
+    "./dist/jquery.a11yfy.core.css",
+    "./dist/jquery.a11yfy.core.js",
+    "./dist/jquery.a11yfy.gmaps.js",
+    "./dist/jquery.a11yfy.i18n-de.js",
+    "./dist/jquery.a11yfy.tables.js"
+  ],
+  "ignore": [
+    "external",
+    "node_modules",
+    "tables",
+    "gmaps",
+    "a11yfy",
+    "coverage",
+    "tests",
+    "i18n",
+    "testem.json",
+    "./*.html",
+    "*.log",
+    "*.md",
+    ".gitignore",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "devDependencies": {
+    "jquery": "~1.10.2",
+    "jquery.validation": "*",
+    "blanket": "*"
+  },
+  "homepage": "https://github.com/dylanb/a11yfy",
+  "_release": "0.0.7",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.7",
+    "commit": "7614bca03d8cf5bb4a58268384eb59d227525210"
+  },
+  "_source": "git://github.com/dylanb/a11yfy.git",
+  "_target": "~0.0.7",
+  "_originalSource": "a11yfy"
+}

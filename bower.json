@@ -13,10 +13,7 @@
   ],
   "devDependencies": {
     "jquery": "~1.10.2",
-    "a11yfycore": "https://raw.github.com/dylanb/a11yfy/master/a11yfy/jquery.a11yfy.core.js",
-    "a11yfytables": "https://raw.github.com/dylanb/a11yfy/master/tables/jquery.a11yfy.tables.js",
-    "a11yfygmaps": "https://raw.github.com/dylanb/a11yfy/master/gmaps/jquery.a11yfy.gmaps.js",
-    "a11yfyde": "https://raw.github.com/dylanb/a11yfy/master/i18n/jquery.a11yfy.i18n-de.js",
+    "a11yfy": "~0.0.7",
     "blanket" : "*"
   }
 }

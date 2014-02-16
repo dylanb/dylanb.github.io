@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../dist/jquery.a11yfy.core.js"></script>
+<link type="text/css" rel="stylesheet" href="../dist/jquery.a11yfy.core.css">
+</head>
+<body>
+<h1>Menu</h1>
+<p>
+    <a href="#">before</a>
+</p>
+<div style="min-height:400px;">
+<ul id="mymenu">
+    <li>
+        One
+        <ul>
+            <li>
+                <a href="oneone">
+                    One One
+                </a>
+            </li>
+            <li>
+                <a href="onetwo">
+                    One Two
+                </a>
+            </li>
+            <li>
+                <a href="onethree">
+                    One Three
+                </a>
+            </li>
+            <li>
+                <a href="onefour">
+                    One Four
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        Two
+        <ul>
+            <li>
+                Two One
+                <ul>
+                    <li>
+                        <a href="oneone">
+                            Two One One
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onetwo">
+                            Two One Two
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onethree">
+                            Two One Three
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onefour">
+                            Two One Four
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="onetwo">
+                    Two Two
+                </a>
+            </li>
+            <li>
+                <a href="onethree">
+                    Two Three
+                </a>
+            </li>
+            <li>
+                <a href="onefour">
+                    Two Four
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="three">
+            Three
+        </a>
+    </li>
+    <li>
+        <a href="four">
+            Überhaupt
+        </a>
+    </li>
+</ul>
+</div>
+<p>
+<a href="#">after</a>
+</p>
+<script>
+jQuery(document).ready(function () {
+    jQuery("#mymenu").a11yfy("menu");
+});
+</script>
+</body>
+</html>

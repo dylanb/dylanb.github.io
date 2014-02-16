@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../dist/jquery.a11yfy.core.js"></script>
+<link type="text/css" rel="stylesheet" href="../dist/jquery.a11yfy.core.css">
+</head>
+<body>
+<h1>Mega Menu</h1>
+<p>
+    <a href="#">before</a>
+</p>
+<div style="min-height:400px;">
+<ul id="mymegamenu" class="a11yfy-mega">
+    <li>
+        One
+        <ul>
+            <li>
+                <a href="oneone">
+                    One One
+                </a>
+            </li>
+            <li>
+                <a href="onetwo">
+                    One Two
+                </a>
+            </li>
+            <li>
+                <a href="onethree">
+                    One Three
+                </a>
+            </li>
+            <li>
+                <a href="onefour">
+                    One Four
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        Two
+        <ul class="a11yfy-three_col">
+            <li class="a11yfy-col">
+                Two One
+                <ul>
+                    <li>
+                        <a href="oneone">
+                            Two One One
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onetwo">
+                            Two One Two
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onethree">
+                            Two One Three
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onefour">
+                            Two One Four
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="a11yfy-col">
+                Two Two
+                <ul>
+                    <li>
+                        <a href="oneone">
+                            Two Two One
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onetwo">
+                            Two Two Two
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onethree">
+                            Two Two Three
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onefour">
+                            Two Two Four
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="a11yfy-col">
+                Two Three
+                <ul>
+                    <li>
+                        <a href="oneone">
+                            Two Three One
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onetwo">
+                            Two Three Two
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onethree">
+                            Two Three Three
+                        </a>
+                    </li>
+                    <li>
+                        <a href="onefour">
+                            Two Three Four
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="three">
+            Three
+        </a>
+    </li>
+    <li>
+        <a href="four">
+            Four
+        </a>
+    </li>
+</ul>
+</div>
+<p>
+<a href="#">after</a>
+</p>
+<script>
+jQuery(document).ready(function () {
+    jQuery("#mymegamenu").a11yfy("menu");
+});
+</script>
+</body>
+</html>
