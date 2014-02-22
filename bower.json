@@ -12,9 +12,10 @@
     "bower.json"
   ],
   "devDependencies": {
-    "jquery": "~1.10.2",
-    "a11yfy": "~0.0.8",
-    "blanket" : "*"
+    "blanket": "*"
+  },
+  "dependencies": {
+    "a11yfy": "~0.0.9",
+    "jquery": "~1.10.2"
   }
 }
-
