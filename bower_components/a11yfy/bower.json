@@ -1,6 +1,6 @@
 {
   "name": "a11yfy",
-  "version": "0.0.8",
+  "version": "0.0.11",
   "main": [
     "./dist/jquery.a11yfy.all.js",
     "./dist/jquery.a11yfy.core.css",
@@ -27,8 +27,10 @@
     "package.json"
   ],
   "devDependencies": {
-    "jquery": "~1.10.2",
-    "jquery.validation" : "*",
     "blanket" : "*"
+  },
+  "dependencies": {
+    "jquery": "~1.10.2",
+    "jquery.validation" : "~1.11.1"
   }
 }
