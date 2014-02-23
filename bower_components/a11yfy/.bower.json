@@ -1,6 +1,6 @@
 {
   "name": "a11yfy",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "main": [
     "./dist/jquery.a11yfy.all.js",
     "./dist/jquery.a11yfy.core.css",
@@ -34,13 +34,13 @@
     "jquery.validation": "~1.11.1"
   },
   "homepage": "https://github.com/dylanb/a11yfy",
-  "_release": "0.0.11",
+  "_release": "0.0.12",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.11",
-    "commit": "bba16e781b2cf4be4aaef31f869abad24c54003f"
+    "tag": "0.0.12",
+    "commit": "b119fa2abccb69e4a88cd41b0f515c86813b438a"
   },
   "_source": "git://github.com/dylanb/a11yfy.git",
-  "_target": "~0.0.11",
+  "_target": "~0.0.12",
   "_originalSource": "a11yfy"
 }
