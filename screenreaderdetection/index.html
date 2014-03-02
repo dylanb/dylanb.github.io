@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../bower_components/jquery/jquery.js"></script>
+        <style>
+        :focus,
+        .simfocus {
+            outline: 2px black dotted;
+        }
+
+        #simbutton {
+            width: 5em;
+            height: 2em;
+            border-radius: 5px;
+            background-color:#999;
+            text-align:center;
+            line-height: 2em;
+            z-index:1000;
+        }
+        @media (max-width: 980px) {
+        }
+        .offscreen {
+            border: 0;
+            clip: rect(0 0 0 0);
+            clip: rect(0, 0, 0, 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            width: 1px;
+            position:absolute;
+        }
+        </style>            
+    </head>
+    <body>
+        <h1>Screen Reader Detection</h1>
+        <div>
+            <p>
+                This page was inspired by the discussion that was spawned by the 5th annual WebAim screen reader survey. That survey showed that a vast majority of screen reader users would be in favor of screen reader detection if it enhanced their accessibility experience. This led me to write about more general AT detection (and by this, I mean digital AT detection). This in turn spawned more discussion and a thought process whereby I realized that you could do a (yes/no) detection of screen readers using today's technology with about an 80% accuracy (my prediction).
+            </p>
+            <p>
+                This example is not intended to be used by anyone, but it is to demonstrate 2 things:
+            </p>
+                <ol>
+                    <li>
+                        Technologies that are intended to be used for one purpose can often be used for other purposes, and
+                    </li>
+                    <li>
+                        The fears of the vocal minority of screen reader users is actually already almost moot. All further intransigence will do is to withold useful finer-grained feature detection functionality at the detriment of all screen reader (and other AT) users.
+                    </li>
+                </ol>
+            <p>
+                To get to the screen reader detection instructions page, please click the "next" button below:
+            </p>
+        </div>
+        <form id="detector" novalidate>
+            <button id="detectorButton" class="offscreen">Next</button><div id="simbutton" aria-hidden="true">Next</div>
+        </form>
+        <div id="conclusion" tabindex="0">
+        </div>
+<script>
+/*
+ * Copyright (C) 2014 Dylan Barrell - All Rights Reserved. 
+ * This code may not be copied or used by anyone for any purpose without the express written permission of the Copyright owner
+ */
+(function() {
+    var $button, $simbutton,
+        buttonEventsLog = [],
+        simbuttonEventsLog = [],
+        pform, bwser, ua,
+        analyzed = false;
+
+    ua = window.navigator.userAgent;
+    if (ua.indexOf('OS X') !== -1) {
+        // OS X
+        pform = 'OSX';
+        if (ua.indexOf('Chrome') !== -1) {
+            bwser = 'Chrome';
+        } else if (ua.indexOf('Safari') !== -1) {
+            bwser = 'Safari';
+        } else if (ua.indexOf('Firefox') !== -1) {
+            bwser = 'Firefox';
+        }
+    } else if (ua.indexOf('Windows') !== -1) {
+        pform = 'Windows';
+        if (ua.indexOf('IE') !== -1) {
+            bwser = 'IE';
+        } else if (ua.indexOf('Chrome') !== -1) {
+            bwser = 'Chrome';
+        } else if (ua.indexOf('Firefox') !== -1) {
+            bwser = 'Firefox';
+        }
+    } else {
+        announce('your platform is not known');
+    }
+    function announce(msg) {
+        jQuery('#conclusion')
+            .find('p')
+            .hide();
+        jQuery('#conclusion')
+            .append(
+                jQuery('<p>')
+                    .text(msg)
+            );
+    }
+    function analyzeEvents() {
+        var blen = buttonEventsLog.length,
+            slen = simbuttonEventsLog.length;
+
+        if (analyzed) return;
+        analyzed = true;
+        if (pform === 'Windows') {
+            if (bwser === 'Firefox') {
+                if (blen >= 2 && buttonEventsLog[blen-2] === 'focus' && buttonEventsLog[blen-1] === 'keydown') {
+                    announce('keyboard user on Windows with Firefox');
+                } else if (blen >= 2 && buttonEventsLog[blen-2] === 'focus' && buttonEventsLog[blen-1] === 'mousedown') {
+                    announce('Screen reader user on Windows with Firefox');
+                } else {
+                    announce('Mouse/touch user on Windows');
+                }
+            } else if (bwser === 'IE') {
+                if (blen >= 2 && buttonEventsLog[blen-2] === 'focus' && buttonEventsLog[blen-1] === 'keydown') {
+                    announce('keyboard user on Windows with IE');
+                } else if (blen >= 1 && buttonEventsLog[blen-1] === 'focus') {
+                    announce('Screen reader user on Windows with IE');
+                } else {
+                    announce('Mouse/touch user on Windows');
+                }
+            } else {
+                announce('Browser platform not supported')
+            }
+        } else if (pform === 'OSX' && bwser === 'Safari') {
+            if (blen >= 2 && buttonEventsLog[blen-2] === 'focus' && slen >= 1 && simbuttonEventsLog[blen-1] === 'mouseup') {
+                announce('Screen reader user on iOS');
+            } else if (blen >= 2 && buttonEventsLog[blen-2] === 'focus' && buttonEventsLog[blen-1] === 'mousedown') {
+                announce('Screen reader user on OS X');
+            } else if (blen >= 2 && buttonEventsLog[blen-2] === 'focus' && buttonEventsLog[blen-1] === 'keydown') {
+                announce('keyboard-only user on Apple device, screen reader might be present');
+            } else {
+                announce('mouse/touch user on Apple device');
+            }
+        } else {
+            announce('Platform not supported')
+        }
+        jQuery('#detector').hide();
+        jQuery('#conclusion').focus();
+    }
+
+    $button = jQuery('button')
+        .on('focus', function (e) {
+            buttonEventsLog.push(e.type);
+            $simbutton.addClass('simfocus');
+        })
+        .on('blur', function (e) {
+            buttonEventsLog.push(e.type);
+            $simbutton.removeClass('simfocus');
+        })
+        .on('keydown', function (e) {
+            var keyCode = e.which || e.keyCode;
+            if ((keyCode === 13 || keyCode === 32) &&
+                !e.ctrlKey && !e.shiftKey && !e.metaKey && !e.altKey) {
+                buttonEventsLog.push(e.type);
+            }
+        })
+        .on('mousedown', function (e) {
+            buttonEventsLog.push(e.type);
+        })
+        .on('click', function (e) {
+            e.preventDefault();
+            analyzeEvents();
+        });
+    $simbutton = jQuery('#simbutton')
+        .on('mousedown', function (e) {
+            simbuttonEventsLog.push(e.type);
+        })
+        .on('mouseup', function (e) {
+            simbuttonEventsLog.push(e.type);
+        })
+        .on('click', function (e) {
+            $button.click();
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    $button.css({
+        top: $simbutton.position().top,
+        left: $simbutton.position().left
+    })
+    .width($simbutton.width())
+    .height($simbutton.height());
+
+}());
+</script>
+<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+  var pageTracker = _gat._getTracker("UA-44989756-2");
+  pageTracker._trackPageview();
+} catch(err) {}
+</script>
+    </body>
+</html>
