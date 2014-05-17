@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>UX and UI: On the Front Line of Accessibility</title>
+
+		<meta name="description" content="How UX and UI designers can affect accessibility">
+		<meta name="author" content="Dylan A. Barrell">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+		<style>
+		.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+			text-transform: none;
+		}
+		</style>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>UX and UI: On the Front Line of Accessibility</h3>
+					<p>
+						<small><a href="http://unobfuscated.blogspot.com">Dylan Barrell</a> / <a href="http://twitter.com/dylanbarrel">@dylanbarrell</a></small>
+					</p>
+				</section>
+
+				<section>
+					<img src="images/agile-flow.png" alt="agile process diagram showing product and sprint backlogs, 30 day sprints and the working increment of the software">
+
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<section>
+					<h2>Common Origins of Accessibility Issues</h2>
+					<ul>
+						<li>Brand and/or Interface Guidelines
+						</li>
+						<li>Product Backlog (BA)
+						</li>
+						<li>Sprint Backlog (UX)
+						</li>
+						<li>Sprint Backlog (UI)
+						</li>
+						<li>Sprint (Development)
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<img src="images/att-logo.png" alt="AT&amp;T Logo showing a sphere with blue bands around it">
+
+				</section>
+
+				<section>
+					<h2>AT&amp;T Brand Guidelines</h2>
+					<img src="images/att-color-swatches.png" alt="swatches of color with descriptions from the AT&amp;T brand guidelines document">
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2>AT&amp;T ca. 2005</h2>
+					<img src="images/att-2005.png" alt="AT&amp;T home page circa 2005, showing mostly blue, black and white color scheme">
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<img src="images/cingular-logo.png" alt="Picture of a stylized human being drawn as a curvy cross with a dot in orange">
+
+				</section>
+
+				<section>
+					<p>
+					<img src="images/cingular-logo.png" alt="Picture of a stylized human being drawn as a curvy cross with a dot in orange">
+					<blockquote cite="http://gizmodo.com/299042/att-brings-back-cingular-orange-to-mobilize-brand-jacks-still-dead">
+						&ldquo;AT&amp;T Brings Back Cingluar Orange to “Mobilize” its Brand&rdquo;
+					</blockquote>
+					Gizmodo, September 2007
+					</p>
+				</section>
+
+				<section>
+					<h2>AT&amp;T Brand Guidelines</h2>
+					<img src="images/att-color-specs.png" alt="A list of all the AT&amp;T brand colors with their respective RGB, Pantone and other specifications">
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2>AT&amp;T Brand Guidelines</h2>
+					<img src="images/att-color-specs-small.png" alt="A list of the 4 primary AT&amp;T brand colors with their respective RGB, Pantone and other specifications">
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2>AT&amp;T Primary Colors Against White</h2>
+					<table style="width:100%;background-color: #fff;color:rgb(85,90,95);padding:3px;border-collapse:collapse;">
+						<thead>
+							<tr>
+								<th scope="col">Color name</th>
+								<th scope="col">Foreground</th>
+								<th scope="col">Contrast</th>
+								<th scope="col">Level A</th>
+								<th scope="col">Level AA</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">AT&amp;T New Orange</th>
+								<td>#ff7200</td>
+								<td>2.74:1</td>
+								<td style="color:white;background-color:red;text-align:center;">Fail</td>
+								<td style="color:white;background-color:red;text-align:center;">Fail</td>
+							</tr>
+							<tr>
+								<th scope="row">Orange highlight</th>
+								<td>#fcb314</td>
+								<td>1.81:1</td>
+								<td style="color:white;background-color:red;text-align:center;">Fail</td>
+								<td style="color:white;background-color:red;text-align:center;">Fail</td>
+							</tr>
+							<tr>
+								<th scope="row">AT&amp;T Blue</th>
+								<td>#067ab5</td>
+								<td>4.72:1</td>
+								<td style="color:white;background-color:green;text-align:center;">Pass</td>
+								<td style="color:white;background-color:red;text-align:center;">Fail</td>
+								</tr>
+							<tr>
+								<th scope="row">Blue Highlight</th>
+								<td>#3aa5dc</td>
+								<td>2.76:1</td>
+								<td style="color:white;background-color:red;text-align:center;">Fail</td>
+								<td style="color:white;background-color:red;text-align:center;">Fail</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section>
+					<h2>AT&amp;T Primary Colors Against Black</h2>
+					<table style="width:100%;background-color: #fff;color:rgb(85,90,95);padding:3px;border-collapse:collapse;">
+						<thead>
+							<tr>
+								<th scope="col">Color name</th>
+								<th scope="col">Foreground</th>
+								<th scope="col">Contrast</th>
+								<th scope="col">Level A</th>
+								<th scope="col">Level AA</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">AT&amp;T New Orange</th>
+								<td>#ff7200</td>
+								<td>7.66:1</td>
+								<td style="color:white;background-color:green;text-align:center;">Pass</td>
+								<td style="color:white;background-color:green;text-align:center;">Pass</td>
+							</tr>
+							<tr>
+								<th scope="row">Orange highlight</th>
+								<td>#fcb314</td>
+								<td>11.6:1</td>
+								<td style="color:white;background-color:green;text-align:center;">Pass</td>
+								<td style="color:white;background-color:green;text-align:center;">Pass</td>
+							</tr>
+							<tr>
+								<th scope="row">AT&amp;T Blue</th>
+								<td>#067ab5</td>
+								<td>4.45:1</td>
+								<td style="color:white;background-color:green;text-align:center;">Pass</td>
+								<td style="color:white;background-color:red;text-align:center;">Fail</td>
+								</tr>
+							<tr>
+								<th scope="row">Blue Highlight</th>
+								<td>#3aa5dc</td>
+								<td>7.6:1</td>
+								<td style="color:white;background-color:green;text-align:center;">Pass</td>
+								<td style="color:white;background-color:green;text-align:center;">Pass</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section>
+					<p>
+					<img style="float:right;" src="images/cingular-logo.png" alt="Picture of a stylized human being drawn as a curvy cross with a dot in orange" width="80px">
+					<blockquote cite="http://gizmodo.com/299042/att-brings-back-cingular-orange-to-mobilize-brand-jacks-still-dead">
+						&ldquo;After spending an ungodly amount of money to kill Jack and mutate the Cingular brand into the "new AT&amp;T," they've decided that Cingular's orange palette offered a "younger, edgier and more contemporary style—all attributes closely associated with wireless." But clearly not AT&amp;T. So, they're rebranding. Again. Look for Death Stars set against the new "primary corporate color," orange, and a series of commercials directed by Wes Anderson coming your way as of — yesterday&rdquo;
+					</blockquote>
+					Gizmodo, September 2007
+					</p>
+				</section>
+
+				<section>
+					<h2>AT&amp;T Brand Impact</h2>
+					<ul>
+						<li>16,000 Retail Stores
+						</li>
+						<li>1,500,000+ pages on att.com
+						</li>
+						<li>460,000+ pages on att.net
+						</li>
+						<li>unknown number of pages on uverse.com
+						</li>
+						<li>Hundreds of products and services
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Humana circa 2012</h2>
+					<img src="images/humana-2012.png" alt="Humana home page circa 2012, showing a page with many color contrast issues due to brand color implementation choices">
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2>Humana 2014</h2>
+					<img src="images/humana-2014.png" alt="Humana home page circa 2014, showing a page with no color contrast issues that is still young and fresh and uses a major brand color of green which is notoriously difficult from a color contrast perspective">
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h2>Common Origins of Accessibility Issues</h2>
+					<ul>
+						<li>Brand and/or Interface Guidelines
+						</li>
+						<li>Product Backlog (BA)
+						</li>
+						<li>Sprint Backlog (UX)
+						</li>
+						<li>Sprint Backlog (UI)
+						</li>
+						<li>Sprint (Development)
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Issue Source: Brand and/or Interface Guidelines</h3>
+					<ul>
+						<li>Color contrast</li>
+						<li>Graphic and color use</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Issue Source: Product Backlog (BA)</h3>
+					<ul>
+						<li>Missing accessibility platform requirements</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Issue Source: Sprint Backlog (UX)</h3>
+					<ul>
+						<li>Layout problems</li>
+						<li>Multi-device interactions</li>
+						<li>Graphic and/or color use</li>
+						<li>Error handling</li>
+						<li>Missing explicit information</li>
+						<li>Missing personas with disabilities</li>
+						<li>Overall page navigation issues</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Issue Source: Sprint Backlog (UI)</h3>
+					<ul>
+						<li>Color contrast</li>
+						<li>Informational graphics</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Issue Source: Sprint (Development)</h3>
+					<ul>
+						<li>Semantic Markup</li>
+						<li>Structural Relationships</li>
+						<li>Keyboard Interactions</li>
+						<li>Reading order</li>
+						<li>Name, Role, Value and State</li>
+						<li>...</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Questions?</h3>
+					<p>
+						<small><a href="http://unobfuscated.blogspot.com">Dylan Barrell</a> / <a href="http://twitter.com/dylanbarrel">@dylanbarrell</a></small>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				width: 1680,
+				height: 1050,
+				margin: 0.05,
+
+				theme: 'sky', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'fade', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
