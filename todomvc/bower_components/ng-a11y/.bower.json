@@ -1,0 +1,39 @@
+{
+  "name": "ng-a11y",
+  "version": "0.0.7",
+  "main": [
+    "./src/nga11yannounce.js",
+    "./src/nga11yfocus.css",
+    "./src/nga11yforms.js",
+    "./src/nga11ymodal.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "src",
+    "build",
+    "examples",
+    "test",
+    "*.md",
+    "LICENSE",
+    "Gruntfile.js",
+    "package.json",
+    "bower.json"
+  ],
+  "devDependencies": {
+    "jquery": "~1.10.2",
+    "angular": "1.2.13",
+    "angular-mocks": "1.2.13"
+  },
+  "dependencies": {},
+  "homepage": "https://github.com/dequelabs/ngA11y",
+  "_release": "0.0.7",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.7",
+    "commit": "9af87cabdc089ecdcfa3d19d6f5900d0e380f081"
+  },
+  "_source": "git://github.com/dequelabs/ngA11y.git",
+  "_target": "~0.0.7",
+  "_originalSource": "ng-a11y",
+  "_direct": true
+}
