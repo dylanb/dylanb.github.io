@@ -22,8 +22,7 @@ button {
 body {
 	font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	line-height: 1.4em;
-	background: #eaeaea url('bg.png');
-	color: #4d4d4d;
+	color: #a80000;
 	width: 550px;
 	margin: 0 auto;
 	-webkit-font-smoothing: antialiased;
@@ -33,9 +32,8 @@ body {
 	font-smoothing: antialiased;
 }
 
-button,
-input[type="checkbox"] {
-  outline: none;
+:focus {
+	outline-color: #a80000;
 }
 
 #todoapp {
@@ -68,8 +66,7 @@ input[type="checkbox"] {
 	font-size: 70px;
 	font-weight: bold;
 	text-align: center;
-	color: #b3b3b3;
-	color: rgba(255, 255, 255, 0.3);
+	color: #a80000;
 	text-shadow: -1px -1px rgba(0, 0, 0, 0.2);
 	-webkit-text-rendering: optimizeLegibility;
 	-moz-text-rendering: optimizeLegibility;
@@ -134,7 +131,6 @@ input[type="checkbox"] {
 	font-family: inherit;
 	line-height: 1.4em;
 	border: 0;
-	outline: none;
 	color: inherit;
 	padding: 6px;
 	border: 1px solid #999;
@@ -266,7 +262,7 @@ label[for='toggle-all'] {
 }
 
 #todo-list li.completed .todoitem {
-	color: #a9a9a9;
+	color: #a80000;
 	text-decoration: line-through;
 }
 
@@ -280,7 +276,7 @@ label[for='toggle-all'] {
 	height: 40px;
 	margin: auto 0;
 	font-size: 22px;
-	color: #a88a8a;
+	color: #a80000;
 	-webkit-transition: all 0.2s;
 	transition: all 0.2s;
 }
@@ -309,7 +305,7 @@ label[for='toggle-all'] {
 }
 
 #footer {
-	color: #777;
+	color: #a80000;
 	padding: 0 15px;
 	position: absolute;
 	right: 0;
@@ -354,7 +350,7 @@ label[for='toggle-all'] {
 }
 
 #filters li a {
-	color: #83756f;
+	color: #a80000;
 	margin: 2px;
 	text-decoration: none;
 }
@@ -368,21 +364,22 @@ label[for='toggle-all'] {
 	position: relative;
 	line-height: 20px;
 	text-decoration: none;
-	background: rgba(0, 0, 0, 0.1);
+	background: rgba(255, 255, 255, 1);
 	font-size: 11px;
 	padding: 0 10px;
 	border-radius: 3px;
 	box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.2);
 }
 
-#clear-completed:hover {
-	background: rgba(0, 0, 0, 0.15);
+#clear-completed:hover, #clear-completed:focus {
+	background: #a80000;
+	color: #ffffff;
 	box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.3);
 }
 
 #info {
 	margin: 65px auto 0;
-	color: #a6a6a6;
+	color: #a80000;
 	font-size: 12px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 	text-align: center;
