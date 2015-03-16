@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+	<head>
+	<body>
+		<link rel="import" href="bower_components/polymer/polymer.html">
+		<polymer-element name="aria-menu">
+			<template id="ariamenu">
+				<div role="menu" tabindex="-1"><content></content></div>
+				<style>
+				*:focus {
+					outline: 2px dotted black;
+				}
+				</style>
+			</template>
+			<script>
+			(function () {
+				Polymer({
+					focus: function () {
+						console.log(this.shadowRoot.querySelector('div'));
+						this.shadowRoot.querySelector('div').focus();;
+					}
+				});
+			}());
+			</script>
+		</polymer-element>
+		<button id="popup">focus</button>
+		<div id="myPopupContainer">
+		    <aria-menu>My Content</aria-menu>
+		</div>
+		<script>
+			popup.addEventListener('click', function (e) {
+				myPopupContainer.querySelector('aria-menu').focus();
+			}, false);
+		</script>
+	</body>
+</html>
