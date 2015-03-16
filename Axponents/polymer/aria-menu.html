@@ -1,3 +1,4 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
 <polymer-element name="aria-menu">
 	<template id="ariamenu">
 		<div role="menu"><content></content></div>
@@ -53,6 +54,7 @@
 		}
 		Polymer({
 			attached: function () {
+				this.setAttribute('role', 'presentation'); // hide the element in the emulated environments
 				this.div = this.shadowRoot.querySelector('div');
 				var content = this.shadowRoot.querySelector('content');
 				this.nodes = content.getDistributedNodes();

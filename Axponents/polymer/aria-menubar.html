@@ -9,11 +9,9 @@
 	</template>
 	<script>
 	Polymer({
-		created: function () {
-			console.log('created aria-menubar');
-		},
 		attached: function() {
 			// do stuff
+			this.setAttribute('role', 'presentation'); // hide the element in the emulated environments
 			var shadowRoot = this.shadowRoot;
 			console.log('ready aria-menubar: ', this);
 			var div = shadowRoot.querySelector('div');
@@ -33,9 +31,6 @@
 					nodes[i].setAttribute('width', 100/children + '%');
 				}
 			}
-		},
-		detached: function () {
-
 		}
 	});
 	</script>

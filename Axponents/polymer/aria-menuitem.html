@@ -96,6 +96,7 @@
 		}
 		Polymer({
 			attached: function () {
+				this.setAttribute('role', 'presentation'); // hide the element in the emulated environments
 				var shadowRoot = this.shadowRoot;
 				this.div = shadowRoot.querySelector('div');
 				this.span = shadowRoot.querySelector('span');
