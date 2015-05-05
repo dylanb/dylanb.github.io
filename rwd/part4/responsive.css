@@ -4,18 +4,6 @@
 /*  #Mobile (0-767)
 ================================================== */
 @media screen and (max-device-width :47.9375em), screen and (max-width :47.9375em) {
-	thead tr {
-		border: 0;
-		clip: rect(0 0 0 0);
-		clip: rect(0, 0, 0, 0);
-		height: 1px;
-		margin: -1px;
-		overflow: hidden;
-		padding: 0;
-		width: 1px;
-		position: absolute;
-	}
-
 	td, th {
 		display:inline-block;
 		width:100%;
