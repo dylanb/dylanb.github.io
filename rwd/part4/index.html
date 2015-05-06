@@ -7,10 +7,10 @@
 	<body>
 		<h1>Accessible Responsive Tables</h1>
 		<p>
-			The two tables below look exatctly the same. They respond exactly the same to changes in the dimensions of the screen. The difference is that the second one is exposed to the screen reader in exactly the same way that the first one is both when in the small screen formatting and the large screen formatting.
+			The two tables below look exatctly the same. The difference is that the second one is adds some in-context headers at the small screen break point.
 		</p>
 		<h2>Inaccessible Responsive Markup</h2>
-		<table>
+		<table class="responsive">
 			<thead>
 				<tr>
 					<th scope="col">
@@ -59,7 +59,7 @@
 			</tbody>
 		</table>
 		<h2>Accessible Responsive Markup</h2>
-		<table class="accessible">
+		<table class="accessible responsive">
 			<thead>
 				<tr>
 					<th scope="col">
@@ -115,5 +115,45 @@
 				</tr>
 			</tbody>
 		</table>
+		<h2>Comparison Table</h2>
+		<p>
+			This table is suitable for comparing products on both a mobile device and a desktop. It is derived from the <a href="http://www.amazon.com/">Amazon.com</a> product comparison table.
+		</p>
+		<div class="comparison-table">
+			<table tabindex="0">
+				<tr>
+					<th scope="col">&nbsp;</th>
+					<th scope="col"><img alt="orange" src="orange.jpg" /></th>
+					<th scope="col"><img alt="red" src="red.jpg" /></th>
+					<th scope="col"><img alt="blue" src="blue.jpg" /></th>
+					<th scope="col"><img alt="brown" src="brown.jpg" /></th>
+					<th scope="col"><img alt="purple" src="purple.jpg" /></th>
+				</tr>
+				<tr>
+					<th scope="row">Brightness</th>
+					<td>high</td>
+					<td>high</td>
+					<td>medium</td>
+					<td>low</td>
+					<td>low</td>
+				</tr>
+				<tr>
+					<th scope="row">Popularity</th>
+					<td>high</td>
+					<td>high</td>
+					<td>high</td>
+					<td>low</td>
+					<td>medium</td>
+				</tr>
+				<tr>
+					<th scope="row">Meaning</th>
+					<td>Joy, Sunshine, Tropics</td>
+					<td>Love, Passion, Danger, War</td>
+					<td>Loyalty, Wisdom, Intelligence, Faith</td>
+					<td>Earth, Dirty, Natural, Recycling</td>
+					<td>Royalty, Stability, Nobility, Luxury</td>
+				</tr>
+			</table
+		</div>
 	</body>
 </html>

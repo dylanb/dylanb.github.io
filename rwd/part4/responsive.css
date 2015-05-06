@@ -24,7 +24,7 @@ table, th, td {
 	border-bottom: 2px solid gray;
 }
 
-th:first-child {
+.comparison-table td:first-child, th:first-child {
 	border-left: 2px solid gray;
 }
 
@@ -50,12 +50,12 @@ thead th {
 	color:#505050;	
 }
 
-th:nth-of-type(1) {
+.responsive th:nth-of-type(1) {
 	width:20%;
 }
 
-thead th:nth-of-type(4),
-tbody td:nth-of-type(3) {
+.responsive thead th:nth-of-type(4),
+.responsive tbody td:nth-of-type(3) {
 	padding-left:1.5em;
 }
 
@@ -66,14 +66,17 @@ tbody td:nth-of-type(3) {
 /*  #Mobile (0-767)
 ================================================== */
 @media screen and (max-device-width :47.9375em), screen and (max-width :47.9375em) {
-	thead {
+	.responsive thead {
 		display:none;
 	}
-	table, th, td {
+	.responsive table {
+		display:block;
+	}
+	.responsive table, .responsive th, .responsive td {
 		border-top: none;
 		border-bottom: none;
 	}
-	td, th {
+	.responsive td, .responsive th {
 		display:inline-block;
 		width:100%;
 		text-align:left;
@@ -83,8 +86,8 @@ tbody td:nth-of-type(3) {
 		padding-bottom:.25em;
 		box-sizing:border-box;
 	}
-	thead th:nth-of-type(4),
-	tbody td:nth-of-type(3) {
+	.responsive thead th:nth-of-type(4),
+	.responsive tbody td:nth-of-type(3) {
 		padding-left:.25em;
 	}
 
@@ -95,29 +98,51 @@ tbody td:nth-of-type(3) {
 		clear:both;
 		width:15%;
 	}
-	th:nth-of-type(1) {
+	.responsive th:nth-of-type(1) {
 		border-top: solid 2px gray;
 		border-left: solid 2px gray;
 		width:50%;
 		padding-left:.25em;
 	}
-	td:nth-of-type(1) {
+	.responsive td:nth-of-type(1) {
 		border-top: solid 2px gray;
 	}
-	td:nth-of-type(2) {
+	.responsive td:nth-of-type(2) {
 		float:right;
 		border-top: solid 2px gray;
 		border-right: solid 2px gray;
 	}
-	td:nth-of-type(1),
-	td:nth-of-type(2) {
+	.responsive td:nth-of-type(1),
+	.responsive td:nth-of-type(2) {
 		width:25%;
 	}
-	td:nth-of-type(3) {
+	.responsive td:nth-of-type(3) {
 		border-bottom: solid 2px gray;
 		border-left: solid 2px gray;
 		border-right: solid 2px gray;
 		margin-bottom: 1em;
 		padding-left:.25em;
 	}
+
+	.comparison-table {
+		width:100%;
+		overflow-x:auto;
+	}
+}
+
+table:focus {
+	outline:none;
+}
+
+table:focus tr:first-child th, table:focus tr:first-child td {
+	border-top: 4px dotted red;
+}
+table:focus tr:last-child th, table:focus tr:last-child td {
+	border-bottom: 4px dotted red;
+}
+table:focus th:last-child, table:focus td:last-child {
+	border-right: 4px dotted red;
+}
+table:focus th:first-child, table:focus td:first-child {
+	border-left: 4px dotted red;
 }
