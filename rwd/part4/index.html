@@ -5,7 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="responsive.css">
 	</head>
 	<body>
-		<h1>Accessible Repsonive Tables</h1>
+		<h1>Accessible Responsive Tables</h1>
 		<p>
 			The two tables below look exatctly the same. They respond exactly the same to changes in the dimensions of the screen. The difference is that the second one is exposed to the screen reader in exactly the same way that the first one is both when in the small screen formatting and the large screen formatting.
 		</p>
@@ -59,49 +59,57 @@
 			</tbody>
 		</table>
 		<h2>Accessible Responsive Markup</h2>
-		<table role="grid">
-			<thead role="rowgroup">
-				<tr role="row">
-					<th scope="col" id="name" role="columnheader">
+		<table class="accessible">
+			<thead>
+				<tr>
+					<th scope="col">
 						Name
 					</th>
-					<th scope="col" id="rank" role="columnheader">
+					<th scope="col">
 						Rank
 					</th>
-					<th scope="col" id="age" role="columnheader">
+					<th scope="col">
 						Age
 					</th>
-					<th scope="col" id="description" role="columnheader">
+					<th scope="col">
 						Description
 					</th>
 				</tr>
 			</thead>
-			<tbody role="rowgroup">
-				<tr role="row">
-					<th scope="row" role="rowheader" id="row1" aria-labelledby="name">
+			<tbody>
+				<tr>
+					<th scope="row">
+						<span class="small">Name</span>
 						Nelson Mandela
 					</th>
-					<td role="gridcell" aria-labelledby="rank row1">
+					<td>
+						<span class="small">Rank</span>
 						1
 					</td>
-					<td role="gridcell" aria-labelledby="age row1">
+					<td>
+						<span class="small">Age</span>
 						95
 					</td>
-					<td role="gridcell" aria-labelledby="description row1">
+					<td>
+						<span class="small">Description</span>
 						Former political prisoner who upon his release was elected president of South Africa in 1994.
 					</td>
 				</tr>
-				<tr role="row">
-					<th scope="row" role="rowheader" id="row2" aria-labelledby="name">
+				<tr>
+					<th scope="row">
+						<span class="small">Name</span>
 						Steve Nash
 					</th>
-					<td role="gridcell" aria-labelledby="rank row2">
+					<td>
+						<span class="small">Rank</span>
 						2
 					</td>
-					<td role="gridcell" aria-labelledby="age row2">
+					<td>
+						<span class="small">Age</span>
 						39
 					</td>
-					<td role="gridcell" aria-labelledby="description row2">
+					<td>
+						<span class="small">Description</span>
 						NBA legend who won the MVP in 2005 and 2006 with the Phoenix Suns, and played in eight NBA All-Star games.
 					</td>
 				</tr>

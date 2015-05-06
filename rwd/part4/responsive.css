@@ -1,11 +1,123 @@
 /* #Standard
 ================================================== */
+body {
+	font-family: Arial;
+}
+
+h1 {
+	text-transform: uppercase;
+	color:navy;
+	font-size: 1.7em;
+}
+
+h2 {
+	text-transform: uppercase;
+	color:#505050;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+}
+
+th:first-child {
+	border-left: 2px solid gray;
+}
+
+th:last-child, td:last-child {
+	border-right: 2px solid gray;
+}
+
+td, th {
+	text-align:left;
+	font-weight:normal;
+	font-size:14pt;
+	padding-top:.5em;
+	padding-bottom:.5em;
+	box-sizing:border-box;
+}
+
+th {
+	text-align: left;
+	font-weight:normal;
+}
+
+thead th {
+	color:#505050;	
+}
+
+th:nth-of-type(1) {
+	width:20%;
+}
+
+thead th:nth-of-type(4),
+tbody td:nth-of-type(3) {
+	padding-left:1.5em;
+}
+
+.accessible .small {
+	display:none;
+}
 
 /*  #Mobile (0-767)
 ================================================== */
 @media screen and (max-device-width :47.9375em), screen and (max-width :47.9375em) {
+	thead {
+		display:none;
+	}
+	table, th, td {
+		border-top: none;
+		border-bottom: none;
+	}
 	td, th {
 		display:inline-block;
 		width:100%;
+		text-align:left;
+		font-weight:normal;
+		font-size:14pt;
+		padding-top:.25em;
+		padding-bottom:.25em;
+		box-sizing:border-box;
+	}
+	thead th:nth-of-type(4),
+	tbody td:nth-of-type(3) {
+		padding-left:.25em;
+	}
+
+	.accessible .small {
+		display:block;
+		font-size:8pt;
+		color:#505050;
+		clear:both;
+		width:15%;
+	}
+	th:nth-of-type(1) {
+		border-top: solid 2px gray;
+		border-left: solid 2px gray;
+		width:50%;
+		padding-left:.25em;
+	}
+	td:nth-of-type(1) {
+		border-top: solid 2px gray;
+	}
+	td:nth-of-type(2) {
+		float:right;
+		border-top: solid 2px gray;
+		border-right: solid 2px gray;
+	}
+	td:nth-of-type(1),
+	td:nth-of-type(2) {
+		width:25%;
+	}
+	td:nth-of-type(3) {
+		border-bottom: solid 2px gray;
+		border-left: solid 2px gray;
+		border-right: solid 2px gray;
+		margin-bottom: 1em;
+		padding-left:.25em;
 	}
 }
