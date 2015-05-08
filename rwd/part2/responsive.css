@@ -1,0 +1,96 @@
+/* #Standard
+================================================== */
+body {
+	margin:0;
+}
+
+section, footer, aside, article, main, div, nav, header {
+	margin-top:.25em;
+	margin-bottom: .25em;
+	margin-left:0;
+	margin-right:0;
+	display:inline-block;
+	width:100%;
+	box-sizing:border-box;
+	text-align: center;
+}
+
+header {
+	background-color:lime;
+	line-height:5em;
+	width:100%;
+}
+
+.header-content {
+	width:75%;
+}
+
+.search {
+	background-color: lightgray;
+	display:inline-block;
+	width:25%;
+	float:right;
+}
+
+nav {
+	width: 100%;
+	line-height:3em;
+	background-color:cyan;
+}
+
+main {
+	width:75%;
+	background-color:hotpink;
+}
+article {
+	line-height:20em;
+	width: 49.5%;
+	border: 2px solid white;
+}
+aside {
+	width:25%;
+	float:right;
+}
+.sidebar-block {
+	line-height:20em;
+	border: 2px solid black;
+}
+footer {
+	background-color:gray;
+	color:white;
+	line-height:3em;
+}
+
+/* #Tablet (768-959)
+================================================== */
+@media screen and (max-device-width: 59.9375em), screen and (max-width: 59.9375em){
+	header {
+		line-height:4em;
+	}
+	nav, footer {
+		line-height:2.5em;
+	}
+	article {
+		width:100%;
+	}
+	main {
+		width:75%;
+	}
+}
+
+/*  #Mobile (0-767)
+================================================== */
+@media screen and (max-device-width :47.9375em), screen and (max-width :47.9375em) {
+   	header {
+		line-height:3em;
+	}
+	nav, footer {
+		line-height:2.1em;
+	}
+	main {
+		width:100%;
+	}
+	aside {
+		width:100%;
+	}
+}

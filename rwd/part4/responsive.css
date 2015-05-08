@@ -1,0 +1,148 @@
+/* #Standard
+================================================== */
+body {
+	font-family: Arial;
+}
+
+h1 {
+	text-transform: uppercase;
+	color:navy;
+	font-size: 1.7em;
+}
+
+h2 {
+	text-transform: uppercase;
+	color:#505050;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+}
+
+.comparison-table td:first-child, th:first-child {
+	border-left: 2px solid gray;
+}
+
+th:last-child, td:last-child {
+	border-right: 2px solid gray;
+}
+
+td, th {
+	text-align:left;
+	font-weight:normal;
+	font-size:14pt;
+	padding-top:.5em;
+	padding-bottom:.5em;
+	box-sizing:border-box;
+}
+
+th {
+	text-align: left;
+	font-weight:normal;
+}
+
+thead th {
+	color:#505050;	
+}
+
+.responsive th:nth-of-type(1) {
+	width:20%;
+}
+
+.responsive thead th:nth-of-type(4),
+.responsive tbody td:nth-of-type(3) {
+	padding-left:1.5em;
+}
+
+.accessible .small {
+	display:none;
+}
+
+/*  #Mobile (0-767)
+================================================== */
+@media screen and (max-device-width :47.9375em), screen and (max-width :47.9375em) {
+	.responsive thead {
+		display:none;
+	}
+	.responsive table {
+		display:block;
+	}
+	.responsive table, .responsive th, .responsive td {
+		border-top: none;
+		border-bottom: none;
+	}
+	.responsive td, .responsive th {
+		display:inline-block;
+		width:100%;
+		text-align:left;
+		font-weight:normal;
+		font-size:14pt;
+		padding-top:.25em;
+		padding-bottom:.25em;
+		box-sizing:border-box;
+	}
+	.responsive thead th:nth-of-type(4),
+	.responsive tbody td:nth-of-type(3) {
+		padding-left:.25em;
+	}
+
+	.accessible .small {
+		display:block;
+		font-size:8pt;
+		color:#505050;
+		clear:both;
+		width:15%;
+	}
+	.responsive th:nth-of-type(1) {
+		border-top: solid 2px gray;
+		border-left: solid 2px gray;
+		width:50%;
+		padding-left:.25em;
+	}
+	.responsive td:nth-of-type(1) {
+		border-top: solid 2px gray;
+	}
+	.responsive td:nth-of-type(2) {
+		float:right;
+		border-top: solid 2px gray;
+		border-right: solid 2px gray;
+	}
+	.responsive td:nth-of-type(1),
+	.responsive td:nth-of-type(2) {
+		width:25%;
+	}
+	.responsive td:nth-of-type(3) {
+		border-bottom: solid 2px gray;
+		border-left: solid 2px gray;
+		border-right: solid 2px gray;
+		margin-bottom: 1em;
+		padding-left:.25em;
+	}
+
+	.comparison-table {
+		width:100%;
+		overflow-x:auto;
+	}
+}
+
+table:focus {
+	outline:none;
+}
+
+table:focus tr:first-child th, table:focus tr:first-child td {
+	border-top: 4px dotted red;
+}
+table:focus tr:last-child th, table:focus tr:last-child td {
+	border-bottom: 4px dotted red;
+}
+table:focus th:last-child, table:focus td:last-child {
+	border-right: 4px dotted red;
+}
+table:focus th:first-child, table:focus td:first-child {
+	border-left: 4px dotted red;
+}
