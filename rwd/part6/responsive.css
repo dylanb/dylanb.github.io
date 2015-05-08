@@ -96,10 +96,14 @@ aside {
 @media screen and (max-device-width :47.9375em), screen and (max-width :47.9375em) {
 	main {
 		width:100%;
+		border-right: none;
 	}
 	aside {
 		width:100%;
 		border-left: none;
 		border-top: 2px solid black;
+	}
+	body {
+		font-size: 18pt;
 	}
 }

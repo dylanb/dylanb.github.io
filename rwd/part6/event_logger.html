@@ -77,19 +77,26 @@
 		</div>
 		<script>
 		jQuery(document).ready(function () {
+			var interesting = [
+				'click',
+				'keydown',
+				'touchstart'
+			];
 			var $eventLog = jQuery('#eventlog');
 			var events = {};
 			function addElement(el) {
+				var prototype = {};
 				var name = el.nodeName;
 				var role = jQuery(el).attr('role');
 				var type = jQuery(el).attr('type');
 				name += role ? (' role="' + role + '"') : '';
 				name += type ? (' type="' + type + '"') : '';
-				events[name] = events[name] || {
-					click: { count: 0 },
-					keydown: { count: 0 },
-					touchstart: { count: 0 }
-				};
+				if (typeof events[name] === 'undefined') {
+					jQuery(interesting).each(function(index, item) {
+						prototype[item] = { count: 0 };
+					});
+					events[name] = prototype;
+				}
 				return name;
 			}
 			function captureEvent(name, type, value) {
@@ -116,16 +123,17 @@
 					}
 				}
 			}
-			jQuery('main article').on('click', function (e) {
-				outputEvent(e);
-			}).on('keydown', function (e) {
-				outputEvent(e);
-			}).on('touchstart', function (e) {
-				outputEvent(e);
+			var art = jQuery('main article');
+			jQuery(interesting).each(function(index, item) {
+				art.on(item, function (e) {
+					outputEvent(e);
+				});
 			});
+
 			jQuery('#clear').on('click', function (e) {
 				$eventLog.empty();
 			});
+
 			jQuery('.checkbox').on('click', function (e) {
 				var $this = jQuery(this);
 				if ($this.attr('role')) {
@@ -138,6 +146,7 @@
 					$this.toggleClass('checked');
 				}
 			});
+
 			jQuery('article>div').each(function (index, item) {
 				var iElem = jQuery(item).find('a,input,textarea,select,button,div');
 				iElem.each(function (index, el) {
