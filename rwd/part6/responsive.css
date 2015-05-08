@@ -104,6 +104,6 @@ aside {
 		border-top: 2px solid black;
 	}
 	select, option, body, input[type=text], textarea, button, input[type=button] {
-		font-size: 20pt;
+		font-size: 24pt;
 	}
 }
