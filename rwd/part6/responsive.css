@@ -103,7 +103,7 @@ aside {
 		border-left: none;
 		border-top: 2px solid black;
 	}
-	body {
+	select, option, body, input[type=text], textarea, button, input[type=button] {
 		font-size: 20pt;
 	}
 }
