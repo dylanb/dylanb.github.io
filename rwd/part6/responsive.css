@@ -1,6 +1,7 @@
 /* #Standard
 ================================================== */
 body {
+	font-family: Arial;
 	margin:0;
 }
 
@@ -16,17 +17,58 @@ section, footer, aside, article, main, div, nav, header {
 
 main {
 	width:62%;
+	padding-left:1em;
+	border-right: 2px solid black;
 }
 article {
 	width: 100%%;
 }
+
+article div+div {
+	padding-top:1em;
+}
+
 aside {
-	width:38%;
+	width:36%;
 	float:right;
-	border-left: 2px solid black;
 }
 .sidebar-block {
-	padding-left:.45em;
+	padding-left:1em;
+}
+
+.sidebar-block div.table {
+	width:50%;
+	padding-left:.5em;
+	padding-right: .5em
+}
+
+.sidebar-block table {
+	width:100%;
+	border-collapse: collapse;
+}
+
+.sidebar-block caption {
+	text-transform: lowercase;
+	font-size:14pt;
+	font-weight: bold;
+}
+
+.sidebar-block caption:before {
+	content: "<";
+}
+
+.sidebar-block caption:after {
+	content: ">";
+}
+
+.sidebar-block td, .sidebar-block th {
+	width:50%;
+	border: 1px solid black;
+	padding:.25em;
+}
+
+.sidebar-block th {
+	text-align: left;
 }
 
 .checkbox {
