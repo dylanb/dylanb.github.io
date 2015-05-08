@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Part 5: Content Replaced</title>
+		<script src="../libs/jquery.js" ></script>
+		<script src="../libs/jquery.mobile.min.js" ></script>
+		<link rel="stylesheet" type="text/css" href="../libs/jquery.mobile.css">
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="header" style="overflow:hidden;">
+				<a href="index.html" data-icon="arrow-l" class="ui-btn-left">Back</a>
+			<h1>Delete a Color</h1>
+			</div>
+			<div class="name clearfix" data-role="content">
+				<ul data-role="listview" data-inset="true">
+					<li data-icon="delete"><a href="#">Blue</a></li>
+					<li data-icon="delete"><a href="#">Black</a></li>
+					<li data-icon="delete"><a href="#">Green</a></li>
+					<li data-icon="delete"><a href="#">Brown</a></li>
+					<li data-icon="delete"><a href="#">Purple</a></li>
+				</ul>
+			</div>
+		</div>
+		<script>
+		jQuery(document).ready(function () {
+			// set up the remove handler
+			jQuery('[data-icon="delete"] a').on('click', function (e) {
+				jQuery(this).parent().remove();
+			});
+		});
+		</script>
+	</body>
+</html>

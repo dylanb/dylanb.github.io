@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Part 6: Keyboard and Gestures</title>
+		<script src="../libs/jquery.js" ></script>
+		<link rel="stylesheet" type="text/css" href="responsive.css">
+	</head>
+	<body>
+		<div>
+			<main>
+				<h1>Event Logger</h1>
+				<article>
+					<p>
+						Interact with the elements below and see the events that are generated. Do this with your screen reader on or off.
+					</p>
+					<h2>Focusable Elements</h2>
+					<div>
+						<a href="javascript:;">I am a link</a>
+					</div>
+					<div>
+						<label>I am a text input
+							<input type="text" />
+						</label>
+					</div>
+					<div>
+						<input type="button" value="I am an inpurt"/>
+					</div>
+					<div>
+						<label>I am a select
+							<select>
+								<option>---select---</option>
+								<option>Red</option>
+								<option>Orange</option>
+								<option>Blue</option>
+								<option>Purple</option>
+								<option>Brown</option>
+							</select>
+						</label>
+					</div>
+					<div>
+						<label>I am a textarea
+							<textarea></textarea>
+						</label>
+					</div>
+					<div>
+						<button>I am a button</button>
+					</div>
+					<div>
+						<label>
+							<input type="checkbox" />
+							I am a checkbox input
+						</label>
+					</div>
+					<div>
+
+						<div tabindex="0" class="checked checkbox">
+							I am a div that looks like a checkbox
+						</div>
+					</div>
+					<div>
+						<div class="checkbox" tabindex="0" role="checkbox" aria-checked="true">
+							I am a div with role="checkbox"
+						</div>
+					</div>
+				</article>
+			</main>
+			<aside>
+				<section class="sidebar-block">
+					<h2>
+						Events
+					</h2>
+					<button id="clear">Clear Events</button>
+					<ul id="eventlog">
+					</ul>
+				</section>
+			</aside>
+		</div>
+		<script>
+		jQuery(document).ready(function () {
+			var $eventLog = jQuery('#eventlog');
+			function outputEvent(e) {
+				jQuery('<li>').text(
+						'Target: ' + e.target.nodeName +
+						' Type: ' + e.type +
+						(e.value ? (' Value:' + e.value) : '')
+					).appendTo($eventLog);
+			}
+			jQuery('main article').on('click', function (e) {
+				outputEvent(e);
+			}).on('keydown', function (e) {
+				outputEvent(e);
+			}).on('touchstart', function (e) {
+				outputEvent(e);
+			});
+			jQuery('#clear').on('click', function (e) {
+				$eventLog.empty();
+			});
+			jQuery('.checkbox').on('click', function (e) {
+				var $this = jQuery(this);
+				if ($this.attr('role')) {
+					if ($this.attr('aria-checked') === 'true') {
+						$this.attr('aria-checked', false);
+					} else {
+						$this.attr('aria-checked', true);
+					}
+				} else {
+					$this.toggleClass('checked');
+				}
+			});
+		});
+		</script>
+	</body>
+</html>

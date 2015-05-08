@@ -1,0 +1,14 @@
+body {
+	font-family: Arial;
+}
+
+h1 {
+	text-transform: uppercase;
+	color:navy;
+	font-size: 1.7em;
+}
+
+h2 {
+	text-transform: uppercase;
+	color:#505050;
+}
