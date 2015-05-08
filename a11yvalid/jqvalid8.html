@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="../bower_components/a11yfy/dist/jquery.a11yfy.core.js"></script>
+        <script src="../bower_components/jquery.validation/jquery.validate.js"></script>
+        <link type="text/css" rel="stylesheet" href="../bower_components/a11yfy/dist/jquery.a11yfy.core.css">
+        <style>
+        form {
+            max-width: 50%;
+        }
+        #instructions {
+            padding: 10px 10px 10px 10px;
+            border: 1px solid grey;
+            border-radius: 5px 5px 5px 5px;
+            background-color: lightyellow;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>jQuery Dynamic Form Validation: BAD Example 2 - Dynamic Updates</h1>
+        <div class="form-container-50">
+        <form id="myform" action="mysubmitaction">
+            <div id="instructions">
+            </div>
+            <label for="firstname">First Name</label>
+            <input type="text" name="firstname" id="firstname"/>
+            <label for="lastname">Last Name</label>
+            <input type="text" name="lastname" id="lastname"/>
+            <p>
+                <label style="width:50%;" for="dob">Date of Birth</label>
+                <input style="width:50%;" type="text" name="dob" id="dob" aria-describedby="dateformat"/>
+                <span id="dateformat">mm/dd/yyyy</span>
+            </p>
+            <span id="parentguardianinfo">
+                <label for="guardianfirstname">Guardian's First Name</label>
+                <input type="text" name="guardianfirstname" id="guardianfirstname"/>
+                <label for="guardianlastname">Guardian's Last Name</label>
+                <input type="text" name="guardianlastname" id="guardianlastname"/>
+            </span>
+            <fieldset>
+                <legend>Social Security Number</legend>
+                <span style="width:49%;height:100%;display:inline-block;">
+                    <input class="a11yfy-inline" style="width:3em;" type="text" name="ssn1" id="ssn1" maxlength="3" pattern="[0-9]*" title="first three digits" aria-describedby="ssnadditional"/> - 
+                    <input class="a11yfy-inline" style="width:2em;" type="text" name="ssn2" id="ssn2" maxlength="2" pattern="[0-9]*" title="middle two digits" aria-describedby="ssnadditional"/> - 
+                    <input class="a11yfy-inline" style="width:4em;" type="text" name="ssn3" id="ssn3" maxlength="4" pattern="[0-9]*" title="last four digits" aria-describedby="ssnadditional"/>
+                </span>
+                <span style="width:49%;display:inline-block;" id="ssnadditional"></span>
+            </fieldset>
+             <button>Submit</button>
+        </form>
+        <a href="jqvalid9.html">Next</a>
+        </div>
+        <script>
+        var messages = {
+            "firstname" : "Enter your first name as it appears on your drivers license",
+            "lastname" : "Enter your last name as it appears on your drivers license",
+        }
+        function showInstruction(msg) {
+            jQuery('#instructions').show();
+            setTimeout(function () {
+                jQuery('#instructions').text(msg);
+            }, 0);
+        }
+        function containsNonNumeric(str) {
+            for (i = str.length; i--;) {
+                if (str[i] >= "0" && str[i] <= "9") {
+                    return true;
+                }
+            }
+            return false;
+        }
+        jQuery(document).ready(function (e) {
+            jQuery('#instructions, #parentguardianinfo').hide();
+            jQuery("input").on("focus", function (e) {
+                var msg = messages[this.id];
+                if (msg) {
+                    showInstruction(msg);
+                }
+            }).on("blur", function (e) {
+                jQuery('#instructions').hide();
+            });
+            jQuery("#dob").on("change", function (e) {
+                var that = this;
+
+                setTimeout(function () {
+                    var rEx = /^([0-9][0-9]).([0-9][0-9]).([0-9][0-9][0-9][0-9])$/,
+                        dStr = jQuery.trim(jQuery(that).val()),
+                        match, dob,
+                        now = new Date(),
+                        year = 365*24*60*60*1000;
+
+                    match = rEx.exec(dStr);
+                    if (match) {
+                        dob = new Date(parseInt(match[3], 10), parseInt(match[1], 10), parseInt(match[2], 10));
+                        if (dob.getTime() > now.getTime()-(year*18)) {
+                            jQuery('#parentguardianinfo').show();
+                        } else {
+                            jQuery('#parentguardianinfo').hide();
+                        }
+                    }
+                }, 2000);
+            });
+            jQuery('#ssn1, #ssn2, #ssn3').on("keydown", function (e) {
+                var $this = jQuery(this),
+                    keyCode = e.which || e.keyCode;
+
+                if (keyCode > 57) {
+                    jQuery("#ssnadditional").text("Social security numbers cannot contain non-numeric characters");
+                } else {
+                    val = $this.val();
+                    if (!containsNonNumeric(val)) {
+                        jQuery("#ssnadditional").text("");
+                    }
+                }
+            });
+        });
+        </script>
+    </body>
+</html>

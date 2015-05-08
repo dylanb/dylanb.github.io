@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="../bower_components/a11yfy/dist/jquery.a11yfy.core.js"></script>
+        <script src="../bower_components/jquery.validation/jquery.validate.js"></script>
+        <link type="text/css" rel="stylesheet" href="../bower_components/a11yfy/dist/jquery.a11yfy.core.css">
+        <style>
+        form {
+            max-width: 50%;
+        }
+        #instructions {
+            padding: 10px 10px 10px 10px;
+            border: 1px solid grey;
+            border-radius: 5px 5px 5px 5px;
+            background-color: lightyellow;
+        }
+        #focusDialog {
+            position:absolute;
+            bottom:0px;
+            background-color: lightyellow;
+            padding: 10px 10px 10px 10px;
+            border: 1px solid grey;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>jQuery Dynamic Form Validation: Example 7 - Dynamic Updates</h1>
+        <div class="form-container-50">
+        <form id="myform" action="mysubmitaction">
+            <div id="instructions">
+            </div>
+            <label for="firstname">First Name</label>
+            <input type="text" name="firstname" id="firstname"/>
+            <label for="lastname">Last Name</label>
+            <input type="text" name="lastname" id="lastname"/>
+            <p>
+                <label style="width:50%;" for="dob">Date of Birth</label>
+                <input style="width:50%;" type="text" name="dob" id="dob" aria-describedby="dateformat"/>
+                <span id="dateformat">mm/dd/yyyy</span>
+            </p>
+            <span id="parentguardianinfo">
+                <label for="guardianfirstname">Guardian's First Name</label>
+                <input type="text" name="guardianfirstname" id="guardianfirstname"/>
+                <label for="guardianlastname">Guardian's Last Name</label>
+                <input type="text" name="guardianlastname" id="guardianlastname"/>
+            </span>
+            <fieldset>
+                <legend>Social Security Number</legend>
+                <span style="width:49%;height:100%;display:inline-block;">
+                    <input class="a11yfy-inline" style="width:3em;" type="text" name="ssn1" id="ssn1" maxlength="3" pattern="[0-9]*" title="first three digits" aria-describedby="ssnadditional"/> - 
+                    <input class="a11yfy-inline" style="width:2em;" type="text" name="ssn2" id="ssn2" maxlength="2" pattern="[0-9]*" title="middle two digits" aria-describedby="ssnadditional"/> - 
+                    <input class="a11yfy-inline" style="width:4em;" type="text" name="ssn3" id="ssn3" maxlength="4" pattern="[0-9]*" title="last four digits" aria-describedby="ssnadditional"/>
+                </span>
+                <span style="width:49%;display:inline-block;" id="ssnadditional"></span>
+            </fieldset>
+             <button id="submit">Submit</button>
+        </form>
+        <a href="jqvalid10.html">Next</a>
+        <div tabindex="-1" role="dialog" id="focusDialog">Updating, please wait...</div>
+        </div>
+        <script>
+        /*
+         * These examples make use of the a11yfy library function
+         */
+        /*
+         * return true if a string contains a non-numeric character
+         */
+        var nnREx = /[^0-9]/;
+        function containsNonNumeric(str) {
+            if (nnREx.exec(str)) {
+                return true;
+            }
+            return false;
+        }
+
+        var messages = {
+            "firstname" : "Enter your first name as it appears on your drivers license",
+            "lastname" : "Enter your last name as it appears on your drivers license",
+        }
+        /*
+         * Show a form wide instruction and announces it using aria-live
+         */
+        function showInstruction(msg) {
+            jQuery('#instructions').show();
+            jQuery.a11yfy.politeAnnounce(msg);
+            setTimeout(function () {
+                jQuery('#instructions').text(msg);
+            }, 0);
+        }
+        jQuery(document).ready(function (e) {
+            jQuery('#instructions, #parentguardianinfo, #focusDialog').hide();
+
+            /*
+             * Here we show a "form-wide" message that is triggered from a user interaction.
+             * In this case the "interaction" is simply certain fields receiving focus
+             */
+            jQuery("input").on("focus", function (e) {
+                var msg = messages[this.id];
+                if (msg) {
+                    showInstruction(msg);
+                }
+            }).on("blur", function (e) {
+                jQuery('#instructions').hide();
+            });
+
+            /*
+             * These callbacks implement the code to show how to deal with dynamic insertion or removal
+             * of form fields based on user input and what is required to manage focus correctly
+             */
+            jQuery("#dob").on("change", function (e) {
+                // First capture the focus on the "waiting" "dialog", then set it to the appropriate element
+                var that = this;
+
+                jQuery("#focusDialog").show();
+                /*
+                 * After show dialog, give the browser time to show the element and also to focus the next
+                 * element that would naturally receive focus
+                 */
+                setTimeout(function () {
+                    var next = true;
+                    var newFocus = document.activeElement;
+
+                    /*
+                     * Pick up the element that received focus and compare its document position
+                     * so we know whether we went forwards or backwards
+                     */
+                    if (that.compareDocumentPosition(newFocus) & Node.DOCUMENT_POSITION_PRECEDING) {
+                        /*
+                         * The currently focussed element is before the dob element, so we need to set focus back
+                         * to the element that received focus after our dialog disappears
+                         */
+                        next = false;
+                    }
+
+                    /*
+                     * Place focus on the "busy" dialog
+                     */
+                    jQuery("#focusDialog").a11yfy("focus");
+
+                    /*
+                     * This timeout simulates an AJAX request that takes 2s to respond
+                     */
+                    setTimeout(function () {
+                        var rEx = /^([0-9][0-9]).([0-9][0-9]).([0-9][0-9][0-9][0-9])$/,
+                            dStr = jQuery.trim(jQuery(that).val()),
+                            match, dob,
+                            now = new Date(),
+                            year = 365*24*60*60*1000; // year in milliseconds
+
+                        /*
+                         * Look at the date of birth and if the person is not 18 years old,
+                         * add some more fields for information on the guardian.
+                         * Does not account for leap years!
+                         */
+                        match = rEx.exec(dStr);
+                        if (match) {
+                            dob = new Date(parseInt(match[3], 10), parseInt(match[1], 10), parseInt(match[2], 10));
+                            if (dob.getTime() > now.getTime()-(year*18)) {
+                                jQuery('#parentguardianinfo').show();
+                                if (next) {
+                                    jQuery("#guardianfirstname").a11yfy("focus");
+                                }
+                            } else {
+                                jQuery('#parentguardianinfo').hide();
+                                if (next) {
+                                    jQuery("#ssn1").a11yfy("focus");
+                                }
+                            }
+                            if (!next) {
+                                jQuery(newFocus).a11yfy("focus");
+                            }
+                        } else {
+                            jQuery(newFocus).a11yfy("focus");
+                        }
+                        jQuery("#focusDialog").hide();
+                    }, 2000);
+                }, 100);
+            });
+            /*
+             * Callbacks to perform SSN "validation"
+             * Shows a hint if the user enters a non-numeric character
+             */
+            function ssnVal() {
+                return jQuery("#ssn1").val() ? jQuery("#ssn1").val() : "" +
+                    jQuery("#ssn2").val() ? jQuery("#ssn2").val() : "" +
+                    jQuery("#ssn3").val() ? jQuery("#ssn3").val() : "";
+            }
+            function validateSSN() {
+                var msg = "Social security numbers cannot contain non-numeric characters",
+                    val = ssnVal();
+
+                if (!containsNonNumeric(val)) {
+                    jQuery("#ssnadditional").text("");
+                } else {
+                    jQuery("#ssnadditional").text(msg);
+                    jQuery.a11yfy.politeAnnounce(msg); // announce for screen readers
+                }
+            }
+            jQuery('#ssn1, #ssn2, #ssn3').on("keypress", function () {
+                // Let the keyboard handler update the field first
+                setTimeout(function () {
+                    validateSSN();
+                }, 0);
+            }).on("blur", function () {
+                validateSSN();
+            });
+        });
+        </script>
+    </body>
+</html>

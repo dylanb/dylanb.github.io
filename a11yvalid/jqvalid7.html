@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="../bower_components/a11yfy/dist/jquery.a11yfy.core.js"></script>
+        <script src="../bower_components/jquery.validation/jquery.validate.js"></script>
+        <link type="text/css" rel="stylesheet" href="../bower_components/a11yfy/dist/jquery.a11yfy.core.css">
+        <style>
+        form {
+            max-width: 50%;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>jQuery Dynamic Form Validation: BAD Example 1 - Explicit Tabindex, SSN focus</h1>
+        <div class="form-container-50">
+        <form id="myform" action="mysubmitaction">
+            <label for="firstname">First Name</label>
+            <input tabindex="1" type="text" name="firstname" id="firstname"/>
+            <label for="lastname">Last Name</label>
+            <input tabindex="2" type="text" name="lastname" id="lastname"/>
+            <fieldset>
+                <legend>Social Security Number</legend>
+                <input tabindex="3" class="a11yfy-inline" style="width:3em;" type="text" name="ssn1" id="ssn1" maxlength="3" pattern="[0-9]*" title="first three digits"/> - 
+                <input tabindex="4" class="a11yfy-inline" style="width:2em;" type="text" name="ssn2" id="ssn2" maxlength="2" pattern="[0-9]*" title="middle two digits"/> - 
+                <input tabindex="5" class="a11yfy-inline" style="width:4em;" type="text" name="ssn3" id="ssn3" maxlength="4" pattern="[0-9]*" title="last four digits"/><a href="help.html">help</a>
+            </fieldset>
+            <p>
+                <label for="dob">Date of Birth</label>
+                <input tabindex="6" type="date" name="dob" id="dob" aria-describedby="dateformat"/>
+                <span id="dateformat">mm/dd/yyyy</span>
+            </p>
+             <button>Submit</button>
+        </form>
+        <a href="jqvalid8.html">Next</a>
+        </div>
+        <script>
+        jQuery(document).ready(function (e) {
+            jQuery('#ssn1, #ssn2').on("keyup", function (e) {
+                var $this = jQuery(this),
+                    keyCode = e.which || e.keyCode;
+
+                if (keyCode < 48 || keyCode > 57) {
+                    return;
+                }
+                setTimeout(function () {
+                    if ($this.val().length >= parseInt($this.attr("maxlength"), 10)) {
+                        jQuery("#ssn" + (parseInt($this.attr("id").substring(3), 10) + 1)).focus();
+                    }
+                }, 0);
+            });
+        });
+        </script>
+    </body>
+</html>

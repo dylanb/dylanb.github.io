@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="../bower_components/a11yfy/dist/jquery.a11yfy.core.js"></script>
+        <script src="../bower_components/jquery.validation/jquery.validate.js"></script>
+        <style>
+        form label {
+            margin-left: 5px;
+            margin-top: 15px;
+            display: inline;
+            width: 70%;
+            padding: 5px 0 5px 3px;
+        }
+
+        form p {
+            margin-top : 0;
+            margin-bottom : 0;
+        }
+
+        form fieldset {
+            margin-top: 15px;
+        }
+        form input[type="text"], form input[type="date"], form select, form textarea {
+            padding: 7px 0 7px 5px;
+            border-radius: 5px;
+            display:inline;
+            margin-top: 0px;
+            border: solid 1px gray;
+            padding-right: 20px;
+        }
+
+
+        </style>
+    </head>
+    <body>
+        <h1>jQuery Dynamic Form Validation: Example 5 - Additional instructions</h1>
+        <div class="form-container-50">
+        <form id="myform" action="mysubmitaction">
+            <p>
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" id="firstname"/>
+            </p>
+            <p>
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname" id="lastname"/>
+            </p>
+            <fieldset>
+                <legend>Social Security Number</legend>
+                <input class="a11yfy-inline" style="width:3em;" type="text" name="ssn1" id="ssn1" maxlength="3" pattern="[0-9]*" title="first three digits"/> - 
+                <input class="a11yfy-inline" style="width:2em;" type="text" name="ssn2" id="ssn2" maxlength="2" pattern="[0-9]*" title="middle two digits"/> - 
+                <input class="a11yfy-inline" style="width:4em;" type="text" name="ssn3" id="ssn3" maxlength="4" pattern="[0-9]*" title="last four digits"/>
+            </fieldset>
+            <p>
+                <label for="dob">Date of Birth</label>
+                <input type="date" name="dob" id="dob" aria-describedby="dateformat"/>
+                <span id="dateformat">mm/dd/yyyy</span>
+            </p>
+             <button>Submit</button>
+        </form>
+        <a href="jqvalid6.html">Next</a>
+        </div>
+        <script>
+        </script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="../bower_components/a11yfy/dist/jquery.a11yfy.core.js"></script>
+        <script src="../bower_components/jquery.validation/jquery.validate.js"></script>
+        <style>
+        form label {
+            margin-left: 5px;
+            margin-top: 15px;
+            display: inline;
+            width: 70%;
+            padding: 5px 0 5px 3px;
+        }
+
+        form p {
+            margin-top : 0;
+            margin-bottom : 0;
+        }
+
+        form fieldset {
+            margin-top: 15px;
+        }
+        form input[type="text"], form input[type="date"], form select, form textarea {
+            padding: 7px 0 7px 5px;
+            border-radius: 5px;
+            display:inline;
+            margin-top: 0px;
+            border: solid 1px gray;
+            padding-right: 20px;
+        }
+        p.a11yfy-grouping {
+            border: 1px solid grey;
+            padding: 5px 5px 5px 5px;
+        }
+        .a11yfy-group-label {
+            display:block;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>jQuery Dynamic Form Validation: Example 4 - Group labels aria-labelledby</h1>
+        <div class="form-container-50">
+        <form id="myform" action="mysubmitaction">
+            <p>
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" id="firstname"/>
+            </p>
+            <p>
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname" id="lastname"/>
+            </p>
+            <p class="a11yfy-grouping">
+                <span class="a11yfy-group-label" id="gender-group">Gender</span>
+                <input aria-labelledby="gender-group male-gender" name="gender" value="male" type="radio" />
+                <label id="male-gender">Male</label>
+                <input aria-labelledby="other-gender" name="gender" value="other" type="radio" />
+                <label id="other-gender">Other</label>
+                <input aria-labelledby="gender-group female-gender" name="gender" value="female" type="radio" />
+                <label id="female-gender">Female</label>
+            </p>
+            <button>Submit</button>
+        </form>
+        <a href="jqvalid5.html">Next</a>
+        </div>
+        <script>
+        </script>
+    </body>
+</html>
