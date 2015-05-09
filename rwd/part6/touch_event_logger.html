@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Part 6: Keyboard and Gestures</title>
+		<script src="../libs/jquery.js" ></script>
+		<link rel="stylesheet" type="text/css" href="touch_responsive.css">
+		<script src="https://hammerjs.github.io/dist/hammer.js"></script>
+	</head>
+	<body>
+		<div>
+			<main>
+				<h1>Touch Event Logger</h1>
+				<article>
+					try a gesture
+				</article>
+				<label>
+					Text Input Field
+					<input type="text" />
+				</label>
+			</main>
+		</div>
+		<script>
+		jQuery(document).ready(function () {
+			var article = document.getElementsByTagName('article')[0];
+			var mc = new Hammer(article);
+
+			// listen to events...
+			mc.on('swipeleft swiperight tap press', function(ev) {
+			    article.textContent = ev.type +" gesture detected.";
+			});
+		});
+		</script>
+	</body>
+</html>

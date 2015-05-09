@@ -1,0 +1,43 @@
+/* #Standard
+================================================== */
+body {
+	font-family: Arial;
+	margin:0;
+}
+
+section, footer, aside, article, main, div, nav, header {
+	margin-top:.25em;
+	margin-bottom: .25em;
+	margin-left:0;
+	margin-right:0;
+	display:inline-block;
+	width:100%;
+	box-sizing:border-box;
+}
+
+main {
+	width:100%;
+}
+article {
+	width: 100%%;
+	background: silver;
+	height: 300px;
+	text-align: center;
+}
+
+
+/* #Tablet (768-959)
+================================================== */
+@media screen and (max-device-width: 59.9375em), screen and (max-width: 59.9375em){
+	article {
+		width:100%;
+	}
+}
+
+/*  #Mobile (0-767)
+================================================== */
+@media screen and (max-device-width :47.9375em), screen and (max-width :47.9375em) {
+	main {
+		width:100%;
+	}	
+}
