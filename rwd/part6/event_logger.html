@@ -6,26 +6,83 @@
 		<link rel="stylesheet" type="text/css" href="responsive.css">
 	</head>
 	<body>
+		<header>
+			<div class="topleft">
+				<h1>Keyboard Event Logger</h1>
+			</div>
+			<div class="topright">
+				<p>
+					<strong>Using the keyboard:</strong> interact with the elements below and see the events that are generated. Do this with your screen reader on, then clear the events and do it with your screen reader off.
+				</p>
+			</div>
+			<div>
+				<button style="display:none;" id="showOptions">Show Options</button>
+				<button id="hideOptions">Hide Options</button>
+				<fieldset id="options">
+					<legend>Elements to display</legend>
+					<label>
+						<input type="checkbox"/>
+						all
+					</label>
+					<label>
+						<input type="checkbox" checked="checked" data-selector="a"/>
+						anchor
+					</label>
+					<label>
+						<input type="checkbox" data-selector="input[type='text']"/>
+						input[type="text"]
+					</label>
+					<label>
+						<input type="checkbox" data-selector="input[type='button']"/>
+						input[type="button"]
+					</label>
+					<label>
+						<input type="checkbox" data-selector="input[type='checkbox']"/>
+						input[type="checkbox"]
+					</label>
+					<label>
+						<input type="checkbox" data-selector="textarea"/>
+						textarea
+					</label>
+					<label>
+						<input type="checkbox" data-selector="select"/>
+						select
+					</label>
+					<label>
+						<input type="checkbox" data-selector="button"/>
+						button
+					</label>
+					<label>
+						<input type="checkbox" data-selector="#divCheckbox"/>
+						div
+					</label>
+					<label>
+						<input type="checkbox" data-selector="div[role='checkbox']"/>
+						div[role="checkbox"]
+					</label>
+					<label>
+						<input type="checkbox" data-selector="div[role='menuitem']"/>
+						div[role="menuitem"]
+					</label>
+				</fieldset>
+			</div>
+		</header>
 		<div>
 			<main>
-				<h1>Keyboard Event Logger</h1>
 				<article>
-					<p>
-						<strong>Using the keyboard:</strong> interact with the elements below and see the events that are generated. Do this with your screen reader on, then clear the events and do it with your screen reader off.
-					</p>
 					<h2>Focusable Elements</h2>
 					<div>
 						<a href="javascript:;">I am a link</a>
 					</div>
-					<div>
+					<div style="display:none;">
 						<label>I am a text input
 							<input type="text" />
 						</label>
 					</div>
-					<div>
+					<div style="display:none;">
 						<input type="button" value="I am an input"/>
 					</div>
-					<div>
+					<div style="display:none;">
 						<label>I am a select
 							<select>
 								<option>---select---</option>
@@ -37,29 +94,34 @@
 							</select>
 						</label>
 					</div>
-					<div>
+					<div style="display:none;">
 						<label>I am a textarea
 							<textarea></textarea>
 						</label>
 					</div>
-					<div>
+					<div style="display:none;">
 						<button>I am a button</button>
 					</div>
-					<div>
+					<div style="display:none;">
 						<label>
 							<input type="checkbox" />
 							I am a checkbox input
 						</label>
 					</div>
-					<div>
+					<div style="display:none;">
 
-						<div tabindex="0" class="checked checkbox">
+						<div id="divCheckbox" tabindex="0" class="checked checkbox">
 							I am a div that looks like a checkbox
 						</div>
 					</div>
-					<div>
+					<div style="display:none;">
 						<div class="checkbox" tabindex="0" role="checkbox" aria-checked="true">
 							I am a div with role="checkbox"
+						</div>
+					</div>
+					<div style="display:none;">
+						<div class="menuitem" tabindex="0" role="menuitem">
+							I am a div with role="menuitem"
 						</div>
 					</div>
 				</article>
@@ -86,10 +148,13 @@
 			function addElement(el) {
 				var prototype = {};
 				var name = el.nodeName;
-				var role = jQuery(el).attr('role');
-				var type = jQuery(el).attr('type');
-				name += role ? (' role="' + role + '"') : '';
-				name += type ? (' type="' + type + '"') : '';
+				var $el = jQuery(el);
+				var role = $el.attr('role');
+				var type = $el.attr('type');
+				var id = $el.attr('id');
+				name += role ? ('[role="' + role + '"]') : '';
+				name += type ? ('[type="' + type + '"]') : '';
+				name += id ? ('#' + id) : '';
 				if (typeof events[name] === 'undefined') {
 					jQuery(interesting).each(function(index, item) {
 						prototype[item] = { count: 0 };
@@ -113,6 +178,9 @@
 				var table;
 				$eventLog.empty();
 				for (var name in events) {
+					if (!jQuery('article>div').find(name).is(':visible')) {
+						continue;
+					}
 					table = jQuery('<div class="table"><table><caption>' + name + '</caption><tr><th scope="col">Type</th><th scope="col">Count</th></table></div>').appendTo($eventLog);
 					table = table.find('table').eq(0);
 					for (var type in events[name]) {
@@ -130,6 +198,11 @@
 			});
 
 			jQuery('#clear').on('click', function (e) {
+				for ( var name in events) {
+					for (var type in events[name]) {
+						events[name][type].count = 0;
+					}
+				}
 				drawEvents();
 			});
 
@@ -153,6 +226,40 @@
 				});
 			});
 			drawEvents();
+
+			jQuery('#showOptions').on('click', function (e) {
+				jQuery('#hideOptions').show();
+				setTimeout(function () {
+					jQuery('#hideOptions').focus();
+				}, 500);
+				jQuery('#options').show();
+				jQuery(this).hide();
+			});
+			jQuery('#hideOptions').on('click', function (e) {
+				jQuery('#showOptions').show();
+				setTimeout(function () {
+					jQuery('#showOptions').focus();
+				}, 500);
+				jQuery('#options').hide();
+				jQuery(this).hide();
+			});
+			jQuery('header input').on('change', function (e) {
+				var $this = jQuery(this);
+				var selector = $this.attr('data-selector');
+
+				if (!selector) {
+					if ($this.is(':checked')) {
+						jQuery('header input[data-selector]').not(':checked').trigger('click').trigger('change');
+					} else {
+						jQuery('header input[data-selector]:checked').trigger('click').trigger('change');
+					}
+				} else {
+					jQuery('article')
+						.find(selector).parent()
+						.closest('div')[$this.is(':checked') ? 'show' : 'hide']();
+				}
+				drawEvents();
+			});
 		});
 		</script>
 	</body>

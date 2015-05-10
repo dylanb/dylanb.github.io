@@ -5,6 +5,11 @@ body {
 	margin:0;
 }
 
+h1 {
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+}
+
 section, footer, aside, article, main, div, nav, header {
 	margin-top:.25em;
 	margin-bottom: .25em;
@@ -15,10 +20,30 @@ section, footer, aside, article, main, div, nav, header {
 	box-sizing:border-box;
 }
 
+header {
+	width:100%;
+	padding:1em;
+	border-bottom: 2px solid black;
+}
+
+header label {
+	display:block;
+}
+
+header .topleft {
+	width:30%;
+	display:inline-block;
+	vertical-align: top;
+}
+header .topright {
+	width:69%;
+	display:inline-block;
+	vertical-align: top;
+}
+
 main {
-	width:62%;
+	width:49%;
 	padding-left:1em;
-	border-right: 2px solid black;
 }
 article {
 	width: 100%%;
@@ -29,27 +54,29 @@ article div+div {
 }
 
 aside {
-	width:36%;
+	width:49%;
 	float:right;
 }
 .sidebar-block {
 	padding-left:1em;
+	background-color:#eee;
 }
 
 .sidebar-block div.table {
 	width:50%;
 	padding-left:.5em;
 	padding-right: .5em
+	overflow:scroll;
 }
 
 .sidebar-block table {
 	width:100%;
+	font-size:12pt;
 	border-collapse: collapse;
 }
 
 .sidebar-block caption {
 	text-transform: lowercase;
-	font-size:14pt;
 	font-weight: bold;
 }
 
@@ -86,19 +113,11 @@ aside {
 /* #Tablet (768-959)
 ================================================== */
 @media screen and (max-device-width: 59.9375em), screen and (max-width: 59.9375em){
-	article {
-		width:100%;
-	}
-}
-
-/*  #Mobile (0-767)
-================================================== */
-@media screen and (max-device-width :47.9375em), screen and (max-width :47.9375em) {
 	main {
 		width:100%;
 		border-right: none;
 	}
-	
+
 	aside {
 		width:100%;
 		border-left: none;
@@ -112,4 +131,17 @@ aside {
 	select, option, input[type=text], textarea, input[type=button] {
 		font-size: 30pt;
 	}
+
+	header .topleft {
+		width:100%;
+	}
+
+	header .topright {
+		width:100%;
+	}
+}
+
+/*  #Mobile (0-767)
+================================================== */
+@media screen and (max-device-width :47.9375em), screen and (max-width :47.9375em) {
 }
