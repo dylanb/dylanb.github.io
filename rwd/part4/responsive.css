@@ -122,9 +122,13 @@ thead th {
 	}
 
 	.comparison-table {
-		min-width:59.9375em;
+		width:100%;
 		font-size:1.5em;
-		overflow-x:auto;
+		overflow-x:scroll;
+	}
+
+	.comparison-table table {
+		min-width:59.9375em;
 	}
 
 	.comparison-table td, .comparison-table th {
