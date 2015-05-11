@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Responsive Accessible Table</title>
+		<link rel="stylesheet" type="text/css" href="responsive.css">
+	</head>
+	<body>
+		<h1>Accessible Responsive Tables</h1>
+		<p>
+			The two tables below look exatctly the same. The difference is that the second one is adds some in-context headers at the small screen break point.
+		</p>
+		<h2>Inaccessible Responsive Markup</h2>
+		<table class="responsive">
+			<thead>
+				<tr>
+					<th scope="col">
+						Name
+					</th>
+					<th scope="col">
+						Rank
+					</th>
+					<th scope="col">
+						Age
+					</th>
+					<th scope="col">
+						Description
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">
+						Nelson Mandela
+					</th>
+					<td>
+						1
+					</td>
+					<td>
+						95
+					</td>
+					<td>
+						Former political prisoner who upon his release was elected president of South Africa in 1994.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">
+						Steve Nash
+					</th>
+					<td>
+						2
+					</td>
+					<td>
+						39
+					</td>
+					<td>
+						NBA legend who won the MVP in 2005 and 2006 with the Phoenix Suns, and played in eight NBA All-Star games.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h2>Accessible Responsive Markup</h2>
+		<table class="accessible responsive">
+			<thead>
+				<tr>
+					<th scope="col">
+						Name
+					</th>
+					<th scope="col">
+						Rank
+					</th>
+					<th scope="col">
+						Age
+					</th>
+					<th scope="col">
+						Description
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">
+						<span class="small">Name</span>
+						Nelson Mandela
+					</th>
+					<td>
+						<span class="small">Rank</span>
+						1
+					</td>
+					<td>
+						<span class="small">Age</span>
+						95
+					</td>
+					<td>
+						<span class="small">Description</span>
+						Former political prisoner who upon his release was elected president of South Africa in 1994.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">
+						<span class="small">Name</span>
+						Steve Nash
+					</th>
+					<td>
+						<span class="small">Rank</span>
+						2
+					</td>
+					<td>
+						<span class="small">Age</span>
+						39
+					</td>
+					<td>
+						<span class="small">Description</span>
+						NBA legend who won the MVP in 2005 and 2006 with the Phoenix Suns, and played in eight NBA All-Star games.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>
