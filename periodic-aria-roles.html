@@ -20,7 +20,11 @@ h1 {
   font-family: "Temporarium", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size:2.5em;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+}
 
+td a {
+  text-decoration: none;
+  color:black;
 }
 
 .style0
@@ -165,6 +169,26 @@ footer {
   text-align:center;
 }
 
+#modal {
+  overflow:scroll;
+  position:absolute;
+  top:10%;
+  left:10%;
+  width:80%;
+  height:80%;
+  background-color:white;
+  border: 2px solid black;
+  padding:1em;
+}
+
+#close {
+  float:right;
+}
+
+:focus {
+  outline: 2px dotted black;
+}
+
 </style>
 </head>
 
@@ -177,102 +201,210 @@ footer {
      <col>
      <col span=5>
      <tr>
-      <td class="text">link</td>
+      <td class="text"><a href="javascript:;">link</a></td>
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
-      <td class="sections">main</td>
-      <td class="embedding">img</td>
+
+
+      <td class="sections"><a href="javascript:;">main</a></td>
+
+      <td class="embedding"><a href="javascript:;">img</a></td>
+
      </tr>
      <tr>
-      <td class="interactive">alert</td>
-      <td class="interactive">alertdialog</td>
-      <td class="interactive">menuitem-radio</td>
-      <td class="interactive">tab</td>
-      <td class="interactive">treeitem</td>
-      <td class="form">form</td>
-      <td class="form">textbox</td>
-      <td class="sections">article</td>
-      <td class="sections">group</td>
-      <td class="sections">presen-tation</td>
-      <td class="sections">banner</td>
-      <td class="table">grid</td>
+      <td class="interactive"><a href="javascript:;">alert</a></td>
+
+      <td class="interactive"><a href="javascript:;">alertdialog</a></td>
+
+      <td class="interactive"><a href="javascript:;">menuitem-radio</a></td>
+
+      <td class="interactive"><a href="javascript:;">tab</a></td>
+
+      <td class="interactive"><a href="javascript:;">treeitem</a></td>
+
+      <td class="form"><a href="javascript:;">form</a></td>
+
+      <td class="form"><a href="javascript:;">textbox</a></td>
+
+      <td class="sections"><a href="javascript:;">article</a></td>
+
+      <td class="sections"><a href="javascript:;">group</a></td>
+
+      <td class="sections"><a href="javascript:;">presen-tation</a></td>
+
+      <td class="sections"><a href="javascript:;">banner</a></td>
+
+      <td class="table"><a href="javascript:;">grid</a></td>
+
      </tr>
      <tr>
-      <td class="interactive">log</td>
-      <td class="interactive">dialog</td>
-      <td class="interactive">progress-bar</td>
-      <td class="interactive">tabpanel</td>
-      <td class="interactive">menu</td>
-      <td class="form">button</td>
-      <td class="form">spinbutton</td>
-      <td class="sections">column-header</td>
-      <td class="sections">heading</td>
-      <td class="sections">region</td>
-      <td class="sections">comple-mentary</td>
-      <td class="table">gridcell</td>
+      <td class="interactive"><a href="javascript:;">log</a></td>
+
+      <td class="interactive"><a href="javascript:;">dialog</a></td>
+
+      <td class="interactive"><a href="javascript:;">progress-bar</a></td>
+
+      <td class="interactive"><a href="javascript:;">tabpanel</a></td>
+
+      <td class="interactive"><a href="javascript:;">menu</a></td>
+
+      <td class="form"><a href="javascript:;">button</a></td>
+
+      <td class="form"><a href="javascript:;">spinbutton</a></td>
+
+      <td class="sections"><a href="javascript:;">column-header</a></td>
+
+      <td class="sections"><a href="javascript:;">heading</a></td>
+
+      <td class="sections"><a href="javascript:;">region</a></td>
+
+      <td class="sections"><a href="javascript:;">comple-mentary</a></td>
+
+      <td class="table"><a href="javascript:;">gridcell</a></td>
+
      </tr>
      <tr>
-      <td class="interactive">status</td>
-      <td class="interactive">menuitem</td>
-      <td class="interactive">scrollbar</td>
-      <td class="interactive">timer</td>
-      <td class="interactive">menubar</td>
-      <td class="form">checkbox</td>
-      <td class="form">combobox</td>
-      <td class="sections">definition</td>
-      <td class="sections">list</td>
-      <td class="sections">separator</td>
-      <td class="sections">content-info</td>
-      <td class="table">row</td>
+      <td class="interactive"><a href="javascript:;">status</a></td>
+
+      <td class="interactive"><a href="javascript:;">menuitem</a></td>
+
+      <td class="interactive"><a href="javascript:;">scrollbar</a></td>
+
+      <td class="interactive"><a href="javascript:;">timer</a></td>
+
+      <td class="interactive"><a href="javascript:;">menubar</a></td>
+
+      <td class="form"><a href="javascript:;">checkbox</a></td>
+
+      <td class="form"><a href="javascript:;">combobox</a></td>
+
+      <td class="sections"><a href="javascript:;">definition</a></td>
+
+      <td class="sections"><a href="javascript:;">list</a></td>
+
+      <td class="sections"><a href="javascript:;">separator</a></td>
+
+      <td class="sections"><a href="javascript:;">contentinfo</a></td>
+
+      <td class="table"><a href="javascript:;">row</a></td>
+
      </tr>
      <tr>
-      <td class="interactive">marquee</td>
-      <td class="interactive">menuitem-checkbox</td>
-      <td class="interactive">slider</td>
-      <td class="interactive">tooltip</td>
-      <td class="interactive">tablist</td>
-      <td class="form">option</td>
-      <td class="form">radio-group</td>
-      <td class="sections">directory</td>
-      <td class="sections">listitem</td>
-      <td class="sections">toolbar</td>
-      <td class="sections">navigation</td>
-      <td class="table">row-header</td>
+      <td class="interactive"><a href="javascript:;">marquee</a></td>
+
+      <td class="interactive"><a href="javascript:;">menuitem-checkbox</a></td>
+
+      <td class="interactive"><a href="javascript:;">slider</a></td>
+
+      <td class="interactive"><a href="javascript:;">tooltip</a></td>
+
+      <td class="interactive"><a href="javascript:;">tablist</a></td>
+
+      <td class="form"><a href="javascript:;">option</a></td>
+
+      <td class="form"><a href="javascript:;">radio-group</a></td>
+
+      <td class="sections"><a href="javascript:;">directory</a></td>
+
+      <td class="sections"><a href="javascript:;">listitem</a></td>
+
+      <td class="sections"><a href="javascript:;">toolbar</a></td>
+
+      <td class="sections"><a href="javascript:;">navigation</a></td>
+
+      <td class="table"><a href="javascript:;">row-header</a></td>
+
      </tr>
      <tr>
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
-      <td class="interactive">application</td>
-      <td class="interactive">treegrid</td>
-      <td class="interactive">tree</td>
-      <td class="form">radio</td>
-      <td class="form">listbox</td>
-      <td class="sections">document</td>
-      <td class="sections">math</td>
-      <td class="sections">note</td>
-      <td class="sections">search</td>
+
+
+      <td class="interactive"><a href="javascript:;">application</a></td>
+
+      <td class="interactive"><a href="javascript:;">treegrid</a></td>
+
+      <td class="interactive"><a href="javascript:;">tree</a></td>
+
+      <td class="form"><a href="javascript:;">radio</a></td>
+
+      <td class="form"><a href="javascript:;">listbox</a></td>
+
+      <td class="sections"><a href="javascript:;">document</a></td>
+
+      <td class="sections"><a href="javascript:;">math</a></td>
+
+      <td class="sections"><a href="javascript:;">note</a></td>
+
+      <td class="sections"><a href="javascript:;">search</a></td>
+
       <td class="invisible"></td>
+
+
      </tr>
      <tr>
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
       <td class="invisible"></td>
+
+
      </tr>
     </table>
   </center>
@@ -288,12 +420,75 @@ footer {
   <footer role="contentinfo">
     The roles have been wrapped using additional - (dash) characters. This is so that the table looks good and the content is not hidden. all ARIA roles have zero dashes in them. Please refer to the <a href="http://www.w3.org/TR/wai-aria/roles">ARIA roles spec</a>
   </footer>
+  <div id="modal" style="display:none;">
+    <button id="close">close</button>
+    <div id="popup">
+    </div>
+  </div>
 <script>
 jQuery(document).ready(function () {
+  var base = 'http://www.w3.org/TR/wai-aria';
+  var $modal = jQuery('#modal');
+  var lastfocus;
+  var links;
+
   jQuery('td').each(function(index, value) {
     var descText = jQuery('li.' + value.className).text();
     if(descText.length) {
       jQuery(value).attr('aria-label', descText);
+    }
+  });
+  jQuery('td a').on('click', function (e) {
+    lastfocus = document.activeElement;
+    var $this = jQuery(this);
+    var text = $this.text();
+    var $popup = jQuery('#popup');
+
+    text = text.replace('-', '');
+    $popup
+      .load( 'http://www.w3.org/TR/wai-aria/roles #' + text, undefined,
+        function() {
+          $popup.find('a').each(function(index, item) {
+            var newHref = item.href.replace(window.location.origin, base);
+            item.setAttribute('href', newHref);
+            item.setAttribute('target', '_blank');
+          });
+          $modal.show();
+          jQuery('#close').focus();
+          links = $modal.find('button, a');
+        });
+  });
+  jQuery('#close').on('click', function () {
+    $modal.hide();
+    lastfocus.focus();
+  });
+  $modal.on('keydown', function (e) {
+    var cancel = false;
+    if (e.ctrlKey || e.metaKey || e.altKey) {
+      return;
+    }
+    switch(e.which) {
+      case 27: // ESC
+        $modal.hide();
+        lastfocus.focus();
+        cancel = true;
+        break;
+      case 9: // TAB
+        if (e.shiftKey) {
+          if (e.target === links[0]) {
+            links[links.length - 1].focus();
+            cancel = true;
+          }
+        } else {
+          if (e.target === links[links.length - 1]) {
+            links[0].focus();
+            cancel = true;
+          }
+        }
+        break;
+    }
+    if (cancel) {
+      e.preventDefault();
     }
   });
 });

@@ -26,6 +26,11 @@ h1 {
 
 }
 
+td a {
+  text-decoration: none;
+  color:black;
+}
+
 .style0
     {text-align:general;
     vertical-align:bottom;
@@ -167,6 +172,27 @@ footer {
   font-size:8pt;
   text-align:center;
 }
+
+#modal {
+  overflow:scroll;
+  position:absolute;
+  top:10%;
+  left:10%;
+  width:80%;
+  height:80%;
+  background-color:white;
+  border: 2px solid black;
+  padding:1em;
+  border-radius: .67em;
+}
+
+#close {
+  float:right;
+}
+
+:focus {
+  outline: 2px dotted black;
+}
 </style>
 </head>
 
@@ -179,64 +205,112 @@ footer {
      <col>
      <col span=5>
      <tr>
-      <td class="name">aria-describedby</td>
-      <td class="role">aria-required</td>
+      <td class="name"><a href="javascript:;">aria-describedby</a></td>
+
+      <td class="role"><a href="javascript:;">aria-required</a></td>
+
       <td class="invisible"></td>
+
       <td class="invisible"></td>
+
       <td class="invisible"></td>
-      <td class="state">aria-hidden</td>
-      <td class="state">aria-busy</td>
-      <td class="value">aria-valuenow</td>
+
+      <td class="state"><a href="javascript:;">aria-hidden</a></td>
+
+      <td class="state"><a href="javascript:;">aria-busy</a></td>
+
+      <td class="value"><a href="javascript:;">aria-valuenow</a></td>
+
      </tr>
      <tr>
-      <td class="name">aria-label</td>
-      <td class="role">aria-multiline</td>
-      <td class="interactive">aria-live</td>
-      <td class="interactive">aria-atomic</td>
-      <td class="interactive">aria-has-popup</td>
-      <td class="state">aria-invalid</td>
-      <td class="state">aria-disabled</td>
-      <td class="value">aria-valuemin</td>
+      <td class="name"><a href="javascript:;">aria-label</a></td>
+
+      <td class="role"><a href="javascript:;">aria-multiline</a></td>
+
+      <td class="interactive"><a href="javascript:;">aria-live</a></td>
+
+      <td class="interactive"><a href="javascript:;">aria-atomic</a></td>
+
+      <td class="interactive"><a href="javascript:;">aria-has-popup</a></td>
+
+      <td class="state"><a href="javascript:;">aria-invalid</a></td>
+
+      <td class="state"><a href="javascript:;">aria-disabled</a></td>
+
+      <td class="value"><a href="javascript:;">aria-valuemin</a></td>
+
      </tr>
      <tr>
-      <td class="name">aria-labelledby</td>
-      <td class="role">aria-multi-selectable</td>
-      <td class="interactive">aria-relevant</td>
-      <td class="interactive">aria-controls</td>
-      <td class="interactive">aria-auto-complete</td>
-      <td class="state">aria-expanded</td>
-      <td class="state">aria-checked</td>
-      <td class="value">aria-valuemax</td>
-     </tr>
-     <tr>
-      <td class="invisible"></td>
-      <td class="role">aria-orientation</td>
-      <td class="interactive">aria-owns</td>
-      <td class="interactive">aria-dropeffect</td>
-      <td class="interactive">aria-flowto</td>
-      <td class="state">aria-selected</td>
-      <td class="state">aria-pressed</td>
-      <td class="value">aria-setsize</td>
-     </tr>
-     <tr>
-      <td class="invisible"></td>
-      <td class="role">aria-sort</td>
-      <td class="role">aria-readonly</td>
-      <td class="invisible"></td>
-      <td class="state">aria-grabbed</td>
-      <td class="state">aria-active-descendant</td>
-      <td class="value">aria-level</td>
-      <td class="value">aria-posinset</td>
+      <td class="name"><a href="javascript:;">aria-labelledby</a></td>
+
+      <td class="role"><a href="javascript:;">aria-multi-selectable</a></td>
+
+      <td class="interactive"><a href="javascript:;">aria-relevant</a></td>
+
+      <td class="interactive"><a href="javascript:;">aria-controls</a></td>
+
+      <td class="interactive"><a href="javascript:;">aria-auto-complete</a></td>
+
+      <td class="state"><a href="javascript:;">aria-expanded</a></td>
+
+      <td class="state"><a href="javascript:;">aria-checked</a></td>
+
+      <td class="value"><a href="javascript:;">aria-valuemax</a></td>
+
      </tr>
      <tr>
       <td class="invisible"></td>
+
+      <td class="role"><a href="javascript:;">aria-orientation</a></td>
+
+      <td class="interactive"><a href="javascript:;">aria-owns</a></td>
+
+      <td class="interactive"><a href="javascript:;">aria-dropeffect</a></td>
+
+      <td class="interactive"><a href="javascript:;">aria-flowto</a></td>
+
+      <td class="state"><a href="javascript:;">aria-selected</a></td>
+
+      <td class="state"><a href="javascript:;">aria-pressed</a></td>
+
+      <td class="value"><a href="javascript:;">aria-setsize</a></td>
+
+     </tr>
+     <tr>
       <td class="invisible"></td>
+
+      <td class="role"><a href="javascript:;">aria-sort</a></td>
+
+      <td class="role"><a href="javascript:;">aria-readonly</a></td>
+
       <td class="invisible"></td>
+
+      <td class="state"><a href="javascript:;">aria-grabbed</a></td>
+
+      <td class="state"><a href="javascript:;">aria-active-descendant</a></td>
+
+      <td class="value"><a href="javascript:;">aria-level</a></td>
+
+      <td class="value"><a href="javascript:;">aria-posinset</a></td>
+
+     </tr>
+     <tr>
       <td class="invisible"></td>
+
       <td class="invisible"></td>
+
       <td class="invisible"></td>
+
       <td class="invisible"></td>
+
       <td class="invisible"></td>
+
+      <td class="invisible"></td>
+
+      <td class="invisible"></td>
+
+      <td class="invisible"></td>
+
      </tr>
     </table>
   </center>
@@ -251,12 +325,78 @@ footer {
   <footer role="contentinfo">
     The attribute names have been wrapped using additional - (dash) characters. This is so that the table looks good and the content is not hidden. all ARIA attributes ONLY have one - (dash) in them immediately after the word aria. Please refer to the <a href="http://www.w3.org/TR/wai-aria/states_and_properties">ARIA states and properties spec</a>
   </footer>
+  <div id="modal" style="display:none;">
+    <button id="close">close</button>
+    <div id="popup">
+    </div>
+  </div>
 <script>
 jQuery(document).ready(function () {
   jQuery('td').each(function(index, value) {
     var descText = jQuery('li.' + value.className).text();
     if(descText.length) {
       jQuery(value).attr('aria-label', descText);
+    }
+  });
+  var base = 'http://www.w3.org/TR/wai-aria';
+  var $modal = jQuery('#modal');
+  var lastfocus;
+  var links;
+
+  jQuery('td a').on('click', function (e) {
+    console.log(e.target);
+    lastfocus = document.activeElement;
+    var $this = jQuery(this);
+    var text = $this.text();
+    var $popup = jQuery('#popup');
+
+    text = text.replace(/-/gi, '');
+    text = text.replace(/aria/, 'aria-');
+    console.log(text);
+    $popup
+      .load( 'http://www.w3.org/TR/wai-aria/states_and_properties #' + text, undefined,
+        function() {
+          $popup.find('a').each(function(index, item) {
+            var newHref = item.href.replace(window.location.origin, base);
+            item.setAttribute('href', newHref);
+            item.setAttribute('target', '_blank');
+          });
+          $modal.show();
+          jQuery('#close').focus();
+          links = $modal.find('button, a');
+        });
+  });
+  jQuery('#close').on('click', function () {
+    $modal.hide();
+    lastfocus.focus();
+  });
+  $modal.on('keydown', function (e) {
+    var cancel = false;
+    if (e.ctrlKey || e.metaKey || e.altKey) {
+      return;
+    }
+    switch(e.which) {
+      case 27: // ESC
+        $modal.hide();
+        lastfocus.focus();
+        cancel = true;
+        break;
+      case 9: // TAB
+        if (e.shiftKey) {
+          if (e.target === links[0]) {
+            links[links.length - 1].focus();
+            cancel = true;
+          }
+        } else {
+          if (e.target === links[links.length - 1]) {
+            links[0].focus();
+            cancel = true;
+          }
+        }
+        break;
+    }
+    if (cancel) {
+      e.preventDefault();
     }
   });
 });
