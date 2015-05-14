@@ -1,0 +1,164 @@
+body {
+  padding-top: 20px;
+  padding-left: 20px;
+  background-color: #fff;
+  color: #000;
+  font-family:Tahoma, Verdana, Arial, sans-serif;
+}
+h1, h3 {
+  text-align:center;
+}
+h1 {
+  font-family: "Temporarium", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size:2.5em;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+}
+
+h3 {
+  margin-top:.25em;
+  margin-bottom:.25em;
+  font-size: .67em;
+}
+
+td a {
+  text-decoration: none;
+  color:black;
+}
+
+.style0
+	{text-align:general;
+	vertical-align:bottom;
+	white-space:nowrap;
+	color:windowtext;
+	font-size:10.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:Verdana;
+	border:none;}
+#elements td {
+  	font-size:11px;
+  	font-weight:normal;
+  	font-style:normal;
+  	text-decoration:none;
+    color: #000;
+  	text-align:general;
+  	vertical-align:bottom;
+  	white-space:normal;
+    border-radius: 10px;
+    width:5em;
+    height: 5em;
+    overflow:wrap;
+    text-align:center;
+    vertical-align:middle;
+    border:2px solid black;
+  }
+  #elements td.invisible {
+    border:2px solid transparent;
+  }
+  table#elements {
+    text-align:center;
+    min-width:800px;
+  }
+/* Legend */
+
+ul#legend .icon {
+  cursor: pointer;
+  font-size: 0.9em;
+  margin: 0;
+  opacity: 0.8;
+  padding: 0;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  border-radius: 0.5em;
+  -o-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+}
+
+ul#legend {
+  width:75%;
+  color: black;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+ul#legend li {
+  float: left;
+  font-size:12px;
+  width: 24%;
+  padding: 0.125em 0;
+}
+
+ul#legend .icon {
+  height: 1.5em;
+  width: 1.5em;
+  display: inline-block;
+  margin: 0 0.5em;
+  vertical-align: middle;
+  border:1px solid black;
+}
+
+fieldset {
+  width:20%;
+  display:inline-block;
+  border:none;
+  font-size:12px;
+  vertical-align:top;
+  border: 2px solid #eee;
+  border-radius:10px;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+ 
+.clearfix {
+    display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+    display: block;
+}
+ 
+* html .clearfix {
+    height: 1%;
+}
+
+footer {
+  padding-top:5em;
+  font-size:8pt;
+  text-align:center;
+}
+
+#modal {
+  overflow:scroll;
+  position:absolute;
+  top:10%;
+  left:10%;
+  width:80%;
+  height:80%;
+  background-color:white;
+  border: 2px solid black;
+  padding:1em;
+}
+
+#close {
+  float:right;
+}
+
+.patterns table a>span {
+  background-color: white;
+  padding:.2em;
+}
+
+:focus {
+  outline: 2px dotted black;
+}
