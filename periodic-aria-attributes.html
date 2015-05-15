@@ -1,289 +1,207 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv=Content-Type content="text/html; charset=macintosh">
-<title>Periodic Title of ARIA attributes</title>
-<script src="./bower_components/jquery/jquery.js"></script>
-<!--[if lt IE 9]>
-<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<link rel="stylesheet" type="text/css" href="./stylesheets/periodic.css" />
-<style>
-table#elements {
-  min-width:560px;
-}
-/* Patterns */
+<html lang="en">
+  <head>
+    <meta http-equiv=Content-Type content="text/html; charset=macintosh">
+    <title>Periodic Title of ARIA attributes</title>
+    <script src="./bower_components/jquery/jquery.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="./stylesheets/periodic.css" />
+    <style>
+    table#elements {
+      min-width:560px;
+    }
+    /* Patterns */
 
-.patterns ul#legend .name .icon,
-.patterns table#elements .name {
-  background-color: rgb(200, 0, 0);
-  background-image: linear-gradient(90deg, rgba(255,255,255,1) 50%, transparent 50%),
-  linear-gradient(rgba(255,255,255,1) 50%, transparent 50%);
-  background-size:7px 7px;
-}
+    .patterns ul#legend .name .icon,
+    .patterns table#elements .name {
+      background-color: rgb(200, 0, 0);
+      background-image: linear-gradient(90deg, rgba(255,255,255,1) 50%, transparent 50%),
+      linear-gradient(rgba(255,255,255,1) 50%, transparent 50%);
+      background-size:7px 7px;
+    }
 
-.patterns ul#legend .role .icon,
-.patterns table#elements .role {
-  background-color: rgb(0, 0, 0);
-  background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
-}
+    .patterns ul#legend .role .icon,
+    .patterns table#elements .role {
+      background-color: rgb(0, 0, 0);
+      background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
+    }
 
-.patterns ul#legend .grouping .icon,
-.patterns table#elements .grouping {
-  background-image: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
-}
+    .patterns ul#legend .grouping .icon,
+    .patterns table#elements .grouping {
+      background-image: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
+    }
 
-.patterns ul#legend .interactive .icon,
-.patterns table#elements .interactive {
-  background-image: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
-}
+    .patterns ul#legend .interactive .icon,
+    .patterns table#elements .interactive {
+      background-image: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
+    }
 
-.patterns ul#legend .state .icon,
-.patterns table#elements .state {
-  background-image: repeating-linear-gradient(135deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
-}
+    .patterns ul#legend .state .icon,
+    .patterns table#elements .state {
+      background-image: repeating-linear-gradient(135deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
+    }
 
-.patterns ul#legend .table .icon,
-.patterns table#elements .table {
-  background-image: repeating-linear-gradient(180deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
-}
+    .patterns ul#legend .table .icon,
+    .patterns table#elements .table {
+      background-image: repeating-linear-gradient(180deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
+    }
 
-.patterns ul#legend .value .icon,
-.patterns table#elements .value {
-  background-image: repeating-linear-gradient(180deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
-}
+    .patterns ul#legend .value .icon,
+    .patterns table#elements .value {
+      background-image: repeating-linear-gradient(180deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
+    }
 
-/* Colors */
-ul#legend .name .icon,
-table#elements .name {
-  background-color: rgb(120, 140, 255);
-}
+    /* Colors */
+    ul#legend .name .icon,
+    table#elements .name {
+      background-color: rgb(120, 140, 255);
+    }
 
-ul#legend .role .icon,
-table#elements .role {
-  background-color: rgb(255, 255, 100);
-}
+    ul#legend .role .icon,
+    table#elements .role {
+      background-color: rgb(255, 255, 100);
+    }
 
- ul#legend .grouping .icon,
-table#elements .grouping {
-  background-color: rgb(255, 150, 80);
-}
+     ul#legend .grouping .icon,
+    table#elements .grouping {
+      background-color: rgb(255, 150, 80);
+    }
 
-ul#legend .interactive .icon,
-table#elements .interactive {
-  background-color: rgb(255, 150, 80);
-}
+    ul#legend .interactive .icon,
+    table#elements .interactive {
+      background-color: rgb(255, 150, 80);
+    }
 
-ul#legend .state .icon,
-table#elements .state {
-  background-color: rgb(160, 175, 255);
-}
+    ul#legend .state .icon,
+    table#elements .state {
+      background-color: rgb(160, 175, 255);
+    }
 
-ul#legend .table .icon,
-table#elements .table {
-  background-color: rgb(255, 150, 100);
-}
+    ul#legend .table .icon,
+    table#elements .table {
+      background-color: rgb(255, 150, 100);
+    }
 
-ul#legend .value .icon,
-table#elements .value {
-  background-color: rgb(255, 150, 255);
-}
-</style>
-</head>
+    ul#legend .value .icon,
+    table#elements .value {
+      background-color: rgb(255, 150, 255);
+    }
+    </style>
+  </head>
 
-<body link="#0000d4" vlink="#993366">
-<section role="main">
-  <h1>Periodic Table of ARIA attributes</h1>
-  <center>
-    <table id="elements">
-     <col span=6>
-     <col>
-     <col span=5>
-     <tr>
-      <td class="name"><a href="javascript:;"><span>aria-describedby</span></a>
-</td>
-
-      <td class="role"><a href="javascript:;"><span>aria-required</span></a>
-</td>
-
-      <td class="invisible"></td>
-
-      <td class="invisible"></td>
-
-      <td class="invisible"></td>
-
-      <td class="state"><a href="javascript:;"><span>aria-hidden</span></a>
-</td>
-
-      <td class="state"><a href="javascript:;"><span>aria-busy</span></a>
-</td>
-
-      <td class="value"><a href="javascript:;"><span>aria-valuenow</span></a>
-</td>
-
-     </tr>
-     <tr>
-      <td class="name"><a href="javascript:;"><span>aria-label</span></a>
-</td>
-
-      <td class="role"><a href="javascript:;"><span>aria-multiline</span></a>
-</td>
-
-      <td class="interactive"><a href="javascript:;"><span>aria-live</span></a>
-</td>
-
-      <td class="interactive"><a href="javascript:;"><span>aria-atomic</span></a>
-</td>
-
-      <td class="interactive"><a href="javascript:;"><span>aria-has-popup</span></a>
-</td>
-
-      <td class="state"><a href="javascript:;"><span>aria-invalid</span></a>
-</td>
-
-      <td class="state"><a href="javascript:;"><span>aria-disabled</span></a>
-</td>
-
-      <td class="value"><a href="javascript:;"><span>aria-valuemin</span></a>
-</td>
-
-     </tr>
-     <tr>
-      <td class="name"><a href="javascript:;"><span>aria-labelledby</span></a>
-</td>
-
-      <td class="role"><a href="javascript:;"><span>aria-multi-selectable</span></a>
-</td>
-
-      <td class="interactive"><a href="javascript:;"><span>aria-relevant</span></a>
-</td>
-
-      <td class="interactive"><a href="javascript:;"><span>aria-controls</span></a>
-</td>
-
-      <td class="interactive"><a href="javascript:;"><span>aria-auto-complete</span></a>
-</td>
-
-      <td class="state"><a href="javascript:;"><span>aria-expanded</span></a>
-</td>
-
-      <td class="state"><a href="javascript:;"><span>aria-checked</span></a>
-</td>
-
-      <td class="value"><a href="javascript:;"><span>aria-valuemax</span></a>
-</td>
-
-     </tr>
-     <tr>
-      <td class="invisible"></td>
-
-      <td class="role"><a href="javascript:;"><span>aria-orientation</span></a>
-</td>
-
-      <td class="interactive"><a href="javascript:;"><span>aria-owns</span></a>
-</td>
-
-      <td class="interactive"><a href="javascript:;"><span>aria-dropeffect</span></a>
-</td>
-
-      <td class="interactive"><a href="javascript:;"><span>aria-flowto</span></a>
-</td>
-
-      <td class="state"><a href="javascript:;"><span>aria-selected</span></a>
-</td>
-
-      <td class="state"><a href="javascript:;"><span>aria-pressed</span></a>
-</td>
-
-      <td class="value"><a href="javascript:;"><span>aria-setsize</span></a>
-</td>
-
-     </tr>
-     <tr>
-      <td class="invisible"></td>
-
-      <td class="role"><a href="javascript:;"><span>aria-sort</span></a>
-</td>
-
-      <td class="role"><a href="javascript:;"><span>aria-readonly</span></a>
-</td>
-
-      <td class="invisible"></td>
-
-      <td class="state"><a href="javascript:;"><span>aria-grabbed</span></a>
-</td>
-
-      <td class="state"><a href="javascript:;"><span>aria-active-descendant</span></a>
-</td>
-
-      <td class="value"><a href="javascript:;"><span>aria-level</span></a>
-</td>
-
-      <td class="value"><a href="javascript:;"><span>aria-posinset</span></a>
-</td>
-
-     </tr>
-     <tr>
-      <td class="invisible"></td>
-
-      <td class="invisible"></td>
-
-      <td class="invisible"></td>
-
-      <td class="invisible"></td>
-
-      <td class="invisible"></td>
-
-      <td class="invisible"></td>
-
-      <td class="invisible"></td>
-
-      <td class="invisible"></td>
-
-     </tr>
-    </table>
-  </center>
-  <h3>Legend</h3>
-  <ul id="legend" class="clearfix">
-    <li class="name"><div class="icon"></div>Name</li>
-    <li class="role"><div class="icon"></div>Role</li>
-    <li class="state"><div class="icon"></div>State</li>
-    <li class="interactive"><div class="icon"></div>Interactive elements</li>
-    <li class="value"><div class="icon"></div>Value</li>
-  </ul>
-  <fieldset>
-    <legend>Colors or Patterns?</legend>
-    <label>
-      <input name="colpat" type="radio" value="colors" checked="checked" />
-      Colors
-    </label>
-    <label>
-      <input name="colpat" type="radio" value="patterns" />
-      Patterns
-    </label>
-  </fieldset>
-</section>
-  <footer role="contentinfo">
-    The attribute names have been wrapped using additional - (dash) characters. This is so that the table looks good and the content is not hidden. all ARIA attributes ONLY have one - (dash) in them immediately after the word aria. Please refer to the <a href="http://www.w3.org/TR/wai-aria/states_and_properties">ARIA states and properties spec</a>
-  </footer>
-  <div id="modal" style="display:none;">
-    <button id="close">close</button>
-    <div id="popup">
+  <body link="#0000d4" vlink="#993366">
+    <section role="main">
+      <h1>Periodic Table of ARIA attributes</h1>
+      <center>
+        <table id="elements">
+         <col span=6>
+         <col>
+         <col span=5>
+         <tr>
+          <td class="name"><a href="javascript:;"><span>aria-describedby</span></a></td>
+          <td class="role"><a href="javascript:;"><span>aria-required</span></a></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="state"><a href="javascript:;"><span>aria-hidden</span></a></td>
+          <td class="state"><a href="javascript:;"><span>aria-busy</span></a></td>
+          <td class="value"><a href="javascript:;"><span>aria-valuenow</span></a></td>
+         </tr>
+         <tr>
+          <td class="name"><a href="javascript:;"><span>aria-label</span></a></td>
+          <td class="role"><a href="javascript:;"><span>aria-multiline</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>aria-live</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>aria-atomic</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>aria-has-popup</span></a></td>
+          <td class="state"><a href="javascript:;"><span>aria-invalid</span></a></td>
+          <td class="state"><a href="javascript:;"><span>aria-disabled</span></a></td>
+          <td class="value"><a href="javascript:;"><span>aria-valuemin</span></a></td>
+         </tr>
+         <tr>
+          <td class="name"><a href="javascript:;"><span>aria-labelledby</span></a></td>
+          <td class="role"><a href="javascript:;"><span>aria-multi-selectable</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>aria-relevant</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>aria-controls</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>aria-auto-complete</span></a></td>
+          <td class="state"><a href="javascript:;"><span>aria-expanded</span></a></td>
+          <td class="state"><a href="javascript:;"><span>aria-checked</span></a></td>
+          <td class="value"><a href="javascript:;"><span>aria-valuemax</span></a></td>
+         </tr>
+         <tr>
+          <td class="invisible"></td>
+          <td class="role"><a href="javascript:;"><span>aria-orientation</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>aria-owns</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>aria-dropeffect</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>aria-flowto</span></a></td>
+          <td class="state"><a href="javascript:;"><span>aria-selected</span></a></td>
+          <td class="state"><a href="javascript:;"><span>aria-pressed</span></a></td>
+          <td class="value"><a href="javascript:;"><span>aria-setsize</span></a></td>
+         </tr>
+         <tr>
+          <td class="invisible"></td>
+          <td class="role"><a href="javascript:;"><span>aria-sort</span></a></td>
+          <td class="role"><a href="javascript:;"><span>aria-readonly</span></a></td>
+          <td class="invisible"></td>
+          <td class="state"><a href="javascript:;"><span>aria-grabbed</span></a></td>
+          <td class="state"><a href="javascript:;"><span>aria-active-descendant</span></a></td>
+          <td class="value"><a href="javascript:;"><span>aria-level</span></a></td>
+          <td class="value"><a href="javascript:;"><span>aria-posinset</span></a></td>
+         </tr>
+         <tr>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+         </tr>
+        </table>
+      </center>
+      <h3>Legend</h3>
+      <ul id="legend" class="clearfix">
+        <li class="name"><div class="icon"></div>Name</li>
+        <li class="role"><div class="icon"></div>Role</li>
+        <li class="state"><div class="icon"></div>State</li>
+        <li class="interactive"><div class="icon"></div>Interactive elements</li>
+        <li class="value"><div class="icon"></div>Value</li>
+      </ul>
+      <fieldset>
+        <legend>Colors or Patterns?</legend>
+        <label>
+          <input name="colpat" type="radio" value="colors" checked="checked" />
+          Colors
+        </label>
+        <label>
+          <input name="colpat" type="radio" value="patterns" />
+          Patterns
+        </label>
+      </fieldset>
+    </section>
+    <footer role="contentinfo">
+      The attribute names have been wrapped using additional - (dash) characters. This is so that the table looks good and the content is not hidden. all ARIA attributes ONLY have one - (dash) in them immediately after the word aria. Please refer to the <a href="http://www.w3.org/TR/wai-aria/states_and_properties">ARIA states and properties spec</a>
+    </footer>
+    <div id="modal" style="display:none;">
+      <button id="close">close</button>
+      <div id="popup">
+      </div>
     </div>
-  </div>
-<script>
-window.waiBase = 'http://www.w3.org/TR/wai-aria/states_and_properties';
-</script>
-<script src="./javascripts/periodic.js"></script>
-<script type="text/javascript">
-  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-  var pageTracker = _gat._getTracker("UA-44989756-2");
-  pageTracker._trackPageview();
-} catch(err) {}
-</script>
-</body>
+    <script>
+    window.waiBase = 'http://www.w3.org/TR/wai-aria/states_and_properties';
+    </script>
+    <script src="./javascripts/periodic.js"></script>
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+      var pageTracker = _gat._getTracker("UA-44989756-2");
+      pageTracker._trackPageview();
+    } catch(err) {}
+    </script>
+  </body>
 </html>
