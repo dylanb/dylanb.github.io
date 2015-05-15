@@ -142,12 +142,14 @@ footer {
   overflow:scroll;
   position:absolute;
   top:10%;
-  left:10%;
-  width:80%;
-  height:80%;
+  left:25%;
+  max-width:50%;
+  max-height:80%;
+  min-height:10%;
   background-color:white;
   border: 2px solid black;
   padding:1em;
+  border-radius:10px;
 }
 
 #close {
@@ -161,4 +163,21 @@ footer {
 
 :focus {
   outline: 2px dotted black;
+}
+
+/* 1.1 Styles */
+
+.role-features {
+  text-align: left;
+}
+
+#popup h3 {
+  font-size: 2em;
+}
+
+#popup h3 a {
+  font-size: .5em;
+  padding-right:1em;
+  padding-top:.5em;
+  float:right;
 }
