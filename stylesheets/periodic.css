@@ -172,12 +172,16 @@ footer {
 }
 
 #popup h3 {
-  font-size: 2em;
+  font-size: 1em;
+}
+
+#popup h3 code {
+  font-size:3em;
 }
 
 #popup h3 a {
-  font-size: .5em;
-  padding-right:1em;
-  padding-top:.5em;
+  font-size: 1em;
+  padding-right:2em;
+  padding-top:1.2em;
   float:right;
 }

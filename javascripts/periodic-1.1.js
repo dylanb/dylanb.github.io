@@ -16,6 +16,7 @@ jQuery(document).ready(function () {
     var $this = jQuery(this);
     var text = $this.text();
     var $popup = jQuery('#popup');
+    var group = this.parentNode.className;
 
     jQuery('[role="main"], footer').attr('aria-hidden', true)
       .find('a').attr('tabindex', '-1');
@@ -27,6 +28,7 @@ jQuery(document).ready(function () {
           $popup.find('.permalink').empty().append(
               jQuery('<a target="_blank" href="' + window.waiBase + '#' + text + '">spec</a>')
             );
+          $popup.find('.type-indicator').text('(' + group + ')');
           $popup.find('table').remove();
           $popup.find('a').each(function(index, item) {
             var newHref = item.href.replace(window.location.origin, base);
