@@ -19,7 +19,6 @@ jQuery(document).ready(function () {
 
     text = text.replace(/-/gi, '');
     text = text.replace(/aria/, 'aria-');
-    console.log(text);
     $popup
       .load( window.waiBase + ' #' + text, undefined,
         function() {

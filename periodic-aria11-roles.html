@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv=Content-Type content="text/html; charset=macintosh">
+    <title>Periodic Table of ARIA 1.1 Roles</title>
+    <script src="./bower_components/jquery/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="./stylesheets/periodic.css" />
+    <style>
+    /* Patterns */
+
+    .patterns ul#legend .text .icon,
+    .patterns table#elements .text {
+      background-color: rgb(200, 0, 0);
+      background-image: linear-gradient(90deg, rgba(255,255,255,1) 50%, transparent 50%),
+      linear-gradient(rgba(255,255,255,1) 50%, transparent 50%);
+      background-size:7px 7px;
+    }
+
+    .patterns ul#legend .interactive .icon,
+    .patterns table#elements .interactive {
+      background: lightblue;
+      background: 
+      linear-gradient(115deg, transparent 75%, rgba(255,255,255,1) 75%) 0 0,
+      linear-gradient(245deg, transparent 75%, rgba(255,255,255,1) 75%) 0 0,
+      linear-gradient(115deg, transparent 75%, rgba(255,255,255,1) 75%) 4px -6px,
+      linear-gradient(245deg, transparent 75%, rgba(255,255,255,1) 75%) 4px -6px,
+      lightblue;
+      background-size: 6px 12px
+      /*background-color: rgb(255, 150, 80);*/
+    }
+
+    .patterns ul#legend .form .icon,
+    .patterns table#elements .form {
+      background-color: rgb(100, 255, 100);
+      background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
+    }
+
+    .patterns ul#legend .sections .icon,
+    .patterns table#elements .sections {
+      background-color: rgb(160, 175, 255);
+      background-image: repeating-linear-gradient(135deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
+    }
+
+    .patterns ul#legend .table .icon,
+    .patterns table#elements .table {
+      background-color: #deb887;
+      background-image: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
+    }
+
+    .patterns ul#legend .embedding .icon,
+    .patterns table#elements .embedding {
+      background-color: rgb(255, 150, 255);
+      background-image: repeating-linear-gradient(180deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 7px);
+    }
+
+    /* Colors */
+    ul#legend .text .icon,
+    table#elements .text {
+      background-color: rgb(255, 255, 100);
+    }
+
+    ul#legend .interactive .icon,
+    table#elements .interactive {
+      background-color: rgb(255, 150, 80);
+    }
+
+    ul#legend .form .icon,
+    table#elements .form {
+      background-color: rgb(100, 255, 100);
+    }
+
+    ul#legend .sections .icon,
+    table#elements .sections {
+      background-color: rgb(160, 175, 255);
+    }
+
+    ul#legend .table .icon,
+    table#elements .table {
+      background-color: #deb887;
+    }
+
+    ul#legend .embedding .icon,
+    table#elements .embedding {
+      background-color: rgb(255, 150, 255);
+    }
+
+    </style>
+  </head>
+
+  <body link="#0000d4" vlink="#993366">
+    <section role="main">
+      <h1>Periodic Table of ARIA 1.1 Roles</h1>
+      <center>
+        <table id="elements">
+         <col span=6>
+         <col>
+         <col span=5>
+         <tr>
+          <td class="text"><a href="javascript:;"><span>link</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>alert</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>alertdialog</span></a></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="sections"><a href="javascript:;"><span>none</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>presen-tation</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>main</span></a></td>
+          <td class="embedding"><a href="javascript:;"><span>img</span></a></td>
+         </tr>
+         <tr>
+          <td class="interactive"><a href="javascript:;"><span>log</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>menuitem-radio</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>tab</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>treeitem</span></a></td>
+          <td class="form"><a href="javascript:;"><span>form</span></a></td>
+          <td class="form"><a href="javascript:;"><span>textbox</span></a></td>
+          <td class="form"><a href="javascript:;"><span>searchbox</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>article</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>group</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>text</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>banner</span></a></td>
+          <td class="table"><a href="javascript:;"><span>grid</span></a></td>
+         </tr>
+         <tr>
+          <td class="interactive"><a href="javascript:;"><span>dialog</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>progress-bar</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>tabpanel</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>menu</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>status</span></a></td>
+          <td class="form"><a href="javascript:;"><span>button</span></a></td>
+          <td class="form"><a href="javascript:;"><span>spinbutton</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>column-header</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>heading</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>region</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>comple-mentary</span></a></td>
+          <td class="table"><a href="javascript:;"><span>gridcell</span></a></td>
+         </tr>
+         <tr>
+          <td class="interactive"><a href="javascript:;"><span>menuitem</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>scrollbar</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>timer</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>menubar</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>marquee</span></a></td>
+          <td class="form"><a href="javascript:;"><span>checkbox</span></a></td>
+          <td class="form"><a href="javascript:;"><span>combobox</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>definition</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>list</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>separator</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>contentinfo</span></a></td>
+          <td class="table"><a href="javascript:;"><span>row</span></a></td>
+         </tr>
+         <tr>
+          <td class="interactive"><a href="javascript:;"><span>menuitem-checkbox</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>slider</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>tooltip</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>tablist</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>application</span></a></td>
+          <td class="form"><a href="javascript:;"><span>option</span></a></td>
+          <td class="form"><a href="javascript:;"><span>radiogroup</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>directory</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>listitem</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>toolbar</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>navigation</span></a></td>
+          <td class="table"><a href="javascript:;"><span>row-header</span></a></td>
+         </tr>
+         <tr>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="interactive"><a href="javascript:;"><span>treegrid</span></a></td>
+          <td class="interactive"><a href="javascript:;"><span>tree</span></a></td>
+          <td class="form"><a href="javascript:;"><span>radio</span></a></td>
+          <td class="form"><a href="javascript:;"><span>listbox</span></a></td>
+          <td class="form"><a href="javascript:;"><span>switch</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>document</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>math</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>note</span></a></td>
+          <td class="sections"><a href="javascript:;"><span>search</span></a></td>
+          <td class="invisible"></td>
+         </tr>
+         <tr>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+          <td class="invisible"></td>
+         </tr>
+        </table>
+      </center>
+      <h3>Legend</h3>
+      <ul id="legend" class="clearfix">
+        <li class="form"><div class="icon"></div>Forms</li>
+        <li class="table"><div class="icon"></div>Tabular data</li> 
+        <li class="sections"><div class="icon"></div>Document sections</li>
+        <li class="interactive"><div class="icon"></div>Interactive elements</li>
+        <li class="embedding"><div class="icon"></div>Embedding content</li>
+        <li class="text"><div class="icon"></div>Text-level semantics</li>
+      </ul>
+      <fieldset>
+        <legend>Colors or Patterns?</legend>
+        <label>
+          <input name="colpat" type="radio" value="colors" checked="checked" />
+          Colors
+        </label>
+        <label>
+          <input name="colpat" type="radio" value="patterns" />
+          Patterns
+        </label>
+      </fieldset>
+    </section>
+    <footer role="contentinfo">
+      <p>
+        The roles have been wrapped using additional - (dash) characters. This is so that the table looks good and the content is not hidden. all ARIA roles have zero dashes in them. Please refer to the <a href="http://rawgit.com/w3c/aria/master/aria/aria.html#usage_intro">ARIA 1.1 roles spec</a>. NOTE: This spec is still in draft!
+      </p>
+    </footer>
+    <div id="modal" style="display:none;">
+      <button id="close">close</button>
+      <div id="popup">
+      </div>
+    </div>
+    <script>
+    window.waiBase = 'http://rawgit.com/w3c/aria/master/aria/aria.html';
+    </script>
+    <script src="./javascripts/periodic-1.1.js"></script>
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+      var pageTracker = _gat._getTracker("UA-44989756-2");
+      pageTracker._trackPageview();
+    } catch(err) {}
+    </script>
+  </body>
+</html>
