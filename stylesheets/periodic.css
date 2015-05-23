@@ -150,6 +150,7 @@ footer {
   border: 2px solid black;
   padding:1em;
   border-radius:10px;
+  overflow-x:hidden;
 }
 
 #close {
@@ -173,6 +174,8 @@ footer {
 
 #popup h3 {
   font-size: 1em;
+  text-align: left;
+  margin-top:1em;
 }
 
 #popup h3 code {

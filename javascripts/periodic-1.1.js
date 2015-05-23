@@ -1,3 +1,36 @@
+var preStyles = {
+ "line-height": "1.4",
+ "font-family": "Monaco, 'Courier New', Courier",
+ "font-size": "0.75em",
+ "border-top-style": "solid",
+ "border-right-style": "solid",
+ "border-bottom-style": "solid",
+ "border-left-style": "solid",
+ "border-top-width": "1px",
+ "border-right-width": "1px",
+ "border-bottom-width": "1px",
+ "border-left-width": "1px",
+ "border-top-color": "rgb(153, 153, 153)",
+ "border-right-color": "rgb(153, 153, 153)",
+ "border-bottom-color": "rgb(153, 153, 153)",
+ "border-left-color": "rgb(153, 153, 153)",
+ "border-image-source": "initial",
+ "border-image-slice": "initial",
+ "border-image-width": "initial",
+ "border-image-outset": "initial",
+ "border-image-repeat": "initial",
+ "background-color": "rgb(252, 252, 252)",
+ "margin-top": "1em",
+ "margin-right": "0px",
+ "margin-bottom": "1em",
+ "margin-left": "0px",
+ "padding-top": "0.5em",
+ "padding-right": "0.8em",
+ "padding-bottom": "0.5em",
+ "padding-left": "0.8em",
+ "overflow-x":"scroll"
+};
+
 jQuery(document).ready(function () {
   jQuery('td').each(function(index, value) {
     var descText = jQuery('li.' + value.className).text();
@@ -5,7 +38,6 @@ jQuery(document).ready(function () {
       jQuery(value).attr('aria-label', descText);
     }
   });
-  var base = 'http://www.w3.org/TR/wai-aria';
   var $modal = jQuery('#modal');
   var lastfocus;
   var links;
@@ -35,12 +67,19 @@ jQuery(document).ready(function () {
             );
           $popup.find('.type-indicator').text('(' + group + ')');
 
+          $popup.find('pre').css(preStyles);
           // Remove the details
           $popup.find('table').remove();
 
           // Make the links point to absolute addresses
           $popup.find('a').each(function(index, item) {
-            var newHref = item.href.replace(window.location.origin, base);
+            var newHref;
+            if (item.getAttribute('href').charAt(0) === '#') {
+              newHref = window.waiBase + item.getAttribute('href');
+            } else {
+              newHref = item.href.replace(window.location.origin, window.waiBase);
+            }
+            console.log(item.getAttribute('href'), ', ', item.href, ', ', newHref, ', ', window.location.origin);
             item.setAttribute('href', newHref);
             item.setAttribute('target', '_blank');
           });
