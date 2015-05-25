@@ -7,15 +7,35 @@
 		<style>
 		.slider-bar {
 			width:75%;
-			background-color: lightblue;
+			background-color: gray;
+			border-radius:1em;
+			min-height:2em;
 		}
 		.slider-value {
 			width:10%;
 			float:right;
+			margin-top:.7em;
+			padding-left: 5px;
+			box-sizing:border-box;
+			overflow:hidden;
 		}
 		.slider-label {
 			width:15%;
 			float:left;
+			margin-top:.7em;
+		}
+		.slider-control {
+			box-sizing:border-box;
+			border-radius:1em;
+			min-width:2em;
+			min-height:2em;
+			margin-top:.35em;
+			background-color:white;
+			border-color:transparent;
+		}
+		.slider-control:focus {
+			outline:none;
+			border:6px dotted gray;
 		}
 		.offscreen {
 		    border: 0;
@@ -40,13 +60,13 @@
 				<p>
 					To use this on iOS with VoiceOver turned on, use the gesture override (double-tap and hold) and then drag the slider left or right.
 				</p>
-				<p>Note: This slider does not implement all the functionality of a slider. It does not implement clicking with the mouse to move left or right and does not implement all of the ARIA authoring guidelines keyboard interaction.
+				<p>Note: This slider does not implement all the functionality of a slider. It does not implement all of the ARIA authoring guidelines keyboard interaction.
 				<article>
 					<div id="slider-example" data-min="0" data-max="100" data-value="0" data-text="{}%">
 						<span class="slider-label">Volume</span>
 						<div class="slider-bar">
 							&nbsp;
-							<button title="Adjust Volume"></button>
+							<button class="slider-control" title="Adjust Volume"></button>
 						</div>
 						<span class="slider-value"></span>
 					</div>
@@ -124,9 +144,10 @@
 							}
 						}
 
-						$bar.on("click", function() {
-	                        var $this = jQuery(this);
+						$bar.on("click", function(e) {
 	                        // handle click in the slider
+	                        value = ((e.clientX - coords.left - bCoords.width/2)/coords.width) * (max - min);
+	                        updateValue();
 	                    });
 	                    $label.attr('id', labelId);
 	                    $value.text(textValue);
@@ -207,12 +228,13 @@
 						});
 						// remove the width of the button from the width
 						var coords = getElementCoordinates($bar[0]);
+						var bCoords = getElementCoordinates($button[0]);
+						coords.width -= (bCoords.width + 8);
+						coords.left += 4;
 						$button.css({
 	                    	left: calcLeft() + 'px',
 	                    	top: coords.top + 1 + 'px'
 						});
-						var bCoords = getElementCoordinates($button[0]);
-						coords.width -= bCoords.width;
 
 	                });
 	            }
