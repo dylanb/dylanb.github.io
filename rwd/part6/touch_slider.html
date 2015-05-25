@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Part 6: Keyboard and Gestures</title>
+		<script src="../libs/jquery.js" ></script>
+		<link rel="stylesheet" type="text/css" href="responsive.css">
+		<style>
+		.slider-bar {
+			width:75%;
+			background-color: lightblue;
+		}
+		.slider-value {
+			width:10%;
+			float:right;
+		}
+		.slider-label {
+			width:15%;
+			float:left;
+		}
+		.offscreen {
+		    border: 0;
+		    clip: rect(0 0 0 0);
+		    clip: rect(0, 0, 0, 0);
+		    height: 1px;
+		    margin: -1px;
+		    overflow: hidden;
+		    padding: 0;
+		    width: 1px;
+		    position: absolute;
+		}
+		</style>
+	</head>
+	<body>
+		<div>
+			<main>
+				<h1>Touch Slider</h1>
+				<p>
+					This slider example shows how to use gestures on iOS where keyboard events are not present in order to implement an ARIA slider. The example also uses a simplistic version of an announcer to announce the updates using ARIA live.
+				</p>
+				<p>
+					To use this on iOS with VoiceOver turned on, use the gesture override (double-tap and hold) and then drag the slider left or right.
+				</p>
+				<p>Note: This slider does not implement all the functionality of a slider. It does not implement clicking with the mouse to move left or right and does not implement all of the ARIA authoring guidelines keyboard interaction.
+				<article>
+					<div id="slider-example" data-min="0" data-max="100" data-value="0" data-text="{}%">
+						<span class="slider-label">Volume</span>
+						<div class="slider-bar">
+							&nbsp;
+							<button title="Adjust Volume"></button>
+						</div>
+						<span class="slider-value"></span>
+					</div>
+				</article>
+			</main>
+		</div>
+		<div id="log" class="offscreen" role="log" aria-live="assertive">
+		</div>
+		<script>
+		jQuery(document).ready(function () {
+            var $log = jQuery('#log');
+			var methods = {
+	            slider : function() {
+	                return this.each(function (index, value) {
+	                    var $this = jQuery(value);
+	                    var $slider = $this;
+	                    var $label = $slider.find('.slider-label');
+	                    var $bar = $slider.find('.slider-bar');
+	                    var $button = $slider.find('button');
+	                    var $value = $slider.find('.slider-value');
+	                    var labelId = 'slider-' + Math.random().toString().substring(2);
+	                    var text = $slider.attr('data-text') || '{}';
+	                    var value = parseInt($slider.attr('data-value'), 10);
+	                    var inc = parseInt($slider.attr('data-inc'), 10) || 1;
+	                    var min = parseInt($slider.attr('data-min'), 10);
+	                    var max = parseInt($slider.attr('data-max'), 10);
+	                    var textValue = text.replace('{}', value);
+						var dragTimer, dragging, dragStartX, dragDistance;
+						var isIOS = navigator.userAgent.match(/iPad|iPhone|iPad/);
+
+						function getElementCoordinates(node) {
+							var coords = {
+								"top": 0, "right": 0, "bottom": 0, "left": 0, "width": 0, "height": 0
+							},
+							xOffset, yOffset, rect;
+
+							if (node) {
+								xOffset = window.scrollX;
+								yOffset = window.scrollY;
+								rect = node.getBoundingClientRect();
+
+								coords = {
+									"top": rect.top + yOffset,
+									"right": rect.right + xOffset,
+									"bottom": rect.bottom + yOffset,
+									"left": rect.left + xOffset,
+									"width": rect.right - rect.left,
+									"height": rect.bottom - rect.top
+								};
+							}
+							return coords;
+						}
+
+						function calcLeft() {
+							var relative = ((value - min)/(max - min));
+							return coords.left + coords.width*relative;
+						}
+
+						function updateValue() {
+	                        if (value > max) {
+	                        	value = max;
+	                        } else if (value < min) {
+	                        	value = min;
+	                        }
+							textValue = text.replace('{}', value.toFixed());
+							$value.text(textValue);
+							$button.css({
+		                    	left: calcLeft() + 'px'
+							}).attr({
+								'aria-valuenow': value,
+								'aria-valuetext': textValue
+							});
+							if (isIOS) {
+								$log.append(textValue);
+							}
+						}
+
+						$bar.on("click", function() {
+	                        var $this = jQuery(this);
+	                        // handle click in the slider
+	                    });
+	                    $label.attr('id', labelId);
+	                    $value.text(textValue);
+	                    $button.attr({
+	                    	'role': 'slider',
+	                    	'aria-labelledby': labelId,
+	                    	'aria-valuenow': value,
+	                    	'aria-valuemax': max,
+	                    	'aria-valuemin': min,
+	                    	'aria-valuetext': textValue
+	                    })
+	                    .css({
+	                    	position: 'absolute'
+	                    })
+	                    /*
+	                     * Set up the keyboard and mouse handlers
+	                     */
+	                    .on("keydown", function(e) {
+	                        /*
+	                         * This implements the WAI-ARIA-PRACTICES keyboard navigation functionality
+	                         */
+	                        var keyCode = e.which || e.keyCode,
+	                            handled = false,
+	                            $this = jQuery(this);
+
+	                        if (e.ctrlKey || e.shiftKey || e.altKey || e.metaKey) {
+	                            // not interested
+	                            return;
+	                        }
+	                        switch(keyCode) {
+	                            case 37: //left
+									value -= inc;
+	                                handled = true;
+	                                break;
+	                            case 39: //right
+									value += inc;
+	                                handled = true;
+	                                break;
+	                        }
+	                        if (handled) {
+	                            e.preventDefault();
+	                            e.stopPropagation();
+	                        }
+	                        updateValue();
+	                        return true;
+	                    })
+						.on('mousedown touchstart', function (e) {
+							if (e.type === 'mousedown') {
+								dragStartX = e.clientX;
+							} else {
+								dragStartX = e.originalEvent.touches[0].pageX;
+							}
+							dragTimer = setTimeout(function () {
+								$log.append(' dragging');
+								dragging = true;
+							}, 100);
+						})
+						jQuery(document).on('mouseup touchend', function (e) {
+							if (dragTimer) {
+								clearTimeout(dragTimer);
+								dragTimer = undefined;
+							}
+							dragging = false;
+						})
+						.on('mousemove touchmove', function (e) {
+							if (dragging) {
+								if (e.type === 'mousemove') {
+									dragDistance = (e.clientX - dragStartX);
+									dragStartX = e.clientX;
+								} else {
+									var touch = e.originalEvent.touches[0];
+									dragDistance = (touch.pageX - dragStartX);
+									dragStartX = touch.pageX;
+								}
+								value += (dragDistance/coords.width) * (max - min);
+								updateValue();
+							}
+						});
+						// remove the width of the button from the width
+						var coords = getElementCoordinates($bar[0]);
+						$button.css({
+	                    	left: calcLeft() + 'px',
+	                    	top: coords.top + 1 + 'px'
+						});
+						var bCoords = getElementCoordinates($button[0]);
+						coords.width -= bCoords.width;
+
+	                });
+	            }
+			}
+		    jQuery.a11y = function () {} ;
+
+		    jQuery.fn.a11y = function(method) {
+		        if (methods[method]) {
+		            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1 ));
+		        } else {
+		            jQuery.error("Method " +  method + " does not exist on jQuery.a11y");
+		        }
+		    };
+		    jQuery('#slider-example').a11y('slider');
+		});
+		</script>
+	</body>
+</html>
