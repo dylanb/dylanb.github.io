@@ -48,6 +48,11 @@
 		    width: 1px;
 		    position: absolute;
 		}
+		@media screen and (max-device-width: 59.9375em), screen and (max-width: 59.9375em){
+			.slider-control {
+				margin-top:0em;
+			}
+		}
 		</style>
 	</head>
 	<body>
@@ -204,6 +209,7 @@
 								$log.append(' dragging');
 								dragging = true;
 							}, 100);
+							e.preventDefault();
 						})
 						jQuery(document).on('mouseup touchend', function (e) {
 							if (dragTimer) {
