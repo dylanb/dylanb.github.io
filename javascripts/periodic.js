@@ -1,8 +1,11 @@
 jQuery(document).ready(function () {
+  jQuery('#legend li').each(function(index, value) {
+    var $this = jQuery(value);
+    $this.attr('id', $this.attr('class'));
+  });
   jQuery('td').each(function(index, value) {
-    var descText = jQuery('li.' + value.className).text();
-    if(descText.length) {
-      jQuery(value).attr('aria-label', descText);
+    if (value.className.length) {
+      jQuery(value).attr('aria-labelledby', value.className);
     }
   });
   var base = 'http://www.w3.org/TR/wai-aria';
