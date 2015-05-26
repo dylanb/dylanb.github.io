@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
     $this.attr('id', $this.attr('class'));
   });
   jQuery('td').each(function(index, value) {
-    if (value.className.length) {
+    if (value.className !== 'invisible') {
       jQuery(value).attr('aria-labelledby', value.className);
     }
   });
