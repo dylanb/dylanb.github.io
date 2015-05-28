@@ -32,12 +32,47 @@ var preStyles = {
 };
 
 jQuery(document).ready(function () {
-  jQuery('td').each(function(index, value) {
-    var descText = jQuery('li.' + value.className).text();
-    if(descText.length) {
-      jQuery(value).attr('aria-label', descText);
-    }
-  });
+  jQuery('td')
+    .each(function(index, value) {
+      var descText = jQuery('li.' + value.className).text();
+      if(descText.length) {
+        jQuery(value).attr('aria-label', descText);
+      }
+    })
+    .on('keydown', function (e) {
+      var handled = false;
+      var keyCode = e.which || e.keyCode;
+      var $this = jQuery(this);
+      var $nextTd, $nextRow;
+
+      if (e.ctrlKey || e.shiftKey || e.altKey || e.metaKey) {
+        return;
+      }
+      switch(keyCode) {
+        case 37: // LEFT
+          handled = true;
+          $nextTd = $this.prev('td');
+          break;
+        case 38: // UP
+          handled = true;
+          $nextRow = $this.parent().prev('tr');
+          $nextTd = $nextRow.find('td').eq($this[0].cellIndex);
+          break;
+        case 39: // RIGHT
+          handled = true;
+          $nextTd = $this.next('td');
+          break;
+        case 40: // DOWN
+          handled = true;
+          $nextRow = $this.parent().next('tr');
+          $nextTd = $nextRow.find('td').eq($this[0].cellIndex);
+          break;
+      }
+      $nextTd.find('a').focus();
+      if (handled) {
+        e.preventDefault();
+      }
+    });
   var $modal = jQuery('#modal');
   var lastfocus;
   var links;
