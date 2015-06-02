@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Testing Group Labels</title>
+	</head>
+	<body>
+		<p>
+			Groups of inputs (in particular checkbox and radio button groups) must have a group label. There are multiple ways to achieve this. The one that works with the largets number of ATs is &lt;fieldset&gt; and &lt;legend&gt;, however ARIA can also be used.Below are examples of how to do this markup.
+		</p>
+		<a href="#">before</a>
+		<h2>Fieldset and legend</h2>
+			<div>
+				<div>To complete enrollment in Acme, a My Account for the administrator is required.</div>
+				<div>Consider the <a href="#">administrator's responsibilities</a> for determining the best person for the role.</div>
+			</div>
+			<fieldset>
+				<legend>
+					Select an Acme Administrator
+				</legend>
+				<div>
+					<div>
+						<label for="HaveAccountFS">
+							<input id="HaveAccountFS" name="SignInGroupFS" type="radio" value="HaveMyAccountProfile">
+							Administrator has a My Account profile.
+						</label>
+					</div>
+				</div>
+				<div>
+					<div>
+						<label for="NeedAccountFS">
+							<input id="NeedAccountFS" name="SignInGroupFS" type="radio" value="NeedMyAccountProfile">				
+							Administrator needs a My Account profile.
+						</label>
+					</div>
+				</div>
+			</fieldset>
+		<a href="#">between</a>
+		<h2>ARIA radio buttons</h2>
+		<div role="group" aria-labelledby="selectAdministratorHeaderRight" id="selectAdministratorRight">
+			<div>
+				<h3 id="selectAdministratorHeaderRight">Select an Acme Administrator</h3>
+			</div>
+			<div>
+				<div>To complete enrollment in Acme, a My Account for the administrator is required.</div>
+				<div>Consider the <a href="#">administrator's responsibilities</a> for determining the best person for the role.</div>
+			</div>
+			<div>
+				<div>
+					<input id="HaveAccountRight" name="SignInGroupRight" type="radio" value="HaveMyAccountProfile" aria-labelledby="HaveAccountRightLabel selectAdministratorHeaderRight">
+					<label id="HaveAccountRightLabel">Administrator has a My Account profile.</label>
+				</div>
+			</div>
+			<div>
+				<div>
+					<input id="NeedAccountRight" name="SignInGroupRight" type="radio" value="NeedMyAccountProfile"  aria-labelledby="NeedAccountRightLabel selectAdministratorHeaderRight">				
+					<label id="NeedAccountRightLabel">Administrator needs a My Account profile.</label>
+				</div>
+			</div>
+		</div>
+		<a href="#">between</a>
+		<h2>ARIA Checkboxes</h2>
+		<div role="group" aria-labelledby="foodHeader" id="food">
+			<div>
+				<h3 id="foodHeader">What food does your Admin eat?</h3>
+			</div>
+			<div>
+				<div>Admins spend a bunch of time, late at night, doing admin-y things. Send them some food!!</div>
+			</div>
+			<div>
+				<div>
+					<label>
+						<input id="pizza" name="pizza" type="checkbox" aria-labelledby="foodHeader pizzaLabel">
+						<span id="pizzaLabel">Pizza
+					</label>
+				</div>
+			</div>
+			<div>
+				<div>
+					<label>
+						<input id="pasta" name="pasta" type="checkbox" aria-labelledby="foodHeader pastaLabel">
+						<span id="pastaLabel">Pasta
+					</label>
+				</div>
+			</div>
+		</div>
+		<a href="#">after</a>
+	</body>
+</html>
