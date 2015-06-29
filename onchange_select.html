@@ -11,7 +11,7 @@
 	<body>
 		<form>
 			<p>
-				This form is to test out the keyboard-only accessibility of a select element with an onchange handler that inserts something new into the DOM.
+				This form is to test out the keyboard-only accessibility of a select element with an onchange handler that inserts something new into the DOM. All browsers have a way to select something from a select that does not trigger the onchange event. In Chrome, Safari and IE, use the space bar. In Firefox, use the F4 key.
 			</p>
 			<label>
 				Choose One
@@ -33,7 +33,7 @@
 		<script>
 		jQuery(document).ready(function () {
 			jQuery('#dynamo').on('change', function (e) {
-				if (jQuery(this).val()) {
+					if (jQuery(this).val()) {
 					jQuery('#chosen').show();
 				} else {
 					jQuery('#chosen').hide();
