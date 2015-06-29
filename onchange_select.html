@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv=Content-Type content="text/html; charset=macintosh">
+		<title>Accessible Select onChange?</title>
+		<script src="./bower_components/jquery/jquery.js"></script>
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<form>
+			<p>
+				This form is to test out the keyboard-only accessibility of a select element with an onchange handler that inserts something new into the DOM.
+			</p>
+			<label>
+				Choose One
+				<select id="dynamo">
+					<option selected="selected" value="">-----</option>
+					<option value="1">One</option>
+					<option value="2">Two</option>
+					<option value="3">Three</option>
+					<option value="4">Four</option>
+				</select>
+			</label>
+			<div id="chosen" style="display:none;">
+				<label>
+					Enter your name
+					<input type="text" name="name" id="name" />
+				</label>
+			</div>
+		</form>
+		<script>
+		jQuery(document).ready(function () {
+			jQuery('#dynamo').on('change', function (e) {
+				if (jQuery(this).val()) {
+					jQuery('#chosen').show();
+				} else {
+					jQuery('#chosen').hide();
+				}
+			});
+		});
+		</script>
+	</body>
+</html>
+
