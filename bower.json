@@ -15,7 +15,7 @@
     "blanket": "*"
   },
   "dependencies": {
-    "a11yfy": "~0.0.20",
+    "a11yfy": "~0.0.21",
     "jquery": "~1.10.2"
   }
 }
