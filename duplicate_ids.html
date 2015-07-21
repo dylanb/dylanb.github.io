@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv=Content-Type content="text/html; charset=macintosh">
+		<title>Duplicate Search form IDs</title>
+		<script src="./bower_components/jquery/jquery.js"></script>
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<p>
+			This page is to test the practical impact of duplicate IDs with multiple ATs. The form fields below have the same IDs and the same labels. Enter text into the second form field and then try to submit the form using the form's buttons.
+		</p>
+		<form onsubmit="one()">
+			<label for="search">Search for:</label>
+			<input type="text" id="search" />
+			<button type="submit" id="submit">Submit</button>
+		</form>
+		<form onsubmit="two()">
+			<label for="search">Search for:</label>
+			<input type="text" id="search" />
+			<button type="submit" id="submit">Submit</button>
+		</form>
+		<script>
+		function one() {
+			alert('one');
+		}
+		function two() {
+			alert('two');
+		}
+		</script>
+	</body>
+</html>
+
