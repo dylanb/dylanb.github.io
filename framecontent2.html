@@ -2,14 +2,16 @@
 <html lang="en">
 	<head>
 		<meta http-equiv=Content-Type content="text/html; charset=macintosh">
-		<title>Frame Tests Outermost</title>
+		<title>Framed content</title>
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
 	<body>
-		<iframe src="framer.html" title="more content for testing aXe Firefox devtools integration" ></iframe>
-		<iframe src="framecontent2.html" title="content for testing aXe Firefox devtools integration" ></iframe>
+		<form>
+			<label>The next field has no label</label>
+			<input type="text" name="unlabelled" id="unlabelled" />
+		</form>
 	</body>
 </html>
 
