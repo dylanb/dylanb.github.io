@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Select Flight</title>
+	<style>
+	html {
+		font-family: "Gotham SSm 4r","Gotham SSm A","Gotham SSm B",Arial,sans-serif;
+	}
+	.top_header, .flight_info, .flight_legs, .prices {
+		display:flex;
+	}
+	.compare, .flight_time {
+		flex-basis:60%;
+	}
+	.fare_classes {
+		flex-basis:40%;
+		display:flex;
+	}
+	.fare_class {
+		flex-basis: 33.33333%;
+	}
+
+	.flight_legs {
+		list-style: none;
+	}
+
+	.flight_legs li {
+		flex-basis: 20%;
+	}
+
+	.flight_time_time {
+		font-size:14pt;
+		font-weight:400;
+		line-height:32px;
+	}
+
+	.flight_time_other {
+		font-size:8pt;
+		text-transform: uppercase;
+	}
+
+	.flight_time_top {
+		line-height:32px;
+	}
+	.flight_time_duration {
+		position:relative;
+		line-height:32px;
+	}
+	.flight_stops {
+		text-align: center;
+	}
+	.prices {
+		flex-basis:40%;
+		height:76px;
+		padding:16px;
+	}
+	.prices a {
+		flex-basis:33.3333333%;
+		height:65px;
+		text-decoration: none;
+		color:black;
+		text-align: center;
+		display:flex;
+	}
+	.price {
+		flex-basis:33.33333333%;
+		border:solid 1px black;
+	}
+	.dollars {
+		line-height:16px;
+		padding:2px;
+		font-weight:bold;
+	}
+	.refund_remain {
+		font-size:10pt;
+		padding-top:16px;
+		padding-left:4px;
+	}
+	.sale {
+		color:#d52341;
+		font-size:9pt;
+		line-height:22px;
+		font-weight:bold;
+	}
+
+	.remaining {
+		color:#a0a0a0;
+	}
+	.refundable {
+		color:#a977c1;
+	}
+	</style>
+</head>
+<body>
+	<div class="">
+		<div class="top_header">
+			<div class="compare">
+				<a href="#" class="">Best fares guaranteed online</a>
+				<a href="#" class="">Compare Fares</a>
+			</div>
+			<div class="fare_classes">
+				<div class="fare_class">
+					<div id="mc">Main Cabin</div>
+					<a href="#">Info</a>
+				</div>
+				<div class="fare_class">
+					<div id="mcs">Main Cabin Select</div>
+					<a href="#">Info</a>
+				</div>
+				<div class="fare_class">
+					<div id="fc">First Class</div>
+					<a href="#">Info</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="flight_info">
+			<div class="flight_time">
+				<ul class="flight_legs">
+					<li class="">
+						<div id="flight1">
+							<a href="#" class="flight_time_other flight_time_top">Flight <span>860</span></a>
+							<div class="flight_time_time">8:15am <span>(SFO)</span></div>
+						</div>
+					</li>
+					<li class="flight_stops">
+						<div class="flight_time_other">
+							<span class="flight_time_top">Non-stop</span>
+							<div class="flight_time_duration">2h 30m</div>
+						</div>
+					</li>
+					<li class="">
+						<div class="">
+							<a href="#" class="flight_time_other flight_time_top">Seat Map</a>
+							<div class="flight_time_time">11:45am <span>(DEN)</span></div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="prices" role="radiogroup" aria-labelledby="flight1" tabindex="0">
+				<a href="#" role="radio" aria-checked="false" aria-labelledby="self1 mc flight1" id="self1">
+					<div class="price">
+						<div class="sale">&nbsp;</div>
+						<div class="dollars">
+							<span>$</span>69
+						</div>
+					</div>
+					<div class="refund_remain">
+						<div class="remaining">&nbsp;</div>
+						<div class="refundable">&nbsp;</div>
+					</div>
+				</a>
+				<a href="#" role="radio" aria-checked="false" aria-labelledby="self2 mcs flight1" id="self2">
+					<div class="price">
+						<div class="sale">Sale</div>
+						<div class="dollars">
+							<span>$</span>139
+						</div>
+					</div>
+					<div class="refund_remain">
+						<div class="remaining">2 seats left</div>
+						<div class="refundable">&nbsp;</div>
+					</div>
+				</a>
+				<a href="#" role="radio" aria-checked="false"  aria-labelledby="self3 fc flight1" id="self3">
+					<div class="price">
+						<div class="sale">&nbsp;</div>
+						<div class="dollars">
+							<span>$</span>899
+						</div>
+					</div>
+					<div class="refund_remain">
+						<div class="remaining">3 seats left</div>
+						<div class="refundable">Refundable</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
