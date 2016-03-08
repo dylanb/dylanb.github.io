@@ -24,6 +24,12 @@ table, th, td {
 	border-bottom: 2px solid gray;
 }
 
+th, td {
+	padding-right: 0;
+	padding-left: 0;
+	border-right:0;
+}
+
 .comparison-table td:first-child, th:first-child {
 	border-left: 2px solid gray;
 }
@@ -73,9 +79,13 @@ thead th {
 		border-top: 0px transparent solid;
 		border-bottom:  0px transparent solid;
 	}
+	table.responsive tr {
+		display:flex;
+		flex-wrap:wrap;
+	}
 	.responsive td, .responsive th {
-		display:inline-block;
-		width:100%;
+		display:block;
+		flex-basis:100%;
 		text-align:left;
 		font-weight:normal;
 		font-size:14pt;
@@ -98,20 +108,19 @@ thead th {
 	.responsive th:nth-of-type(1) {
 		border-top: solid 2px gray;
 		border-left: solid 2px gray;
-		width:50%;
+		flex-basis:50%;
 		padding-left:.25em;
 	}
 	.responsive td:nth-of-type(1) {
 		border-top: solid 2px gray;
 	}
 	.responsive td:nth-of-type(2) {
-		float:right;
 		border-top: solid 2px gray;
 		border-right: solid 2px gray;
 	}
 	.responsive td:nth-of-type(1),
 	.responsive td:nth-of-type(2) {
-		width:25%;
+		flex-basis:25%;
 	}
 	.responsive td:nth-of-type(3) {
 		border-bottom: solid 2px gray;
