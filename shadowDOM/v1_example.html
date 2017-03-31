@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <div class="stories">
+            <li><a href="//example.com/stories/1">A story</a></li>
+            <li><a href="//example.com/stories/2">Another story</a></li>
+            <li class="breaking" slot="breaking"><a href="//example.com/stories/3">Also a story</a></li>
+            <li><a href="//example.com/stories/4">Yet another story</a></li>
+            <li><a href="//example.com/stories/5">Awesome story</a></li>
+            <li class="breaking" slot="breaking"><a href="//example.com/stories/6">Horrible story</a></li>
+        </div>
+        <script>
+            function createStoryGroup(className, slotName)
+            {
+                var group = document.createElement('div');
+                group.className = className;
+                // Empty string in slot name attribute or absence thereof work the same, so no need for special handling.
+                group.innerHTML = '<ul><slot name="' + slotName + '"></slot></ul>';
+                return group;
+            }
+
+            function createStyle()
+            {
+                var style = document.createElement('style');
+                style.textContent = 'div.breaking { color: Red;font-size: 20px; border: 1px dashed Purple; }' +
+                    'div.other { padding: 2px 0 0 0; border: 1px solid Cyan; }';
+                return style;
+            }
+
+            function makeShadowTree(storyList)
+            {
+                var root = storyList.attachShadow({mode: 'open'});
+                root.appendChild(createStyle());
+                root.appendChild(createStoryGroup('breaking', 'breaking'));
+                root.appendChild(createStoryGroup('other', ''));
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('div.stories').forEach(makeShadowTree);
+            });
+        </script>
+    </body>
+</html>

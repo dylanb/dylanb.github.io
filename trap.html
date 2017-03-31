@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv=Content-Type content="text/html; charset=macintosh">
+		<title>Keyboard trap</title>
+		<script src="./bower_components/jquery/jquery.js"></script>
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<label>
+			Nice lookahead search field
+			<input type="text" name="lookahead" id="lookahead" />
+		</label>
+		<div id="suggestions">
+		</div>
+		<form>
+			<p>
+				See whether you can get past the above input field using the keyboard alone... Cannot? this is because the implementation of a lookahead is not doing the correct thing.
+			</p>
+			<div id="chosen">
+				<label>
+					You want to be here
+					<input type="text" name="name" id="name" />
+				</label>
+			</div>
+		</form>
+		<script>
+		jQuery(document).ready(function () {
+			jQuery('#lookahead').on('keydown', function (e) {
+				var keyCode = e.which;
+				if (keyCode != 8) {
+					var character = String.fromCharCode(keyCode).toLowerCase();
+					var value = jQuery(this).val() + character || '';
+					jQuery('#suggestions').empty().append(jQuery('<p> Stuff that begins with: ')
+						.text(value)
+					);
+					jQuery(this).val(value);
+					e.preventDefault();
+				}
+			});
+		});
+		</script>
+	</body>
+</html>
+
