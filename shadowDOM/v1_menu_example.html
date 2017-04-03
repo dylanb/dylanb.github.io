@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+        <div class="menu">
+            <li>One
+                <ul>
+                    <div class="menu">
+                        <li>One One</li>
+                        <li>One Two</li>
+                    </div>
+                </ul>
+            </li>
+            <li>Two
+                <ul>
+                    <div class="menu">
+                        <li>Two One</li>
+                        <li>Two Two</li>
+                    </div>
+                </ul>
+            </li>
+        </div>
+        <script>
+            function createMenuGroup()
+            {
+                var group = document.createElement('div');
+                group.className = 'menuitem';
+                // Empty string in slot name attribute or absence thereof work the same, so no need for special handling.
+                group.innerHTML = '<ul class="menucontainer"><slot></slot></ul>';
+                return group;
+            }
+
+            function createStyle()
+            {
+                var style = document.createElement('style');
+                // style.textContent = 'div.breaking { color: Red;font-size: 20px; border: 1px dashed Purple; }' +
+                //     'div.other { padding: 2px 0 0 0; border: 1px solid Cyan; }';
+                return style;
+            }
+
+            function makeShadowTree(menuList)
+            {
+                var root = menuList.attachShadow({mode: 'open'})
+                root.appendChild(createStyle())
+                root.appendChild(createMenuGroup())
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('div.menu').forEach(makeShadowTree);
+            });
+        </script>
+    </body>
+</html>
