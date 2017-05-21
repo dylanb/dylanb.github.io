@@ -2,52 +2,108 @@
 <html>
     <head>
     </head>
-    <body>
+    <body style="background-color:blue;color:white;">
+        <h1>Demonstrate some Chrome shadow DOM bugs</h1>
+        <p>
+            Run this page in Chrome and Safari (OS X). What you see in Chrome does not match what you see in Safari and if you refresh the page, Chrome's display of the fallback content might change.
+        </p>
         <div class="menu">
-            <li>One
+            <li slot="news">One
                 <ul>
                     <div class="menu">
-                        <li>One One</li>
-                        <li>One Two</li>
+                        <li slot="news">One One</li>
+                        <li slot="news">One Two</li>
                     </div>
                 </ul>
             </li>
-            <li>Two
+            <li slot="news">Two
                 <ul>
                     <div class="menu">
-                        <li>Two One</li>
-                        <li>Two Two</li>
+                        <li slot="news">Two One</li>
+                        <li slot="news">Two Two</li>
                     </div>
                 </ul>
             </li>
         </div>
+        <div class="styledmenu">
+            <li slot="news">Styled One
+                <ul>
+                    <div class="styledmenu">
+                        <li slot="news" class="white">Styled One One</li>
+                        <li slot="news">Styled One Two</li>
+                    </div>
+                </ul>
+            </li>
+            <li slot="news">Styled Two
+                <ul>
+                    <div class="styledmenu">
+                        <li slot="news" class="white">Styled Two One</li>
+                        <li slot="news">Styled Two Two</li>
+                    </div>
+                </ul>
+            </li>
+        </div>
+        <div class="menu">
+        </div>
+        <div class="menu styledmenu closed">
+        </div>
+        <button onclick="document.querySelectorAll('div.menu').forEach(makeOpenShadowTree);">Run "menu"</button><button onclick="document.querySelectorAll('div.styledmenu').forEach(makeStyledShadowTree);">Run "styledmenu"</button>
+
         <script>
-            function createMenuGroup()
-            {
+            var roots = [];
+            function createMenuGroup(styleIt) {
                 var group = document.createElement('div');
                 group.className = 'menuitem';
+                if (styleIt) {
+                    group.style.color = 'initial'
+                    group.style.backgroundColor = 'initial'
+                }
                 // Empty string in slot name attribute or absence thereof work the same, so no need for special handling.
-                group.innerHTML = '<ul class="menucontainer"><slot></slot></ul>';
+                group.innerHTML = '<ul class="menucontainer"><slot name="news">Fallback<li>one</li><li>two</li></slot></ul><slot></slot>';
                 return group;
             }
 
-            function createStyle()
-            {
+            function createStyle(styleIt) {
                 var style = document.createElement('style');
-                // style.textContent = 'div.breaking { color: Red;font-size: 20px; border: 1px dashed Purple; }' +
-                //     'div.other { padding: 2px 0 0 0; border: 1px solid Cyan; }';
+                if (styleIt) {
+                    style.textContent = 'ul { background-color: black;}' +
+                        '::slotted(.white) { background-color: white;}' +
+                        'slot { border: 1px dotted white;}' + // no effect (display:contents)
+                        ':host-context(html) { border: 2px solid white;}'
+                } else {
+                    style.textContent = '' +
+                        'slot { display:block; background-color: white;}' + // no effect
+                        ':host { border: 2px solid white;}'
+                }
                 return style;
             }
 
-            function makeShadowTree(menuList)
-            {
-                var root = menuList.attachShadow({mode: 'open'})
-                root.appendChild(createStyle())
-                root.appendChild(createMenuGroup())
+            function makeOpenShadowTree(menu) {
+                try {
+                    var mode = menu.classList.contains('closed') ? 'closed' : 'open'
+                    var root = menu.attachShadow({mode: mode})
+                    root.appendChild(createStyle())
+                    root.appendChild(createMenuGroup())
+                    roots.push(root)
+                } catch (e) {
+                    // do nothing if there is already a shadow root
+                }
+            }
+
+            function makeStyledShadowTree(menu) {
+                try {
+                    var root = menu.attachShadow({mode: 'open'})
+                    root.appendChild(createStyle(true))
+                    root.appendChild(createMenuGroup(true))
+                    roots.push(root)
+                } catch (e) {
+                    // do nothing if there is already a shadow root
+                }
             }
 
             document.addEventListener('DOMContentLoaded', function() {
-                document.querySelectorAll('div.menu').forEach(makeShadowTree);
+                document.querySelectorAll('div.styledmenu').forEach(makeStyledShadowTree);
+                document.querySelectorAll('div.menu').forEach(makeOpenShadowTree);
             });
         </script>
     </body>
