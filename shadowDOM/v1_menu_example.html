@@ -3,6 +3,7 @@
     <head>
     </head>
     <body style="background-color:blue;color:white;">
+        <a href="/">Back to dylanb.github.io</a>
         <h1>Demonstrate Chrome shadow DOM bugs</h1>
         <p>
             Run this page in Chrome and Safari (OS X). What you see in Chrome does not match what you see in Safari and if you refresh the page, Chrome's display of the fallback content might change.
@@ -58,7 +59,7 @@
                     group.style.backgroundColor = 'initial'
                 }
                 // Empty string in slot name attribute or absence thereof work the same, so no need for special handling.
-                group.innerHTML = '<ul class="menucontainer"><slot name="news">Fallback<li>one</li><li>two</li></slot></ul><slot></slot>';
+                group.innerHTML = '<ul class="menucontainer"><slot role="link" name="news">Fallback<li>one</li><li>two</li></slot></ul><slot role="link"></slot>';
                 return group;
             }
 
@@ -71,7 +72,8 @@
                         ':host-context(html) { border: 2px solid white;}'
                 } else {
                     style.textContent = '' +
-                        'slot { display:block; background-color: white;}' + // no effect
+                        // 'slot { display:block; background-color: white;}' + // no effect on Chrome
+                        'slot { display:block; border: 1px dotted white;}' + // no effect on Chrome
                         ':host { border: 2px solid white;}'
                 }
                 return style;
