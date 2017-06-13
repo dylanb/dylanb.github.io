@@ -17,6 +17,7 @@
             {
                 var group = document.createElement('div');
                 group.className = className;
+                group.id = className;
                 // Empty string in slot name attribute or absence thereof work the same, so no need for special handling.
                 group.innerHTML = '<ul><slot name="' + slotName + '"></slot></ul>';
                 return group;

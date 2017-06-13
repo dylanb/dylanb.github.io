@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+    </head>
+    <body>
+    	<script>
+			function createStyle (box) {
+				'use strict';
+
+				var style = document.createElement('style');
+				style.textContent = 'div.breaking { color: Red;font-size: 20px; border: 1px dashed Purple; }' +
+					(box ? 'slot { display: block; }' : '') +
+					'div.other { padding: 2px 0 0 0; border: 1px solid Cyan; }';
+				return style;
+			}
+			function createStoryGroup (className, slotName) {
+				var group = document.createElement('div');
+				group.className = className;
+				// Empty string in slot name attribute or absence thereof work the same, so no need for special handling.
+				group.innerHTML = '<ul><slot name="' + slotName + '">fallback content<li>one</li></slot></ul>';
+				return group;
+			}
+
+			function makeShadowTree (storyList) {
+				var root = storyList.attachShadow({mode: 'open'});
+				root.appendChild(createStyle());
+				root.appendChild(createStoryGroup('breaking', 'breaking'));
+				root.appendChild(createStoryGroup('other', ''));
+			}
+			var str = '<div class="stories"><li>1</li>' +
+			'<li>2</li><li class="breaking" slot="breaking">3</li>' +
+			'<li>4</li><li>5</li><li class="breaking" slot="breaking">6</li></div>';
+			str += '<div class="stories"><li>1</li>' +
+			'<li>2</li><li class="breaking" slot="breaking">3</li>' +
+			'<li>4</li><li>5</li><li class="breaking" slot="breaking">6</li></div>';
+			str += '<div class="stories"></div>';
+			document.body.innerHTML = str;
+			document.body.querySelectorAll('.stories').forEach(makeShadowTree);
+		</script>
+	</body>
+</html>

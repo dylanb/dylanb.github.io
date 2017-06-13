@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+    <head>
+        <title>ARIA inside shadow DOM</title>
+    </head>
+    <body>
+        <a href="/">Back to dylanb.github.io</a>
+        <div class="attach">
+        </div>
+        <script>
+            function createContent() {
+                var group = document.createElement('div');
+                group.innerHTML = '<label id="mylabel">Label</label><input id="myinput" aria-labelledby="mylabel" type="text" placeholder="ok"/>' +
+                    '<label id="mylabel2">Label</label><input id="myinput2" aria-labelledby="mylabel3" type="text" placeholder="broken"/>';
+                return group;
+            }
+
+            function createStyle()
+            {
+                var style = document.createElement('style');
+                style.textContent = '';
+                return style;
+            }
+
+            function makeShadowTree(node)
+            {
+                var root = node.attachShadow({mode: 'open'});
+                root.appendChild(createStyle());
+                root.appendChild(createContent());
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('div.attach').forEach(makeShadowTree);
+            });
+        </script>
+    </body>
+</html>
