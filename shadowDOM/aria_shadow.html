@@ -7,6 +7,12 @@
         <a href="/">Back to dylanb.github.io</a>
         <div class="attach">
         </div>
+        <div>
+            <p id="target">Thingamabob</p>
+        </div>
+        <div class="slotted">
+            <a href="" aria-labelledby="target">Thing One</a>
+        </div>
         <script>
             function createContent() {
                 var group = document.createElement('div');
@@ -15,22 +21,31 @@
                 return group;
             }
 
-            function createStyle()
-            {
+            function createStyle() {
                 var style = document.createElement('style');
                 style.textContent = '';
                 return style;
             }
 
-            function makeShadowTree(node)
-            {
+            function makeShadowTree(node) {
                 var root = node.attachShadow({mode: 'open'});
                 root.appendChild(createStyle());
                 root.appendChild(createContent());
             }
+            function createContentSlotted() {
+                var group = document.createElement('div');
+                group.innerHTML = '<div id="target">Stuff<slot></slot></div><a href="" aria-labelledby="target">Thing Two</a>';
+                return group;
+            }
+
+            function makeShadowTreeSlotted(node) {
+                var root = node.attachShadow({mode: 'open'});
+                root.appendChild(createContentSlotted());
+            }
 
             document.addEventListener('DOMContentLoaded', function() {
                 document.querySelectorAll('div.attach').forEach(makeShadowTree);
+                document.querySelectorAll('div.slotted').forEach(makeShadowTreeSlotted);
             });
         </script>
     </body>
