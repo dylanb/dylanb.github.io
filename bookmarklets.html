@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Bookmarklets</title>
+	</head>
+	<body>
+		<p>
+			A list of bookmarklets you might find useful for accessibility testing. Drag the links to your bookmark bar to install them.
+		</p>
+		<ul>
+			<li>A bookmarklet for testing <a href="javascript:(function()%7B%0A%09document.querySelectorAll('*').forEach(function%20(el)%20%7B%0A%09%09if%20(el.nodeName.toLowerCase()%20%3D%3D%3D%20'p')%20%7B%0A%09%09%09el.style.setProperty('margin-bottom'%2C%20'2em'%2C%20'important')%3B%0A%09%09%7D%0A%09%09el.style.setProperty('line-height'%2C%20'1.5'%2C%20'important')%3B%0A%09%09el.style.setProperty('letter-spacing'%2C%20'0.12em'%2C%20'important')%3B%0A%09%09el.style.setProperty('word-spacing'%2C%20'0.16em'%2C%20'important')%3B%0A%09%7D)%0A%7D)()%3B
+">1.4.12 Text Spacing</a></li>
+		</ul>
+	</body>
+</html>
